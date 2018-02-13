@@ -1,11 +1,11 @@
 package com.epam.brest.cource;
 
-/**
- * Hello world!
- *
- */
 public class App {
     public static void main( String[] args ) {
+        displayMessage();
+    }
+
+    public static void displayMessage() {
         System.out.println("Hello World!");
     }
 }

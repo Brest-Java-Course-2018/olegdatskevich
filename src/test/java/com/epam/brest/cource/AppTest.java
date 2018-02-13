@@ -1,33 +1,39 @@
 package com.epam.brest.cource;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+import org.junit.After;
+import org.junit.Before;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest extends TestCase {
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.junit.Assert.assertEquals;
+
+public class AppTest {
+    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
+
     /**
-     * Create the test case
-     *
-     * @param testName name of the test case
+     * The method redirect standard output to byte array.
      */
-    public AppTest(String testName) {
-        super(testName);
+    @Before
+    public void setUpStreams(){
+        System.setOut(new PrintStream(output));
     }
 
     /**
-     * @return the suite of tests being tested
+     * The method compares the redirected output stream with the expected message.
      */
-    public static Test suite() {
-        return new TestSuite(AppTest.class);
+    @Test
+    public void testDisplayMessage() {
+        App.displayMessage();
+        assertEquals("Hello World!\n", output.toString());
     }
 
     /**
-     * Rigourous Test :-)
+     * Returns the standard output to its place.
      */
-    public void testApp() {
-        assertTrue(true);
+    @After
+    public void cleanUpStream() {
+        System.setOut(null);
     }
 }
