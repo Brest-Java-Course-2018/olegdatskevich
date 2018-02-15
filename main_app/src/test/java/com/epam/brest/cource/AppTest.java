@@ -16,7 +16,7 @@ public class AppTest {
      * The method redirect standard output to byte array.
      */
     @Before
-    public void setUpStreams(){
+    public void setUpStreams() {
         System.setOut(new PrintStream(output));
     }
 
