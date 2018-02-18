@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBUtilsTest {
 
     @org.junit.Test
-    public void getConnection() throws SQLException, ClassNotFoundException {
+    public void testGetConnection() throws SQLException, ClassNotFoundException {
         DBUtils dbUtils = new DBUtils();
         Assert.assertNotNull(dbUtils.getConnection());
     }

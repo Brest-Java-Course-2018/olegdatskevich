@@ -6,10 +6,21 @@
     <groupId>com.epam.brest.cource</groupId>
     <artifactId>sampleuserapp</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <packaging>pom</packaging>
 
     <name>sampleuserapp</name>
+    <description>Test project</description>
+    <inceptionYear>2018</inceptionYear>
+    <organization>
+        <name>EPAM</name>
+        <url>http://www.epam.by</url>
+    </organization>
+    <developers>
+        <developer>
+            <name>Oleg Datskevich</name>
+            <email>olegdac@gmail.com</email>
+        </developer>
+    </developers>
     <url>http://maven.apache.org</url>
 
     <modules>
@@ -42,5 +53,19 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
