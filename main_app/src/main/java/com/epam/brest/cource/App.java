@@ -10,10 +10,12 @@ public class App {
         Connection connection = dbUtils.getConnection();
         dbUtils.createUserTable(connection);
         dbUtils.addUser(connection, "admin", "admin", "Administrator");
-        dbUtils.addUser(connection, "user1", "Password01", "User 1");
-        dbUtils.addUser(connection, "user2", "Password02", "User 2");
+        dbUtils.addUser(connection, "manager", "Password01", "Manager");
+        dbUtils.addUser(connection, "director", "Password02", "Director");
         dbUtils.getAllUsers(connection);
-        dbUtils.delUser(connection, 2);
+        dbUtils.removeUserById(connection, 2);
+        dbUtils.getAllUsers(connection);
+        dbUtils.updateUserById(connection, 3, "superuser", "superpassword", "SuperUser");
         dbUtils.getAllUsers(connection);
     }
 

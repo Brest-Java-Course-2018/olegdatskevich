@@ -52,9 +52,10 @@ public class DBUtils {
         }
     }
 
-    public void delUser(Connection connection, int user_id) throws SQLException {
+    public void removeUserById(Connection connection, int user_id) throws SQLException {
         System.out.print("Delete user: ");
-        getUser(connection, user_id);
+        getUserById(connection, user_id);
+
         System.out.print("y/n ");
         Scanner dataString = new Scanner(System.in);
         if (dataString.hasNext("y")) {
@@ -68,7 +69,7 @@ public class DBUtils {
         }
     }
 
-    public void getUser(Connection connection, int user_id) throws SQLException {
+    public void getUserById(Connection connection, int user_id) throws SQLException {
         String outputUser = "SELECT user_id, login, description FROM app_user WHERE user_id = " + user_id;
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(outputUser);
@@ -78,6 +79,18 @@ public class DBUtils {
                     resultSet.getString("login"),
                     resultSet.getString("description")));
         }
+    }
 
+    public void updateUserById(Connection connection, int user_id, String login, String password, String description) throws SQLException {
+        System.out.print("Update user: ");
+        getUserById(connection, user_id);
+
+        String updateUser = "UPDATE app_user SET login = ?, password = ?, description = ? WHERE user_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(updateUser);
+        preparedStatement.setString(1, login);
+        preparedStatement.setString(2, password);
+        preparedStatement.setString(3, description);
+        preparedStatement.setInt(4, user_id);
+        preparedStatement.executeUpdate();
     }
 }
