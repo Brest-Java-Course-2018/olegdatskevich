@@ -10,8 +10,8 @@ import java.io.PrintStream;
 import static org.junit.Assert.assertEquals;
 
 public class AppTest {
-    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
+    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     /**
      * The method redirect standard output to byte array.
      */
