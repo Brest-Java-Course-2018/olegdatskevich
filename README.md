@@ -1,4 +1,6 @@
-Brest EPAM Java Course, 2018  
+###Department web application  
+  
+EPAM Java Course, Brest 2018  
 _  
 by **Oleg Datskevich**  
 olegdac@gmail.com
