@@ -10,6 +10,20 @@ public class Department {
     private String departmentName;
     private String departmentDescription;
 
+    public Department() {
+    }
+
+    public Department(String departmentName, String departmentDescription) {
+        this.departmentName = departmentName;
+        this.departmentDescription = departmentDescription;
+    }
+
+    public Department(Integer departmentId, String departmentName, String departmentDescription) {
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.departmentDescription = departmentDescription;
+    }
+
     @Override
     public String toString() {
         return "Department [" +

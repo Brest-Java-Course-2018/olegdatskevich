@@ -31,9 +31,29 @@ public class DepartmentDaoImplTest {
         Assert.assertTrue(department.getDepartmentId().equals(1));
         Assert.assertTrue(department.getDepartmentName().equals("Development"));
         Assert.assertTrue(department.getDepartmentDescription().equals("Developers"));
-
     }
 
+    @Test
+    public void addDepartment() {
+        Department department = departmentDao.addDepartment(
+                new Department(2,"Management", "Managers"));
+        Assert.assertNotNull(department);
+        Assert.assertEquals("Management", department.getDepartmentName());
+    }
 
+    @Test
+    public void updateDepartment() {
+        Department departmentUpdated = departmentDao.getDepartmentById(1);
+        Department departmentNotUpdated = departmentDao.getDepartmentById(1);
+        Assert.assertNotNull(departmentUpdated);
+        Assert.assertNotNull(departmentNotUpdated);
+        departmentUpdated.setDepartmentDescription("DEV");
+        Assert.assertTrue(departmentUpdated.getDepartmentId().equals(departmentNotUpdated.getDepartmentId()));
+        Assert.assertTrue(departmentUpdated.getDepartmentName().equals(departmentNotUpdated.getDepartmentName()));
+        Assert.assertFalse(departmentUpdated.getDepartmentDescription().equals(departmentNotUpdated.getDepartmentDescription()));
+    }
 
+    @Test
+    public void removeDepartmentById() {
+    }
 }

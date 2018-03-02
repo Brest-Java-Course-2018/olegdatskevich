@@ -25,6 +25,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
     private final String GET_DEPARTMENT_BY_ID = "SELECT departmentId, " +
             "departmentName, description FROM department WHERE " +
             "departmentId = :departmentId";
+    private final String ADD_DEPARTMENT = "INSERT INTO department " +
+            "(departmentName, description) VALUES (?, ?)";
+    private final String UPDATE_DEPARTMENT = "UPDATE department SET " +
+            "description = ? WHERE departmentId = ?";
+    private final String REMOVE_DEPARTMENT = "DELETE FROM department WHERE departmentId = :departmentId";
 
     /**
      * Constructor
@@ -63,30 +68,32 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     /**
      * Adding the department to the DB.
-     * @param department
+     * @param department - prepared instance of the object Department to update.
      * @return department that was added to the DB.
      */
     @Override
     public Department addDepartment(Department department) {
-        return null;
+        jdbcTemplate.update(ADD_DEPARTMENT, department.getDepartmentName(),
+                department.getDepartmentDescription());
+        return getDepartmentById(department.getDepartmentId());
     }
 
     /**
      * Updating information about department.
-     * @param department
+     * @param department - prepared instance of the object Department to update.
      */
     @Override
     public void updateDepartment(Department department) {
-
+        jdbcTemplate.update(UPDATE_DEPARTMENT,"DEV", department.getDepartmentId());
     }
 
     /**
      * Deleting the department from DB.
-     * @param id - department that was deleted from DB.
+     * @param departmentId - id of the department that was deleted from DB.
      */
     @Override
-    public void removeDepartmentById(Integer id) {
-
+    public void removeDepartmentById(Integer departmentId) {
+        jdbcTemplate.update(REMOVE_DEPARTMENT, departmentId);
     }
 
 
@@ -107,5 +114,4 @@ public class DepartmentDaoImpl implements DepartmentDao {
             return department;
         }
     }
-
 }
