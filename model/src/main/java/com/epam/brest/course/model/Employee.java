@@ -2,58 +2,97 @@ package com.epam.brest.course.model;
 
 /**
  *
- * POJO Employee in model
+ * POJO Employee in model.
  */
 public class Employee {
+    /**
+     * Id number of employee.
+     */
     private Integer employeeId;
+    /**
+     * Name of employee.
+     */
     private String employeeName;
+    /**
+     * Salary of employee.
+     */
     private Integer salary;
+    /**
+     * Id of employee's department.
+     */
     private Integer departmentId;
 
     @Override
-    public String toString() {
-        return "Employee [" +
-                "employeeId=" + employeeId +
-                ", employeeName='" + employeeName + '\'' +
-                ", salary=" + salary +
-                ", departmentId=" + departmentId +
-                ']';
+    public final String toString() {
+        return "Employee ["
+                + "employeeId=" + employeeId
+                + ", employeeName='" + employeeName + '\''
+                + ", salary=" + salary
+                + ", departmentId=" + departmentId
+                + ']';
     }
 
     /**
-     * Get Employee Id
-     * @return
+     * Getter for employee id.
+     * @return id of employee.
      */
-
-    public Integer getEmployeeId() {
+    public final Integer getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    /**
+     * Setter for employeeId.
+     * @param employeeId - id of employee.
+     */
+    public final void setEmployeeId(Integer employeeId) {
         this.employeeId = employeeId;
     }
 
-    public String getEmployeeName() {
+    /**
+     * Getter for employee name.
+     * @return name of employee.
+     */
+    public final String getEmployeeName() {
         return employeeName;
     }
 
-    public void setEmployeeName(String employeeName) {
+    /**
+     * Setter for employeeName.
+     * @param employeeName - name of employee.
+     */
+    public final void setEmployeeName(final String employeeName) {
         this.employeeName = employeeName;
     }
 
-    public Integer getSalary() {
+    /**
+     * Getter for salary of employee.
+     * @return salary of employee.
+     */
+    public final Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(Integer salary) {
+    /**
+     * Setter for salary of employee.
+     * @param salary - salary of employee.
+     */
+    public final void setSalary(final Integer salary) {
         this.salary = salary;
     }
 
-    public Integer getDepartmentId() {
+    /**
+     * Getter for employee's department.
+     * @return employee's department.
+     */
+    public final Integer getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Integer departmentId) {
+    /**
+     * Setter for employee's department.
+     * @param departmentId - employee's department.
+     */
+    public final void setDepartmentId(final Integer departmentId) {
         this.departmentId = departmentId;
     }
 }

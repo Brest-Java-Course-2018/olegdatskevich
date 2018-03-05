@@ -5,14 +5,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:test-db-spring.xml",
-        "classpath:test-dao.xml"})
+@ContextConfiguration(locations = {"classpath:test-db-spring.xml", "classpath:test-dao.xml"})
 public class DepartmentDaoImplTest {
 
     @Autowired
@@ -34,26 +34,56 @@ public class DepartmentDaoImplTest {
     }
 
     @Test
-    public void addDepartment() {
-        Department department = departmentDao.addDepartment(
-                new Department(2,"Management", "Managers"));
+    public void getDepartmentByName() {
+        Department department = departmentDao.getDepartmentByName("Development");
         Assert.assertNotNull(department);
-        Assert.assertEquals("Management", department.getDepartmentName());
+        Assert.assertTrue(department.getDepartmentId().equals(1));
+        Assert.assertTrue(department.getDepartmentName().equals("Development"));
+        Assert.assertTrue(department.getDepartmentDescription().equals("Developers"));
+    }
+
+    @Test
+    public void addDepartment() {
+        Department department = new Department("TestDepartment",
+                "TestDep");
+        departmentDao.addDepartment(department);
+        int i = 0;
+        for (Department dep:departmentDao.getDepartments()) {
+            if(dep.getDepartmentName().equals(department.getDepartmentName())){
+                i = dep.getDepartmentId();
+            }
+        }
+        Assert.assertEquals(department.getDepartmentName(),
+                departmentDao.getDepartmentById(i).getDepartmentName());
     }
 
     @Test
     public void updateDepartment() {
-        Department departmentUpdated = departmentDao.getDepartmentById(1);
-        Department departmentNotUpdated = departmentDao.getDepartmentById(1);
-        Assert.assertNotNull(departmentUpdated);
-        Assert.assertNotNull(departmentNotUpdated);
-        departmentUpdated.setDepartmentDescription("DEV");
-        Assert.assertTrue(departmentUpdated.getDepartmentId().equals(departmentNotUpdated.getDepartmentId()));
-        Assert.assertTrue(departmentUpdated.getDepartmentName().equals(departmentNotUpdated.getDepartmentName()));
-        Assert.assertFalse(departmentUpdated.getDepartmentDescription().equals(departmentNotUpdated.getDepartmentDescription()));
+        Department oldDepartment = departmentDao.getDepartmentById(1);
+        Department newDepartment = new Department();
+        newDepartment.setDepartmentId(oldDepartment.getDepartmentId());
+        newDepartment.setDepartmentName(oldDepartment.getDepartmentName());
+        newDepartment.setDepartmentDescription(oldDepartment.getDepartmentDescription()+ "_NEW");
+        departmentDao.updateDepartment(newDepartment);
+        Department testedDepartment = departmentDao.getDepartmentById(1);
+        Assert.assertEquals(newDepartment.getDepartmentDescription(),
+                testedDepartment.getDepartmentDescription());
     }
 
     @Test
     public void removeDepartmentById() {
+        boolean test = false;
+        Department delDepartment =
+                new Department("DelName", "DelDescription");
+        delDepartment = departmentDao.addDepartment(delDepartment);
+        Assert.assertEquals(delDepartment,
+                departmentDao.getDepartmentById(delDepartment.getDepartmentId()));
+        departmentDao.removeDepartmentById(delDepartment.getDepartmentId());
+        try {
+            departmentDao.getDepartmentById(delDepartment.getDepartmentId());
+        } catch (EmptyResultDataAccessException e) {
+            test = true;
+        }
+        Assert.assertTrue(test);
     }
 }
