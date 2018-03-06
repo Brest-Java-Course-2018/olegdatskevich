@@ -1,3 +1,3 @@
-INSERT INTO department (departmentName, description) VALUES ('Development', 'Developers');
-INSERT INTO department (departmentName, description) VALUES ('Management', 'Managers');
-INSERT INTO department (departmentName, description) VALUES ('Accounting', 'Accountants');
+INSERT INTO department (departmentName, departmentDescription) VALUES ('Development', 'Developers Dep');
+INSERT INTO department (departmentName, departmentDescription) VALUES ('Management', 'Managers Dep');
+INSERT INTO department (departmentName, departmentDescription) VALUES ('Accounting', 'Accountants Dep');

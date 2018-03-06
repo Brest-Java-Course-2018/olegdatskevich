@@ -10,12 +10,10 @@ public class Department {
      * Id of department.
      */
     private Integer departmentId;
-
     /**
      * Name of department.
      */
     private String departmentName;
-
     /**
      * Description of department.
      */
@@ -30,18 +28,6 @@ public class Department {
      * @param departmentDescription - description of the departments.
      */
     public Department(final String departmentName, final String departmentDescription) {
-        this.departmentName = departmentName;
-        this.departmentDescription = departmentDescription;
-    }
-
-    /**
-     * Constructor for three parameters.
-     * @param departmentId - id of the department.
-     * @param departmentName - name of the department.
-     * @param departmentDescription - description of the departments.
-     */
-    public Department(final Integer departmentId, final String departmentName, final String departmentDescription) {
-        this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.departmentDescription = departmentDescription;
     }
@@ -79,7 +65,7 @@ public class Department {
         this.departmentDescription = departmentDescription;
     }
 
-    @Override
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -90,20 +76,25 @@ public class Department {
 
         Department that = (Department) o;
 
-        if (departmentId != null ? !departmentId.equals(that.departmentId) : that.departmentId != null) {
+        if (departmentId != null ? !departmentId.equals(that.departmentId) :
+                that.departmentId != null) {
             return false;
         }
-        if (departmentName != null ? !departmentName.equals(that.departmentName) : that.departmentName != null) {
+        if (departmentName != null ? !departmentName.equals(that.departmentName) :
+                that.departmentName != null) {
             return false;
         }
-        return departmentDescription != null ? departmentDescription.equals(that.departmentDescription) : that.departmentDescription == null;
+        return departmentDescription != null ?
+                departmentDescription.equals(that.departmentDescription) :
+                that.departmentDescription == null;
     }
 
     @Override
     public final int hashCode() {
         int result = departmentId != null ? departmentId.hashCode() : 0;
         result = 31 * result + (departmentName != null ? departmentName.hashCode() : 0);
-        result = 31 * result + (departmentDescription != null ? departmentDescription.hashCode() : 0);
+        result = 31 * result + (departmentDescription != null ?
+                departmentDescription.hashCode() : 0);
         return result;
-    }
+    }*/
 }

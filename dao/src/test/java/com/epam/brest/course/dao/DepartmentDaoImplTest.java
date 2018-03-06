@@ -2,17 +2,25 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.Department;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:test-db-spring.xml", "classpath:test-dao.xml"})
+@ContextConfiguration(locations = {
+        "classpath:test-db-spring.xml",
+        "classpath:test-dao.xml",
+        "classpath:dao.xml"})
+@Rollback
+@Transactional
 public class DepartmentDaoImplTest {
 
     @Autowired
@@ -26,64 +34,76 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void getDepartmentById() {
-        Department department = departmentDao.getDepartmentById(1);
+        Department department = departmentDao.getDepartmentById(3);
         Assert.assertNotNull(department);
-        Assert.assertTrue(department.getDepartmentId().equals(1));
-        Assert.assertTrue(department.getDepartmentName().equals("Development"));
-        Assert.assertTrue(department.getDepartmentDescription().equals("Developers"));
+        Assert.assertTrue(department.getDepartmentId().equals(3));
+        Assert.assertTrue(department.getDepartmentName().equals("Accounting"));
+        System.out.println(department.toString());
+        Assert.assertTrue(department.getDepartmentDescription().equals("Accountants Dep"));
     }
 
     @Test
     public void getDepartmentByName() {
-        Department department = departmentDao.getDepartmentByName("Development");
+        Department department = departmentDao.getDepartmentByName("Management");
         Assert.assertNotNull(department);
-        Assert.assertTrue(department.getDepartmentId().equals(1));
-        Assert.assertTrue(department.getDepartmentName().equals("Development"));
-        Assert.assertTrue(department.getDepartmentDescription().equals("Developers"));
+        System.out.println(department.toString());
+        Assert.assertTrue(department.getDepartmentId().equals(2));
+        Assert.assertTrue(department.getDepartmentName().equals("Management"));
+        Assert.assertTrue(department.getDepartmentDescription().equals("Managers Dep"));
     }
 
     @Test
     public void addDepartment() {
-        Department department = new Department("TestDepartment",
-                "TestDep");
-        departmentDao.addDepartment(department);
-        int i = 0;
-        for (Department dep:departmentDao.getDepartments()) {
-            if(dep.getDepartmentName().equals(department.getDepartmentName())){
-                i = dep.getDepartmentId();
-            }
-        }
-        Assert.assertEquals(department.getDepartmentName(),
-                departmentDao.getDepartmentById(i).getDepartmentName());
+        List<Department> departments = departmentDao.getDepartments();
+        int sizeBefore = departments.size();
+        Department testDepartment = new Department("TestAddDep", "TestAddDepDescription");
+        Department newDepartment = departmentDao.addDepartment(testDepartment);
+        Assert.assertNotNull(newDepartment.getDepartmentId());
+        Assert.assertTrue(newDepartment.getDepartmentName().equals(testDepartment.getDepartmentName()));
+        Assert.assertTrue(newDepartment.getDepartmentDescription().equals(testDepartment.getDepartmentDescription()));
+        Assert.assertTrue((sizeBefore + 1) == departmentDao.getDepartments().size());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addSameDepartment() {
+        Department testDepartment = new Department("TestAddSameDep", "TestAddSameDepDescription");
+        departmentDao.addDepartment(testDepartment);
+        departmentDao.addDepartment(testDepartment);
+    }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    @Test
+    public void addSameDepartmentWithRule() {
+        Department testDepartment = new Department("TestAddSameDepRule", "TestAddSameDepDescriptionRule");
+        departmentDao.addDepartment(testDepartment);
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Department with the same name already exists in DB.");
+        departmentDao.addDepartment(testDepartment);
     }
 
     @Test
     public void updateDepartment() {
-        Department oldDepartment = departmentDao.getDepartmentById(1);
-        Department newDepartment = new Department();
-        newDepartment.setDepartmentId(oldDepartment.getDepartmentId());
-        newDepartment.setDepartmentName(oldDepartment.getDepartmentName());
-        newDepartment.setDepartmentDescription(oldDepartment.getDepartmentDescription()+ "_NEW");
+        Department testDepartment = new Department("TestUpdateDep", "TestUpdateDepDescription");
+        Department newDepartment = departmentDao.addDepartment(testDepartment);
+        newDepartment.setDepartmentName("NEWTestUpdateDep");
+        newDepartment.setDepartmentDescription("NEWTestUpdateDepDescription");
         departmentDao.updateDepartment(newDepartment);
-        Department testedDepartment = departmentDao.getDepartmentById(1);
-        Assert.assertEquals(newDepartment.getDepartmentDescription(),
-                testedDepartment.getDepartmentDescription());
+        Department updatedDepartment = departmentDao.getDepartmentById(newDepartment.getDepartmentId());
+        Assert.assertTrue(newDepartment.getDepartmentId().equals(updatedDepartment.getDepartmentId()));
+        Assert.assertTrue(newDepartment.getDepartmentName().equals(updatedDepartment.getDepartmentName()));
+        Assert.assertTrue(newDepartment.getDepartmentDescription().equals(updatedDepartment.getDepartmentDescription()));
     }
 
     @Test
     public void removeDepartmentById() {
-        boolean test = false;
-        Department delDepartment =
-                new Department("DelName", "DelDescription");
-        delDepartment = departmentDao.addDepartment(delDepartment);
-        Assert.assertEquals(delDepartment,
-                departmentDao.getDepartmentById(delDepartment.getDepartmentId()));
-        departmentDao.removeDepartmentById(delDepartment.getDepartmentId());
-        try {
-            departmentDao.getDepartmentById(delDepartment.getDepartmentId());
-        } catch (EmptyResultDataAccessException e) {
-            test = true;
-        }
-        Assert.assertTrue(test);
+
+        Department testDepartment =
+                new Department("TestRemoveDep", "TestRemoveDepDescription");
+        testDepartment = departmentDao.addDepartment(testDepartment);
+        List<Department> departments = departmentDao.getDepartments();
+        int sizeBefore = departments.size();
+        departmentDao.removeDepartmentById(testDepartment.getDepartmentId());
+        Assert.assertTrue((sizeBefore - 1) == departmentDao.getDepartments().size());
     }
 }
