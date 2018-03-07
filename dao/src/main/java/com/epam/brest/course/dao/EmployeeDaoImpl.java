@@ -45,7 +45,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> getEmployees() {
-        List<Employee> employees = namedParameterJdbcTemplate.getJdbcOperations().query(employeeSelectAll, new EmployeeRowMapper());
+        List<Employee> employees = namedParameterJdbcTemplate.getJdbcOperations().
+                query(employeeSelectAll, BeanPropertyRowMapper.newInstance(Employee.class));
         return employees;
     }
 
@@ -93,26 +94,5 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void removeEmployee(Integer employeeId) {
         namedParameterJdbcTemplate.getJdbcOperations().update(employeeRemove, employeeId);
-
-    }
-
-    private class EmployeeRowMapper implements RowMapper<Employee> {
-        /**
-         * Method for writing data from DB in a object of Department class.
-         * @param resultSet - set of data from DB in i-row.
-         * @param i - raw from DB
-         * @return - department from DB.
-         * @throws SQLException
-         */
-        @Override
-        public Employee mapRow(final ResultSet resultSet, final int i)
-                throws SQLException {
-            Employee employee = new Employee();
-            employee.setEmployeeId(resultSet.getInt(EMPLOYEE_ID));
-            employee.setEmployeeName(resultSet.getString(EMPLOYEE_NAME));
-            employee.setEmployeeSalary(resultSet.getInt(EMPLOYEE_SALARY));
-            employee.setDepartmentId(resultSet.getInt(DEPARTMENT_ID));
-            return employee;
-        }
     }
 }

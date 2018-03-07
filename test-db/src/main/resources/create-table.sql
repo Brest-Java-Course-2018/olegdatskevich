@@ -5,7 +5,6 @@ CREATE TABLE department (
  departmentDescription VARCHAR(255) NULL,
  PRIMARY KEY (departmentId)
 );
-
 DROP TABLE IF EXISTS employee;
 CREATE TABLE employee (
  employeeId INT NOT NULL AUTO_INCREMENT,
