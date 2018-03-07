@@ -38,7 +38,6 @@ public class DepartmentDaoImplTest {
         Assert.assertNotNull(department);
         Assert.assertTrue(department.getDepartmentId().equals(3));
         Assert.assertTrue(department.getDepartmentName().equals("Accounting"));
-        System.out.println(department.toString());
         Assert.assertTrue(department.getDepartmentDescription().equals("Accountants Dep"));
     }
 
@@ -97,9 +96,7 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void removeDepartmentById() {
-
-        Department testDepartment =
-                new Department("TestRemoveDep", "TestRemoveDepDescription");
+        Department testDepartment = new Department("TestRemoveDep", "TestRemoveDepDescription");
         testDepartment = departmentDao.addDepartment(testDepartment);
         List<Department> departments = departmentDao.getDepartments();
         int sizeBefore = departments.size();

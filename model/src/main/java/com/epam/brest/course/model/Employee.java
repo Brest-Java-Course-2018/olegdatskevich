@@ -16,18 +16,27 @@ public class Employee {
     /**
      * Salary of employee.
      */
-    private Integer salary;
+    private Integer employeeSalary;
     /**
      * Id of employee's department.
      */
     private Integer departmentId;
+
+    public Employee() {
+    }
+
+    public Employee(String employeeName, Integer employeeSalary, Integer departmentId) {
+        this.employeeName = employeeName;
+        this.employeeSalary = employeeSalary;
+        this.departmentId = departmentId;
+    }
 
     @Override
     public final String toString() {
         return "Employee ["
                 + "employeeId=" + employeeId
                 + ", employeeName='" + employeeName + '\''
-                + ", salary=" + salary
+                + ", employeeSalary=" + employeeSalary
                 + ", departmentId=" + departmentId
                 + ']';
     }
@@ -65,19 +74,19 @@ public class Employee {
     }
 
     /**
-     * Getter for salary of employee.
-     * @return salary of employee.
+     * Getter for employeeSalary of employee.
+     * @return employeeSalary of employee.
      */
-    public final Integer getSalary() {
-        return salary;
+    public final Integer getEmployeeSalary() {
+        return employeeSalary;
     }
 
     /**
-     * Setter for salary of employee.
-     * @param salary - salary of employee.
+     * Setter for employeeSalary of employee.
+     * @param employeeSalary - employeeSalary of employee.
      */
-    public final void setSalary(final Integer salary) {
-        this.salary = salary;
+    public final void setEmployeeSalary(final Integer employeeSalary) {
+        this.employeeSalary = employeeSalary;
     }
 
     /**
