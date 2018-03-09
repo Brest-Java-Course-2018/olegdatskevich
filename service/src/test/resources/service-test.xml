@@ -10,17 +10,11 @@
     </bean>
 
     <bean id="departmentDao" class="com.epam.brest.course.dao.DepartmentDaoImpl">
-        <!--<constructor-arg ref="namedParameterJdbcTemplate"/>-->
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+        <!--<property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>-->
     </bean>
 
-    <bean id="employeeDao" class="com.epam.brest.course.dao.EmployeeDaoImpl">
-        <!--<constructor-arg ref="namedParameterJdbcTemplate"/>-->
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="departmentService" class="com.epam.brest.course.service.DepartmentServiceImpl">
+        <constructor-arg ref="departmentDao"/>
     </bean>
 </beans>

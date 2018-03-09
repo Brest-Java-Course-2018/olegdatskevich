@@ -45,7 +45,6 @@ public class DepartmentDaoImplTest {
     public void getDepartmentByName() {
         Department department = departmentDao.getDepartmentByName("Management");
         Assert.assertNotNull(department);
-        System.out.println(department.toString());
         Assert.assertTrue(department.getDepartmentId().equals(2));
         Assert.assertTrue(department.getDepartmentName().equals("Management"));
         Assert.assertTrue(department.getDepartmentDescription().equals("Managers Dep"));

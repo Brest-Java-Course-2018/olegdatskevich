@@ -22,10 +22,22 @@ public class Employee {
      */
     private Integer departmentId;
 
+    /**
+     * Default constructor.
+     *
+     */
     public Employee() {
     }
 
-    public Employee(String employeeName, Integer employeeSalary, Integer departmentId) {
+    /**
+     * Constructor with arguments.
+     * @param employeeName - name of employee.
+     * @param employeeSalary - salary of employee.
+     * @param departmentId - id of employee's department.
+     */
+    public Employee(final String employeeName,
+                    final Integer employeeSalary,
+                    final Integer departmentId) {
         this.employeeName = employeeName;
         this.employeeSalary = employeeSalary;
         this.departmentId = departmentId;
@@ -53,7 +65,7 @@ public class Employee {
      * Setter for employeeId.
      * @param employeeId - id of employee.
      */
-    public final void setEmployeeId(Integer employeeId) {
+    public final void setEmployeeId(final Integer employeeId) {
         this.employeeId = employeeId;
     }
 

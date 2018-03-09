@@ -30,7 +30,7 @@ public interface DepartmentDao {
 
     /**
      * Adding the department to the DB.
-     * @param department - prepared instance of the object Department to update.
+     * @param department - prepared instance of the object Department to added.
      * @return department that was added to the DB.
      */
     Department addDepartment(final Department department);
