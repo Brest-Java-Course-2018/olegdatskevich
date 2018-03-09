@@ -1,4 +1,4 @@
-###Department web application  
+**Department web application**  
   
 EPAM Java Course, Brest 2018  
 _  
