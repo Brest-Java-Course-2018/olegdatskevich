@@ -27,14 +27,14 @@ public class DepartmentServiceImplMockTest {
     private DepartmentDao mockDepartmentDao;
 
     @Test
-    public void updateDepartmentDescription() {
+    public void serviceUpdateDepartmentDescription() {
         EasyMock.expect(mockDepartmentDao.getDepartmentById(EasyMock.anyInt())).andReturn(DEPARTMENT);
         Capture<Department> captureArgument = Capture.newInstance();
         mockDepartmentDao.updateDepartment(EasyMock.capture(captureArgument));
         EasyMock.expectLastCall();
         EasyMock.replay(mockDepartmentDao);
 
-        departmentService.updateDepartmentDescription(ID, DEPARTMENT_DESCRIPTION);
+        departmentService.serviceUpdateDepartmentDescription(ID, DEPARTMENT_DESCRIPTION);
 
         Department department = captureArgument.getValue();
         Assert.assertEquals(DEPARTMENT_DESCRIPTION, department.getDepartmentDescription());

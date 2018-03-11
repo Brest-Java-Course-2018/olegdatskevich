@@ -22,13 +22,25 @@ public class DepartmentServiceImplTest {
     private DepartmentService departmentService;
 
     @Test
-    public void getDepartmentById() {
-        departmentService.updateDepartmentDescription(ID, DEPARTMENT_DESCRIPTION);
-        Department department = departmentService.getDepartmentById(ID);
+    public void serviceGetDepartments() {
+    }
+
+    @Test
+    public void serviceGetDepartmentById() {
+        departmentService.serviceUpdateDepartmentDescription(ID, DEPARTMENT_DESCRIPTION);
+        Department department = departmentService.serviceGetDepartmentById(ID);
         Assert.assertEquals(DEPARTMENT_DESCRIPTION, department.getDepartmentDescription());
     }
 
     @Test
-    public void updateDepartmentDescription() {
+    public void serviceAddDepartment() {
+    }
+
+    @Test
+    public void serviceUpdateDepartmentDescription() {
+    }
+
+    @Test
+    public void serviceRemoveDepartment() {
     }
 }

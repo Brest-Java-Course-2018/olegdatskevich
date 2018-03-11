@@ -20,7 +20,8 @@ import java.util.List;
  */
 public class EmployeeDaoImpl implements EmployeeDao {
 
-    private static final Logger LOGGER = LogManager.getLogger(EmployeeDaoImpl.class);
+    private static final Logger LOGGER =
+            LogManager.getLogger(EmployeeDaoImpl.class);
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -44,11 +45,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Value("${employee.remove}")
     private String employeeRemove;
 
-    public EmployeeDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public EmployeeDaoImpl(
+            NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public void setNamedParameterJdbcTemplate(
+            NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
@@ -59,8 +62,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> getEmployees() {
         LOGGER.debug("getEmployees()");
-        List<Employee> employees = namedParameterJdbcTemplate.getJdbcOperations().
-                query(employeeSelectAll, BeanPropertyRowMapper.newInstance(Employee.class));
+        List<Employee> employees =
+                namedParameterJdbcTemplate.getJdbcOperations().query(
+                        employeeSelectAll,
+                        BeanPropertyRowMapper.newInstance(Employee.class));
         return employees;
     }
 
@@ -72,9 +77,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee getEmployeeById(final Integer employeeId) {
         LOGGER.debug("getEmployeeById({})", employeeId);
-        SqlParameterSource namedParameters = new MapSqlParameterSource(EMPLOYEE_ID, employeeId);
-        Employee employee = namedParameterJdbcTemplate.queryForObject(employeeSelectById,
-                namedParameters, BeanPropertyRowMapper.newInstance(Employee.class));
+        SqlParameterSource namedParameters = new MapSqlParameterSource(
+                EMPLOYEE_ID, employeeId);
+        Employee employee = namedParameterJdbcTemplate.queryForObject(
+                employeeSelectById,
+                namedParameters,
+                BeanPropertyRowMapper.newInstance(Employee.class));
         return employee;
     }
 
@@ -86,9 +94,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee getEmployeeByName(final String employeeName) {
         LOGGER.debug("getEmployeeByName({})", employeeName);
-        SqlParameterSource namedParameters = new MapSqlParameterSource(EMPLOYEE_NAME, employeeName);
-        Employee employee = namedParameterJdbcTemplate.queryForObject(employeeSelectByName,
-                namedParameters, BeanPropertyRowMapper.newInstance(Employee.class));
+        SqlParameterSource namedParameters = new MapSqlParameterSource(
+                EMPLOYEE_NAME, employeeName);
+        Employee employee = namedParameterJdbcTemplate.queryForObject(
+                employeeSelectByName,
+                namedParameters,
+                BeanPropertyRowMapper.newInstance(Employee.class));
         return employee;
     }
 
@@ -100,8 +111,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee addEmployee(final Employee employee) {
         LOGGER.debug("addEmployee({})", employee);
-        MapSqlParameterSource namedParameters = new MapSqlParameterSource(EMPLOYEE_NAME, employee.getEmployeeName());
-        Integer result = namedParameterJdbcTemplate.queryForObject(checkEmployee, namedParameters, Integer.class);
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource(
+                EMPLOYEE_NAME, employee.getEmployeeName());
+        Integer result = namedParameterJdbcTemplate.queryForObject(
+                checkEmployee, namedParameters, Integer.class);
         LOGGER.debug("result({})", result);
         if(result == 0) {
             namedParameters = new MapSqlParameterSource();
@@ -109,10 +122,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
             namedParameters.addValue(EMPLOYEE_SALARY, employee.getEmployeeSalary());
             namedParameters.addValue(DEPARTMENT_ID, employee.getDepartmentId());
             KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-            namedParameterJdbcTemplate.update(employeeInsert, namedParameters, generatedKeyHolder);
+            namedParameterJdbcTemplate.update(
+                    employeeInsert, namedParameters, generatedKeyHolder);
             employee.setEmployeeId(generatedKeyHolder.getKey().intValue());
         } else {
-            throw new IllegalArgumentException("Employee with the same name already exists in DB.");
+            throw new IllegalArgumentException(
+                    "Employee with the same name already exists in DB.");
         }
         return employee;
     }
@@ -124,7 +139,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void updateEmployee(final Employee employee) {
         LOGGER.debug("updateEmployee({})", employee);
-        SqlParameterSource namedParameter = new BeanPropertySqlParameterSource(employee);
+        SqlParameterSource namedParameter =
+                new BeanPropertySqlParameterSource(employee);
         namedParameterJdbcTemplate.update(employeeUpdate, namedParameter);
     }
 
@@ -135,6 +151,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void removeEmployee(final Integer employeeId) {
         LOGGER.debug("removeEmployee({})", employeeId);
-        namedParameterJdbcTemplate.getJdbcOperations().update(employeeRemove, employeeId);
+        namedParameterJdbcTemplate.getJdbcOperations().update(
+                employeeRemove, employeeId);
     }
 }

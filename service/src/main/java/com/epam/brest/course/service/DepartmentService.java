@@ -2,9 +2,44 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Department;
 
+import java.util.List;
+
+/**
+ * Interface fo Department service.
+ */
 public interface DepartmentService {
 
-    Department getDepartmentById(final Integer departmentId);
+    /**
+     * Getting all departments from DB.
+     * @return - list of department.
+     */
+    List<Department> serviceGetDepartments();
 
-    void updateDepartmentDescription(final Integer departmentId, final String departmentDescription);
+    /**
+     * Getting one department from DB.
+     * @param departmentId - id of department.
+     * @return department.
+     */
+    Department serviceGetDepartmentById(final Integer departmentId);
+
+    /**
+     * Adding department in DB.
+     * @param department - department that need to add.
+     * @return department which was added.
+     */
+    Department serviceAddDepartment(final Department department);
+
+    /**
+     * Updating department.
+     * @param departmentId - id of department.
+     * @param departmentDescription - department's description.
+     */
+    void serviceUpdateDepartmentDescription(final Integer departmentId,
+                                     final String departmentDescription);
+
+    /**
+     * Remove department from DB.
+     * @param departmentId - department that need to remove.
+     */
+    void serviceRemoveDepartmentById(final Integer departmentId);
 }
