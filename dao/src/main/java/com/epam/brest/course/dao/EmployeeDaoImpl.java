@@ -20,16 +20,28 @@ import java.util.List;
  */
 public class EmployeeDaoImpl implements EmployeeDao {
 
+    /**
+     * Logger for EmployeeDaoImpl.
+     */
     private static final Logger LOGGER =
             LogManager.getLogger(EmployeeDaoImpl.class);
 
+    /**
+     * For naming queries.
+     */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    /**
+     * Group of constant vars.
+     */
     private static final String EMPLOYEE_ID = "employeeId";
     private static final String EMPLOYEE_NAME = "employeeName";
     private static final String EMPLOYEE_SALARY = "employeeSalary";
     private static final String DEPARTMENT_ID = "departmentId";
 
+    /**
+     * SQL queries located in classpath/sql.properties.
+     */
     @Value("${employee.selectAll}")
     private String employeeSelectAll;
     @Value("${employee.selectById}")
@@ -45,13 +57,21 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Value("${employee.remove}")
     private String employeeRemove;
 
+    /**
+     * Constructor for namedParameterJdbcTemplate.
+     * @param namedParameterJdbcTemplate - for named queries.
+     */
     public EmployeeDaoImpl(
-            NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public void setNamedParameterJdbcTemplate(
-            NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    /**
+     * Setter for namedParameterJdbcTemplate.
+     * @param namedParameterJdbcTemplate - for named queries.
+     */
+    public final void setNamedParameterJdbcTemplate(
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
@@ -60,7 +80,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * @return List of Employees.
      */
     @Override
-    public List<Employee> getEmployees() {
+    public final List<Employee> getEmployees() {
         LOGGER.debug("getEmployees()");
         List<Employee> employees =
                 namedParameterJdbcTemplate.getJdbcOperations().query(
@@ -75,7 +95,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * @return Employee.
      */
     @Override
-    public Employee getEmployeeById(final Integer employeeId) {
+    public final Employee getEmployeeById(final Integer employeeId) {
         LOGGER.debug("getEmployeeById({})", employeeId);
         SqlParameterSource namedParameters = new MapSqlParameterSource(
                 EMPLOYEE_ID, employeeId);
@@ -92,7 +112,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * @return employee.
      */
     @Override
-    public Employee getEmployeeByName(final String employeeName) {
+    public final Employee getEmployeeByName(final String employeeName) {
         LOGGER.debug("getEmployeeByName({})", employeeName);
         SqlParameterSource namedParameters = new MapSqlParameterSource(
                 EMPLOYEE_NAME, employeeName);
@@ -109,17 +129,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * @return employee that was added to the DB.
      */
     @Override
-    public Employee addEmployee(final Employee employee) {
+    public final Employee addEmployee(final Employee employee) {
         LOGGER.debug("addEmployee({})", employee);
         MapSqlParameterSource namedParameters = new MapSqlParameterSource(
                 EMPLOYEE_NAME, employee.getEmployeeName());
         Integer result = namedParameterJdbcTemplate.queryForObject(
                 checkEmployee, namedParameters, Integer.class);
         LOGGER.debug("result({})", result);
-        if(result == 0) {
+        if (result == 0) {
             namedParameters = new MapSqlParameterSource();
             namedParameters.addValue(EMPLOYEE_NAME, employee.getEmployeeName());
-            namedParameters.addValue(EMPLOYEE_SALARY, employee.getEmployeeSalary());
+            namedParameters.addValue(EMPLOYEE_SALARY,
+                    employee.getEmployeeSalary());
             namedParameters.addValue(DEPARTMENT_ID, employee.getDepartmentId());
             KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
             namedParameterJdbcTemplate.update(
@@ -137,7 +158,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * @param employee - prepared instance of the object Employee to update.
      */
     @Override
-    public void updateEmployee(final Employee employee) {
+    public final void updateEmployee(final Employee employee) {
         LOGGER.debug("updateEmployee({})", employee);
         SqlParameterSource namedParameter =
                 new BeanPropertySqlParameterSource(employee);
@@ -149,7 +170,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * @param employeeId - id of the employee that was deleted from DB.
      */
     @Override
-    public void removeEmployee(final Integer employeeId) {
+    public final void removeEmployee(final Integer employeeId) {
         LOGGER.debug("removeEmployee({})", employeeId);
         namedParameterJdbcTemplate.getJdbcOperations().update(
                 employeeRemove, employeeId);

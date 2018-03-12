@@ -8,23 +8,23 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 /**
- * Implementation of DepartmentService.
+ * Implementation of DepartmentService class.
  */
-public class DepartmentServiceImpl implements DepartmentService{
+public class DepartmentServiceImpl implements DepartmentService {
 
     /**
-     *
+     * Logger for DepartmentServiceImpl .
      */
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     *
+     * For working with DAO layer Departments.
      */
     private DepartmentDao departmentDao;
 
     /**
-     *
-     * @param departmentDao
+     * Constructor for departmentDao.
+     * @param departmentDao - instance of DepartmentDao class.
      */
     public DepartmentServiceImpl(final DepartmentDao departmentDao) {
         this.departmentDao = departmentDao;
@@ -35,7 +35,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      * @return - list of department.
      */
     @Override
-    public List<Department> serviceGetDepartments() {
+    public final List<Department> serviceGetDepartments() {
         List<Department> departments = departmentDao.getDepartments();
         LOGGER.debug("serviceGetDepartments {} pc.", departments.size());
         return departments;
@@ -47,7 +47,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      * @return department.
      */
     @Override
-    public Department serviceGetDepartmentById(final Integer departmentId) {
+    public final Department serviceGetDepartmentById(final Integer departmentId) {
         Department department = departmentDao.getDepartmentById(departmentId);
         LOGGER.debug("serviceGetDepartmentById {}", departmentId);
         return department;
@@ -59,7 +59,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      * @return department which was added.
      */
     @Override
-    public Department serviceAddDepartment(final Department department) {
+    public final Department serviceAddDepartment(final Department department) {
         Department serviceDepartment = departmentDao.addDepartment(department);
         LOGGER.debug("serviceAddDepartment {}", department);
         return serviceDepartment;
@@ -71,7 +71,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      * @param departmentDescription - department's description.
      */
     @Override
-    public void serviceUpdateDepartmentDescription(
+    public final void serviceUpdateDepartmentDescription(
             final Integer departmentId, final String departmentDescription) {
         LOGGER.debug("serviceUpdateDepartmentDescription({}, {})",
                 departmentId, departmentDescription);
@@ -85,7 +85,7 @@ public class DepartmentServiceImpl implements DepartmentService{
      * @param departmentId - department that need to remove.
      */
     @Override
-    public void serviceRemoveDepartmentById(final Integer departmentId) {
+    public final void serviceRemoveDepartmentById(final Integer departmentId) {
         departmentDao.removeDepartmentById(departmentId);
         LOGGER.debug("serviceRemoveDepartmentById {}", departmentId);
     }

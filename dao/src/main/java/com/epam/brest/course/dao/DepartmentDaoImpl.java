@@ -21,16 +21,28 @@ import java.util.List;
  */
 public class DepartmentDaoImpl implements DepartmentDao {
 
+    /**
+     * Logger for DepartmentDaoImpl.
+     */
     private static final Logger LOGGER = LogManager.getLogger(
             DepartmentDaoImpl.class);
 
+    /**
+     * For naming queries.
+     */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    /**
+     * Group of constant vars.
+     */
     private static final String DEPARTMENT_ID = "departmentId";
     private static final String DEPARTMENT_NAME = "departmentName";
     private static final String DEPARTMENT_DESCRIPTION =
             "departmentDescription";
 
+    /**
+     * SQL queries located in classpath/sql.properties.
+     */
     @Value("${department.select}")
     private String departmentSelect;
     @Value("${department.selectById}")
@@ -47,8 +59,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
     private String remove;
 
     /**
-     *
-     * @param namedParameterJdbcTemplate
+     * Constructor for namedParameterJdbcTemplate.
+     * @param namedParameterJdbcTemplate - for named queries.
      */
     public DepartmentDaoImpl(
             final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -56,10 +68,10 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     /**
-     *
-     * @param namedParameterJdbcTemplate
+     * Setter for namedParameterJdbcTemplate.
+     * @param namedParameterJdbcTemplate - for named queries.
      */
-    public void setNamedParameterJdbcTemplate(
+    public final void setNamedParameterJdbcTemplate(
             final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }

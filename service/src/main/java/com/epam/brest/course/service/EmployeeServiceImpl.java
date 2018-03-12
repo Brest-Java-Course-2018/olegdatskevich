@@ -13,12 +13,12 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     /**
-     * Logger
+     * Logger for EmployeeServiceImpl.
      */
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * employee DAO
+     * For working with DAO layer Departments.
      */
     private EmployeeDao employeeDao;
 
@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return - list of Employees.
      */
     @Override
-    public List<Employee> serviceGetEmployees() {
+    public final List<Employee> serviceGetEmployees() {
         List<Employee> employees = employeeDao.getEmployees();
         LOGGER.debug("serviceGetEmployees {} pc.", employees.size());
         return employees;
@@ -47,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return Employee.
      */
     @Override
-    public Employee serviceGetEmployeeById(final Integer employeeId) {
+    public final Employee serviceGetEmployeeById(final Integer employeeId) {
         Employee employee = employeeDao.getEmployeeById(employeeId);
         LOGGER.debug("serviceGetEmployeeById {}", employeeId);
         return employee;
@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return - list of employees.
      */
     @Override
-    public List<Employee> serviceGetEmployeesByDepartmentId(
+    public final List<Employee> serviceGetEmployeesByDepartmentId(
             final Integer departmentId) {
         LOGGER.debug("serviceGetEmployeesByDepartmentId {}", departmentId);
         List<Employee> employees = employeeDao.getEmployees();
@@ -78,7 +78,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return - average salary fo list.
      */
     @Override
-    public Integer calculateAverageSalary(final List<Employee> employees) {
+    public final Integer calculateAverageSalary(final List<Employee> employees) {
         Integer averageSalary = 0;
         if (employees != null) {
             for (Employee employee: employees) {
@@ -96,7 +96,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return employees.
      */
     @Override
-    public List<Employee> serviceGetEmployeeBySalaryMore(
+    public final List<Employee> serviceGetEmployeeBySalaryMore(
             final Integer employeeSalary) {
         LOGGER.debug("serviceGetEmployeeByName {}", employeeSalary);
         List<Employee> employees = employeeDao.getEmployees();
@@ -115,7 +115,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return employee that was added to the DB.
      */
     @Override
-    public Employee serviceAddEmployee(final Employee employee) {
+    public final Employee serviceAddEmployee(final Employee employee) {
         Employee serviceEmployee = employeeDao.addEmployee(employee);
         LOGGER.debug("serviceAddEmployee {}", employee);
         return serviceEmployee;
@@ -127,7 +127,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param newEmployeeSalary - updatable value of salary.
      */
     @Override
-    public void serviceUpdateEmployeeSalary(final Integer employeeId,
+    public final void serviceUpdateEmployeeSalary(final Integer employeeId,
                                             final Integer newEmployeeSalary) {
         LOGGER.debug("serviceUpdateEmployeeSalary({}, {})", employeeId,
                 newEmployeeSalary);
@@ -141,7 +141,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeeId - id of the employee that was deleted from DB.
      */
     @Override
-    public void serviceRemoveEmployee(final Integer employeeId) {
+    public final void serviceRemoveEmployee(final Integer employeeId) {
         employeeDao.removeEmployee(employeeId);
         LOGGER.debug("serviceRemoveEmployee {}", employeeId);
     }

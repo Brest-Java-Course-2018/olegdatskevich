@@ -19,6 +19,9 @@ public class Department {
      */
     private String departmentDescription;
 
+    /**
+     * Empty constructor fo Department class.
+     */
     public Department() {
     }
 
@@ -86,7 +89,8 @@ public class Department {
      * Setter for departmentDescription.
      * @param departmentDescription - description of the department.
      */
-    public final void setDepartmentDescription(final String departmentDescription) {
+    public final void setDepartmentDescription(
+            final String departmentDescription) {
         this.departmentDescription = departmentDescription;
     }
 }
