@@ -7,13 +7,12 @@ Web application for HR-manager. The application is designed to work with departm
 * JDK 1.8  
 * Spring 4 Framework  
 * Maven v3.2.2  
-* H2 database v1.4.196  
-  
-## Build  
-  
-       $mvn clean install  
-  
-##  
+* H2 database v1.4.196
+
+##Build
+       $mvn clean install
+
+## 
 EPAM Java Course, Brest 2018  
 by **Oleg Datskevich**  
 e-mail: olegdac@gmail.com
