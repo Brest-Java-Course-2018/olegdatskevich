@@ -9,7 +9,8 @@ Web application for HR-manager. The application is designed to work with departm
 * Maven v3.2.2  
 * H2 database v1.4.196
 
-##Build
+##Build  
+
        $mvn clean install
 
 ## 
