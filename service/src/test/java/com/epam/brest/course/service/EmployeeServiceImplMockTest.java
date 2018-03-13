@@ -20,7 +20,11 @@ import static org.easymock.EasyMock.*;
 public class EmployeeServiceImplMockTest {
 
     public static final int EMPLOYEE_ID = 1;
-    public static final Employee EMPLOYEE = new Employee("John Doe", 1500, 1);
+    public static final String EMPLOYEE_NAME = "John Doe";
+    public static final int EMPLOYEE_SALARY = 1500;
+    public static final int DEPT_ID = 1;
+    public static final Employee EMPLOYEE = new Employee(
+            "John Doe", 1500, 1);
 
 
     @Autowired
@@ -42,8 +46,7 @@ public class EmployeeServiceImplMockTest {
     @Test
     public void serviceGetEmployeesTest() {
         List<Employee> employees = new ArrayList<>();
-        expect(mockEmployeeDao.getEmployees()).
-                andReturn(employees);
+        expect(mockEmployeeDao.getEmployees()).andReturn(employees);
         replay(mockEmployeeDao);
         employeeService.serviceGetEmployees();
         verify(mockEmployeeDao);
@@ -58,9 +61,14 @@ public class EmployeeServiceImplMockTest {
         verify(mockEmployeeDao);
     }
 
-//    @Test
-//    public void serviceGetEmployeesByDepartmentId() {
-//    }
+    @Test
+    public void serviceGetEmployeesByDepartmentIdTest() {
+        List<Employee> employees = new ArrayList<>();
+        expect(mockEmployeeDao.getEmployees()).andReturn(employees);
+        replay(mockEmployeeDao);
+        employeeService.serviceGetEmployeesByDepartmentId(DEPT_ID);
+        verify(mockEmployeeDao);
+    }
 //
 //    @Test
 //    public void calculateAverageSalary() {
@@ -70,15 +78,23 @@ public class EmployeeServiceImplMockTest {
 //    public void serviceGetEmployeeBySalaryMore() {
 //    }
 //
-//    @Test
-//    public void serviceAddEmployee() {
-//    }
+    @Test
+    public void serviceAddEmployeeTest() {
+        expect(mockEmployeeDao.addEmployee(EMPLOYEE)).andReturn(new Employee());
+        replay(mockEmployeeDao);
+        employeeService.serviceAddEmployee(EMPLOYEE);
+        verify(mockEmployeeDao);
+    }
 //
 //    @Test
 //    public void serviceUpdateEmployeeSalary() {
 //    }
 //
-//    @Test
-//    public void serviceRemoveEmployee() {
-//    }
+    @Test
+    public void serviceRemoveEmployeeTest() {
+        mockEmployeeDao.removeEmployee(EMPLOYEE_ID);
+        expectLastCall();
+        replay(mockEmployeeDao);
+        employeeService.serviceRemoveEmployee(EMPLOYEE_ID);
+    }
 }

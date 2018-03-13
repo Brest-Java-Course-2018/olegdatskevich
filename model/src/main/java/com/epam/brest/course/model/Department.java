@@ -93,4 +93,26 @@ public class Department {
             final String departmentDescription) {
         this.departmentDescription = departmentDescription;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Department that = (Department) o;
+
+        if (departmentId != null ? !departmentId.equals(that.departmentId) : that.departmentId != null)
+            return false;
+        if (departmentName != null ? !departmentName.equals(that.departmentName) : that.departmentName != null)
+            return false;
+        return departmentDescription != null ? departmentDescription.equals(that.departmentDescription) : that.departmentDescription == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = departmentId != null ? departmentId.hashCode() : 0;
+        result = 31 * result + (departmentName != null ? departmentName.hashCode() : 0);
+        result = 31 * result + (departmentDescription != null ? departmentDescription.hashCode() : 0);
+        return result;
+    }
 }

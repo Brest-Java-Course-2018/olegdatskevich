@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         LOGGER.debug("serviceGetEmployeesByDepartmentId {}", departmentId);
         List<Employee> employees = employeeDao.getEmployees();
         List<Employee> employeesByDepartmentId = null;
-        for (Employee employee: employees) {
+        for (Employee employee : employees) {
             if (employee.getDepartmentId().equals(departmentId)) {
                 employeesByDepartmentId.add(employee);
             }

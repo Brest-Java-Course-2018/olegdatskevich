@@ -15,8 +15,13 @@ public class EmployeeController {
         return "employees";
     }
 
-    @GetMapping(value = "/employee")
-    public String employee(Model model) {
-        return "employee";
+    @GetMapping(value = "/add_employee")
+    public String addEmployee(Model model) {
+        return "add_employee";
+    }
+
+    @GetMapping(value = "/edit_employee")
+    public String editEmployee(Model model) {
+        return "edit_employee";
     }
 }

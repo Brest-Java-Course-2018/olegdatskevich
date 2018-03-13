@@ -116,4 +116,29 @@ public class Employee {
     public final void setDepartmentId(final Integer departmentId) {
         this.departmentId = departmentId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        if (employeeId != null ? !employeeId.equals(employee.employeeId) : employee.employeeId != null)
+            return false;
+        if (employeeName != null ? !employeeName.equals(employee.employeeName) : employee.employeeName != null)
+            return false;
+        if (employeeSalary != null ? !employeeSalary.equals(employee.employeeSalary) : employee.employeeSalary != null)
+            return false;
+        return departmentId != null ? departmentId.equals(employee.departmentId) : employee.departmentId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = employeeId != null ? employeeId.hashCode() : 0;
+        result = 31 * result + (employeeName != null ? employeeName.hashCode() : 0);
+        result = 31 * result + (employeeSalary != null ? employeeSalary.hashCode() : 0);
+        result = 31 * result + (departmentId != null ? departmentId.hashCode() : 0);
+        return result;
+    }
 }

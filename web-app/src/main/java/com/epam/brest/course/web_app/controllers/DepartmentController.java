@@ -15,8 +15,13 @@ public class DepartmentController {
         return "departments";
     }
 
-    @GetMapping(value = "/department")
-    public String department(Model model) {
-        return "department";
+    @GetMapping(value = "/add_department")
+    public String addDepartment(Model model) {
+        return "add_department";
+    }
+
+    @GetMapping(value = "/edit_department")
+    public String editDepartment(Model model) {
+        return "edit_department";
     }
 }
