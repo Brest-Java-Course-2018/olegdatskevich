@@ -101,18 +101,25 @@ public class Department {
 
         Department that = (Department) o;
 
-        if (departmentId != null ? !departmentId.equals(that.departmentId) : that.departmentId != null)
+        if (departmentId != null ? !departmentId.equals(that.departmentId) :
+                that.departmentId != null)
             return false;
-        if (departmentName != null ? !departmentName.equals(that.departmentName) : that.departmentName != null)
+        if (departmentName != null ?
+                !departmentName.equals(that.departmentName) :
+                that.departmentName != null)
             return false;
-        return departmentDescription != null ? departmentDescription.equals(that.departmentDescription) : that.departmentDescription == null;
+        return departmentDescription != null ?
+                departmentDescription.equals(that.departmentDescription) :
+                that.departmentDescription == null;
     }
 
     @Override
     public int hashCode() {
         int result = departmentId != null ? departmentId.hashCode() : 0;
-        result = 31 * result + (departmentName != null ? departmentName.hashCode() : 0);
-        result = 31 * result + (departmentDescription != null ? departmentDescription.hashCode() : 0);
+        result = 31 * result +
+                (departmentName != null ? departmentName.hashCode() : 0);
+        result = 31 * result + (departmentDescription != null ?
+                departmentDescription.hashCode() : 0);
         return result;
     }
 }

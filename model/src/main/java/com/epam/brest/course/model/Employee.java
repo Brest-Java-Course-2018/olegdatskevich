@@ -124,13 +124,19 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        if (employeeId != null ? !employeeId.equals(employee.employeeId) : employee.employeeId != null)
+        if (employeeId != null ? !employeeId.equals(employee.employeeId) :
+                employee.employeeId != null)
             return false;
-        if (employeeName != null ? !employeeName.equals(employee.employeeName) : employee.employeeName != null)
+        if (employeeName != null ? !employeeName.equals(employee.employeeName) :
+                employee.employeeName != null)
             return false;
-        if (employeeSalary != null ? !employeeSalary.equals(employee.employeeSalary) : employee.employeeSalary != null)
+        if (employeeSalary != null ?
+                !employeeSalary.equals(employee.employeeSalary) :
+                employee.employeeSalary != null)
             return false;
-        return departmentId != null ? departmentId.equals(employee.departmentId) : employee.departmentId == null;
+        return departmentId != null ?
+                departmentId.equals(employee.departmentId) :
+                employee.departmentId == null;
     }
 
     @Override
