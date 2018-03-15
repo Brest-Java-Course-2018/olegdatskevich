@@ -16,13 +16,14 @@ import java.util.List;
 @Controller
 public class DepartmentController {
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 //List to Collection
     //Empty Collection
     @GetMapping(value = "/departments")
     public String getDepartments(Model model) {
         List<Department> departments =
                 departmentService.serviceGetDepartments();
+        //Collections.emptyList();
         model.addAttribute("departments", departments);
         return "departments";
     }
