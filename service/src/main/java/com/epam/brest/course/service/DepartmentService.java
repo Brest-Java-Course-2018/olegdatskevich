@@ -3,7 +3,7 @@ package com.epam.brest.course.service;
 import com.epam.brest.course.model.Department;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Interface fo Department service.
@@ -15,7 +15,7 @@ public interface DepartmentService {
      * Getting all departments from DB.
      * @return - list of department.
      */
-    List<Department> serviceGetDepartments();
+    Collection<Department> serviceGetDepartments();
 
     /**
      * Getting one department from DB.

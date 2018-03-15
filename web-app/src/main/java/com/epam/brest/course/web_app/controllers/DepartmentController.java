@@ -8,20 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Department controller.
  */
 @Controller
 public class DepartmentController {
+
     @Autowired
     private DepartmentService departmentService;
-//List to Collection
-    //Empty Collection
+
     @GetMapping(value = "/departments")
     public String getDepartments(Model model) {
-        List<Department> departments =
+        Collection<Department> departments =
                 departmentService.serviceGetDepartments();
         //Collections.emptyList();
         model.addAttribute("departments", departments);

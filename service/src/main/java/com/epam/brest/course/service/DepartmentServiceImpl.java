@@ -5,7 +5,7 @@ import com.epam.brest.course.model.Department;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Implementation of DepartmentService class.
@@ -35,8 +35,8 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @return - list of department.
      */
     @Override
-    public final List<Department> serviceGetDepartments() {
-        List<Department> departments = departmentDao.getDepartments();
+    public final Collection<Department> serviceGetDepartments() {
+        Collection<Department> departments = departmentDao.getDepartments();
         LOGGER.debug("serviceGetDepartments {} pc.", departments.size());
         return departments;
     }

@@ -2,7 +2,7 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.Department;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * DAO for department Interface.
@@ -12,7 +12,7 @@ public interface DepartmentDao {
      * Getting list of Departments from DB.
      * @return List of Departments.
      */
-    List<Department> getDepartments();
+    Collection<Department> getDepartments();
 
     /**
      * Getting one department from DB.

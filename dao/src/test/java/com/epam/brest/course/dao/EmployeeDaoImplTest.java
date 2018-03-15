@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,7 +29,7 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void getEmployees() {
-        List<Employee> employees = employeeDao.getEmployees();
+        Collection<Employee> employees = employeeDao.getEmployees();
         Assert.assertFalse(employees.isEmpty());
     }
 
@@ -54,7 +55,7 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void addEmployee() {
-        List<Employee> employees = employeeDao.getEmployees();
+        Collection<Employee> employees = employeeDao.getEmployees();
         int sizeBefore = employees.size();
         Employee testEmployee = new Employee("Test Testov", 500, 1);
         Employee newEmployee = employeeDao.addEmployee(testEmployee);
@@ -102,7 +103,7 @@ public class EmployeeDaoImplTest {
     public void removeEmployee() {
         Employee testEmployee = new Employee("TestRemoveEmployee", 300, 2);
         testEmployee = employeeDao.addEmployee(testEmployee);
-        List<Employee> employees = employeeDao.getEmployees();
+        Collection<Employee> employees = employeeDao.getEmployees();
         int sizeBefore = employees.size();
         employeeDao.removeEmployee(testEmployee.getEmployeeId());
         Assert.assertTrue(sizeBefore - 1 == employeeDao.getEmployees().size());

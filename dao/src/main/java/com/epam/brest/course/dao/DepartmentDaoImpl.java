@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Implementation of DepartmentDao class.
@@ -81,9 +81,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * @return List of Departments.
      */
     @Override
-    public final List<Department> getDepartments() throws DataAccessException {
+    public final Collection<Department> getDepartments() throws DataAccessException {
         LOGGER.debug("getDepartments()");
-        List<Department> departments =
+        Collection<Department> departments =
                 namedParameterJdbcTemplate.getJdbcOperations().
                 query(departmentSelect,
                       BeanPropertyRowMapper.newInstance(Department.class));

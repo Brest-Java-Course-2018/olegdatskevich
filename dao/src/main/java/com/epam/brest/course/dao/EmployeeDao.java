@@ -2,7 +2,7 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.Employee;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * DAO for Employee interface.
@@ -12,7 +12,7 @@ public interface EmployeeDao {
      * Getting list of Employees from DB.
      * @return List of Employees.
      */
-    List<Employee> getEmployees();
+    Collection<Employee> getEmployees();
 
     /**
      * Getting one employee from DB.

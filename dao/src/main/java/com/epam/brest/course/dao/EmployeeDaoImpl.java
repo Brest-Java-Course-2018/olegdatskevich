@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Implementation of EmployeeDao class.
@@ -80,9 +80,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
      * @return List of Employees.
      */
     @Override
-    public final List<Employee> getEmployees() {
+    public final Collection<Employee> getEmployees() {
         LOGGER.debug("getEmployees()");
-        List<Employee> employees =
+        Collection<Employee> employees =
                 namedParameterJdbcTemplate.getJdbcOperations().query(
                         employeeSelectAll,
                         BeanPropertyRowMapper.newInstance(Employee.class));

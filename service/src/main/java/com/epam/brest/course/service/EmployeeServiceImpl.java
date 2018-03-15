@@ -5,7 +5,7 @@ import com.epam.brest.course.model.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Interface of employee service.
@@ -35,8 +35,8 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return - list of Employees.
      */
     @Override
-    public final List<Employee> serviceGetEmployees() {
-        List<Employee> employees = employeeDao.getEmployees();
+    public final Collection<Employee> serviceGetEmployees() {
+        Collection<Employee> employees = employeeDao.getEmployees();
         LOGGER.debug("serviceGetEmployees {} pc.", employees.size());
         return employees;
     }
@@ -59,11 +59,11 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return - list of employees.
      */
     @Override
-    public final List<Employee> serviceGetEmployeesByDepartmentId(
+    public final Collection<Employee> serviceGetEmployeesByDepartmentId(
             final Integer departmentId) {
         LOGGER.debug("serviceGetEmployeesByDepartmentId {}", departmentId);
-        List<Employee> employees = employeeDao.getEmployees();
-        List<Employee> employeesByDepartmentId = null;
+        Collection<Employee> employees = employeeDao.getEmployees();
+        Collection<Employee> employeesByDepartmentId = null;
         for (Employee employee : employees) {
             if (employee.getDepartmentId().equals(departmentId)) {
                 employeesByDepartmentId.add(employee);
@@ -78,7 +78,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return - average salary fo list.
      */
     @Override
-    public final Integer calculateAverageSalary(final List<Employee> employees) {
+    public final Integer calculateAverageSalary(final Collection<Employee> employees) {
         Integer averageSalary = 0;
         if (employees != null) {
             for (Employee employee: employees) {
@@ -96,11 +96,11 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return employees.
      */
     @Override
-    public final List<Employee> serviceGetEmployeeBySalaryMore(
+    public final Collection<Employee> serviceGetEmployeeBySalaryMore(
             final Integer employeeSalary) {
         LOGGER.debug("serviceGetEmployeeByName {}", employeeSalary);
-        List<Employee> employees = employeeDao.getEmployees();
-        List<Employee> employeesSalaryMore = null;
+        Collection<Employee> employees = employeeDao.getEmployees();
+        Collection<Employee> employeesSalaryMore = null;
         for (Employee employee: employees) {
             if (employee.getEmployeeSalary() >= employeeSalary) {
                 employeesSalaryMore.add(employee);

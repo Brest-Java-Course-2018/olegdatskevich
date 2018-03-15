@@ -2,7 +2,7 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Employee;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Interface of employee service.
@@ -12,7 +12,7 @@ public interface EmployeeService {
      * Getting list of Employees from DB.
      * @return - list of Employees.
      */
-    List<Employee> serviceGetEmployees();
+    Collection<Employee> serviceGetEmployees();
 
     /**
      * Getting one employee from DB.
@@ -26,7 +26,7 @@ public interface EmployeeService {
      * @param departmentId - department id.
      * @return - list of employees.
      */
-    List<Employee> serviceGetEmployeesByDepartmentId(
+    Collection<Employee> serviceGetEmployeesByDepartmentId(
             final Integer departmentId);
 
     /**
@@ -34,7 +34,7 @@ public interface EmployeeService {
      * @param employeeSalary - value of salary.
      * @return employees.
      */
-    List<Employee> serviceGetEmployeeBySalaryMore(
+    Collection<Employee> serviceGetEmployeeBySalaryMore(
             final Integer employeeSalary);
 
     /**
@@ -42,7 +42,7 @@ public interface EmployeeService {
      * @param employees - list of employees.
      * @return - average salary fo list.
      */
-    Integer calculateAverageSalary(final List<Employee> employees);
+    Integer calculateAverageSalary(final Collection<Employee> employees);
 
     /**
      * Adding the employee to the DB.
