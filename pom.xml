@@ -65,6 +65,11 @@
             </dependency>
             <dependency>
                 <groupId>com.epam.brest.course</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
                 <artifactId>test.db</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>

@@ -1,12 +1,14 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Department;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Interface fo Department service.
  */
+@Service
 public interface DepartmentService {
 
     /**

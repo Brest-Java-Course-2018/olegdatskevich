@@ -20,6 +20,15 @@
         </dependency>
         <dependency>
             <groupId>com.epam.brest.course</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.brest.course</groupId>
+            <artifactId>service</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.brest.course</groupId>
             <artifactId>test-db</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

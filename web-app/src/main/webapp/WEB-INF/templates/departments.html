@@ -71,11 +71,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>CEO</td>
+                            <tr th:each="department: ${departments}">
+                                <td th:text="${department.departmentName}">QWE</td>
                                 <td>999.99</td>
                                 <td class="text-right">
                                     <a href="edit_department.html"
+                                       th:href="'/edit_department/' + ${department.departmentId}"
                                        class="btn-outline-secondary btn-sm"
                                        data-toggle="tooltip"
                                        data-placement="bottom"
@@ -96,11 +97,12 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr th:remove="all">
                                 <td>&nbsp&nbsp&nbsp&nbspAccounting</td>
                                 <td>999.99</td>
                                 <td class="text-right">
                                     <a href="edit_department.html"
+                                       th:href="@{/department/2}"
                                        class="btn-outline-secondary btn-sm"
                                        data-toggle="tooltip"
                                        data-placement="bottom"
@@ -121,7 +123,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr th:remove="all">
                                 <td>&nbsp&nbsp&nbsp&nbspDevelopment</td>
                                 <td>999.99</td>
                                 <td class="text-right">
@@ -146,7 +148,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr th:remove="all">
                                 <td>Management</td>
                                 <td>999.99</td>
                                 <td class="text-right">
