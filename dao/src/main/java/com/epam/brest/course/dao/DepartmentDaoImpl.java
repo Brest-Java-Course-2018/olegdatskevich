@@ -1,6 +1,7 @@
 package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.Department;
+import com.epam.brest.course.model.dto.DepartmentAvgSalary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,16 +46,25 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     @Value("${department.select}")
     private String departmentSelect;
+
     @Value("${department.selectById}")
     private String departmentSelectById;
+
     @Value("${department.selectByName}")
     private String departmentSelectByName;
+
     @Value("${department.checkDepartment}")
     private String checkDepartment;
+
+    @Value("${department.avgSalary}")
+    private String departmentColculateAvgSalary;
+
     @Value("${department.insert}")
     private String insert;
+
     @Value("${department.update}")
     private String update;
+
     @Value("${department.remove}")
     private String remove;
 
@@ -122,6 +132,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
                 namedParameters,
                 BeanPropertyRowMapper.newInstance(Department.class));
         return department;
+    }
+
+    @Override
+    public Collection<DepartmentAvgSalary> departmentAvgSalary() {
+        LOGGER.debug("departmentAvgSalary()");
+        Collection<DepartmentAvgSalary> avgSalaries =
+                namedParameterJdbcTemplate.getJdbcOperations().
+                query(departmentColculateAvgSalary, BeanPropertyRowMapper.
+                        newInstance(DepartmentAvgSalary.class));
+        return avgSalaries;
     }
 
     /**

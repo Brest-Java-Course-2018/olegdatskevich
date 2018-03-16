@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -39,6 +38,7 @@ public class EmployeeDaoImplTest {
         Assert.assertNotNull(employee);
         Assert.assertTrue(employee.getEmployeeId().equals(1));
         Assert.assertTrue(employee.getEmployeeName().equals("Ivan Ivanov"));
+        Assert.assertTrue(employee.getEmployeeEmail().equals("ivanov@ex.com"));
         Assert.assertTrue(employee.getEmployeeSalary().equals(1000));
         Assert.assertTrue(employee.getDepartmentId().equals(1));
     }
@@ -49,6 +49,7 @@ public class EmployeeDaoImplTest {
         Assert.assertNotNull(employee);
         Assert.assertTrue(employee.getEmployeeId().equals(2));
         Assert.assertTrue(employee.getEmployeeName().equals("Petr Petrov"));
+        Assert.assertTrue(employee.getEmployeeEmail().equals("petrov@ex.com"));
         Assert.assertTrue(employee.getEmployeeSalary().equals(1500));
         Assert.assertTrue(employee.getDepartmentId().equals(2));
     }
@@ -57,10 +58,11 @@ public class EmployeeDaoImplTest {
     public void addEmployee() {
         Collection<Employee> employees = employeeDao.getEmployees();
         int sizeBefore = employees.size();
-        Employee testEmployee = new Employee("Test Testov", 500, 1);
+        Employee testEmployee = new Employee("Test Testov", "test@test.com", 500, 1);
         Employee newEmployee = employeeDao.addEmployee(testEmployee);
         Assert.assertNotNull(newEmployee.getEmployeeId());
         Assert.assertTrue(newEmployee.getEmployeeName().equals(testEmployee.getEmployeeName()));
+        Assert.assertTrue(newEmployee.getEmployeeEmail().equals(testEmployee.getEmployeeEmail()));
         Assert.assertTrue(newEmployee.getEmployeeSalary().equals(testEmployee.getEmployeeSalary()));
         Assert.assertTrue(newEmployee.getDepartmentId().equals(testEmployee.getDepartmentId()));
         Assert.assertTrue(sizeBefore + 1 == employeeDao.getEmployees().size());
@@ -68,7 +70,7 @@ public class EmployeeDaoImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public  void  addSameEmployee() {
-        Employee testEmployee = new Employee("TestAddSameEmployee", 100, 1);
+        Employee testEmployee = new Employee("TestAddSameEmployee", "test@test.com", 100, 1);
         employeeDao.addEmployee(testEmployee);
         employeeDao.addEmployee(testEmployee);
     }
@@ -77,7 +79,8 @@ public class EmployeeDaoImplTest {
     public ExpectedException thrown = ExpectedException.none();
     @Test
     public void addSameEmployeeWithRule() {
-        Employee testEmployee = new Employee("TestAddSameEmployeeRule", 100, 1);
+        Employee testEmployee =
+                new Employee("TestAddSameEmployeeRule", "test@test.com", 100, 1);
         employeeDao.addEmployee(testEmployee);
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Employee with the same name already exists in DB.");
@@ -86,7 +89,8 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void updateEmployee() {
-        Employee testEmployee = new Employee("TestUpdateEmployee", 100, 1);
+        Employee testEmployee =
+                new Employee("TestUpdateEmployee", "test@test.com", 100, 1);
         Employee newEmployee = employeeDao.addEmployee(testEmployee);
         newEmployee.setEmployeeName("NEWTestUpdateEmployee");
         newEmployee.setEmployeeSalary(200);
@@ -101,7 +105,8 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void removeEmployee() {
-        Employee testEmployee = new Employee("TestRemoveEmployee", 300, 2);
+        Employee testEmployee =
+                new Employee("TestRemoveEmployee", "test@test.com", 300, 2);
         testEmployee = employeeDao.addEmployee(testEmployee);
         Collection<Employee> employees = employeeDao.getEmployees();
         int sizeBefore = employees.size();

@@ -1,6 +1,7 @@
 package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.Department;
+import com.epam.brest.course.model.dto.DepartmentAvgSalary;
 
 import java.util.Collection;
 
@@ -27,6 +28,8 @@ public interface DepartmentDao {
      * @return Department
      */
     Department getDepartmentByName(final String departmentName);
+
+    Collection<DepartmentAvgSalary> departmentAvgSalary();
 
     /**
      * Adding the department to the DB.

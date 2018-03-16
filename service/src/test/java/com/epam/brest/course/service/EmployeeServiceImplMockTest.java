@@ -21,10 +21,11 @@ public class EmployeeServiceImplMockTest {
 
     public static final int EMPLOYEE_ID = 1;
     public static final String EMPLOYEE_NAME = "John Doe";
+    public static final String EMPLOYEE_EMAIL = "johndoe@ex.com";
     public static final int EMPLOYEE_SALARY = 1500;
     public static final int DEPT_ID = 1;
     public static final Employee EMPLOYEE = new Employee(
-            "John Doe", 1500, 1);
+            "John Doe", "johndoe@ex.com", 1500, 1);
 
 
     @Autowired

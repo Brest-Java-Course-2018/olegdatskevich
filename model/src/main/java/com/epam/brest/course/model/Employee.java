@@ -14,6 +14,10 @@ public class Employee {
      */
     private String employeeName;
     /**
+     * Email of employee.
+     */
+    private String employeeEmail;
+    /**
      * Salary of employee.
      */
     private Integer employeeSalary;
@@ -35,22 +39,11 @@ public class Employee {
      * @param employeeSalary - salary of employee.
      * @param departmentId - id of employee's department.
      */
-    public Employee(final String employeeName,
-                    final Integer employeeSalary,
-                    final Integer departmentId) {
+    public Employee(String employeeName, String employeeEmail, Integer employeeSalary, Integer departmentId) {
         this.employeeName = employeeName;
+        this.employeeEmail = employeeEmail;
         this.employeeSalary = employeeSalary;
         this.departmentId = departmentId;
-    }
-
-    @Override
-    public final String toString() {
-        return "Employee ["
-                + "employeeId=" + employeeId
-                + ", employeeName='" + employeeName + '\''
-                + ", employeeSalary=" + employeeSalary
-                + ", departmentId=" + departmentId
-                + ']';
     }
 
     /**
@@ -83,6 +76,14 @@ public class Employee {
      */
     public final void setEmployeeName(final String employeeName) {
         this.employeeName = employeeName;
+    }
+
+    public String getEmployeeEmail() {
+        return employeeEmail;
+    }
+
+    public void setEmployeeEmail(String employeeEmail) {
+        this.employeeEmail = employeeEmail;
     }
 
     /**
@@ -124,27 +125,35 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        if (employeeId != null ? !employeeId.equals(employee.employeeId) :
-                employee.employeeId != null)
+        if (employeeId != null ? !employeeId.equals(employee.employeeId) : employee.employeeId != null)
             return false;
-        if (employeeName != null ? !employeeName.equals(employee.employeeName) :
-                employee.employeeName != null)
+        if (employeeName != null ? !employeeName.equals(employee.employeeName) : employee.employeeName != null)
             return false;
-        if (employeeSalary != null ?
-                !employeeSalary.equals(employee.employeeSalary) :
-                employee.employeeSalary != null)
+        if (employeeEmail != null ? !employeeEmail.equals(employee.employeeEmail) : employee.employeeEmail != null)
             return false;
-        return departmentId != null ?
-                departmentId.equals(employee.departmentId) :
-                employee.departmentId == null;
+        if (employeeSalary != null ? !employeeSalary.equals(employee.employeeSalary) : employee.employeeSalary != null)
+            return false;
+        return departmentId != null ? departmentId.equals(employee.departmentId) : employee.departmentId == null;
     }
 
     @Override
     public int hashCode() {
         int result = employeeId != null ? employeeId.hashCode() : 0;
         result = 31 * result + (employeeName != null ? employeeName.hashCode() : 0);
+        result = 31 * result + (employeeEmail != null ? employeeEmail.hashCode() : 0);
         result = 31 * result + (employeeSalary != null ? employeeSalary.hashCode() : 0);
         result = 31 * result + (departmentId != null ? departmentId.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", employeeName='" + employeeName + '\'' +
+                ", employeeEmail='" + employeeEmail + '\'' +
+                ", employeeSalary=" + employeeSalary +
+                ", departmentId=" + departmentId +
+                '}';
     }
 }

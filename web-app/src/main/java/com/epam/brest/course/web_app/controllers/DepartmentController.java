@@ -1,6 +1,7 @@
 package com.epam.brest.course.web_app.controllers;
 
 import com.epam.brest.course.model.Department;
+import com.epam.brest.course.model.dto.DepartmentAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,10 @@ public class DepartmentController {
 
     @GetMapping(value = "/departments")
     public String getDepartments(Model model) {
-        Collection<Department> departments =
-                departmentService.serviceGetDepartments();
+        Collection<DepartmentAvgSalary> departments =
+                departmentService.serviceDepartmentAvgSalary();
         //Collections.emptyList();
+
         model.addAttribute("departments", departments);
         return "departments";
     }

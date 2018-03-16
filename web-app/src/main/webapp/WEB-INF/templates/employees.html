@@ -70,6 +70,7 @@
                             <thead class="thead-inverse">
                             <tr>
                                 <th>Name</th>
+                                <th>Email</th>
                                 <th>Department</th>
                                 <th>Salary</th>
                                 <th></th>
@@ -78,6 +79,7 @@
                             <tbody>
                             <tr th:each="employee : ${employees}">
                                 <td th:text="${employee.employeeName}">Oleg Datskevich</td>
+                                <td th:text="${employee.employeeEmail}">datskevich@ex.com</td>
                                 <td th:text="${employee.departmentId}">Development</td>
                                 <td th:text="${employee.employeeSalary}">999</td>
                                 <td class="text-right">
@@ -101,54 +103,6 @@
                                     </span>
                                 </td>
                             </tr>
-                            <!--<tr>
-                                <td>Oleg Datskevich</td>
-                                <td>Management</td>
-                                <td>olegdac@gmail.com</td>
-                                <td>1000</td>
-                                <td class="text-right">
-                                    <a href="edit_employee.html" class="btn-outline-secondary btn-sm"
-                                       data-toggle="tooltip"
-                                       data-placement="top"
-                                       title="Edit employee">
-                                        <i class="fa fa-pencil"></i>
-                                        <span class="d-none d-md-inline">Edit</span>
-                                    </a>
-                                    <span data-toggle="modal" data-target="#confirmRemoveModal">
-                                        <a href="#" class="btn-outline-secondary btn-sm"
-                                           data-toggle="tooltip"
-                                           data-placement="top"
-                                           title="Remove employee">
-                                            <i class="fa fa-remove"></i>
-                                            <span class="d-none d-md-inline">Remove</span>
-                                        </a>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tim Cook</td>
-                                <td>CEO</td>
-                                <td>timmy@gmail.com</td>
-                                <td>10000</td>
-                                <td class="text-right">
-                                    <a href="edit_employee.html" class="btn-outline-secondary btn-sm"
-                                       data-toggle="tooltip"
-                                       data-placement="top"
-                                       title="Edit employee">
-                                        <i class="fa fa-pencil"></i>
-                                        <span class="d-none d-md-inline">Edit</span>
-                                    </a>
-                                    <span data-toggle="modal" data-target="#warningRemove">
-                                        <a href="#" class="btn-outline-secondary btn-sm"
-                                           data-toggle="tooltip"
-                                           data-placement="top"
-                                           title="Remove employee">
-                                            <i class="fa fa-remove"></i>
-                                            <span class="d-none d-md-inline">Remove</span>
-                                        </a>
-                                    </span>
-                                </td>
-                            </tr>-->
                             </tbody>
                         </table>
                     </div>

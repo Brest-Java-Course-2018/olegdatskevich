@@ -4,7 +4,6 @@ package com.epam.brest.course.model;
  *
  * POJO Department for model.
  */
-
 public class Department {
     /**
      * Id of department.

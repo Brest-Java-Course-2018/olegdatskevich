@@ -9,8 +9,9 @@ DROP TABLE IF EXISTS employee;
 CREATE TABLE employee (
  employeeId INT NOT NULL AUTO_INCREMENT,
  employeeName VARCHAR(255) NOT NULL,
+ employeeEmail VARCHAR(255) NOT NULL,
  employeeSalary DECIMAL(10,2) NOT NULL DEFAULT 0,
  departmentId INT NOT NULL,
- PRIMARY KEY (employeeId),
- FOREIGN KEY (departmentId) REFERENCES department(departmentId)
+ PRIMARY KEY (employeeId)
 );
+ALTER TABLE employee ADD CONSTRAINT fk_dep_emp FOREIGN KEY (departmentId) REFERENCES department (departmentId);

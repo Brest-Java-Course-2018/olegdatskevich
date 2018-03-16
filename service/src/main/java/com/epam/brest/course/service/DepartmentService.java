@@ -1,6 +1,7 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Department;
+import com.epam.brest.course.model.dto.DepartmentAvgSalary;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -23,6 +24,8 @@ public interface DepartmentService {
      * @return department.
      */
     Department serviceGetDepartmentById(final Integer departmentId);
+
+    Collection<DepartmentAvgSalary> serviceDepartmentAvgSalary();
 
     /**
      * Adding department in DB.

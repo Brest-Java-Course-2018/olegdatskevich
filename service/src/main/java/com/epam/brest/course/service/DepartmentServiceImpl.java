@@ -2,6 +2,7 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.DepartmentDao;
 import com.epam.brest.course.model.Department;
+import com.epam.brest.course.model.dto.DepartmentAvgSalary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -51,6 +52,13 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department department = departmentDao.getDepartmentById(departmentId);
         LOGGER.debug("serviceGetDepartmentById {}", departmentId);
         return department;
+    }
+
+    @Override
+    public Collection<DepartmentAvgSalary> serviceDepartmentAvgSalary() {
+        LOGGER.debug("serviceDepartmentAvgSalary()");
+        Collection<DepartmentAvgSalary> departmentAvgSalaries = departmentDao.departmentAvgSalary();
+        return departmentAvgSalaries;
     }
 
     /**

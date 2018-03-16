@@ -77,7 +77,7 @@
                             <tbody>
                             <tr th:each="department : ${departments}">
                                 <td th:text="${department.departmentName}">CEO</td>
-                                <td>999.99</td>
+                                <td th:text="${department.averageSalary}">999.99</td>
                                 <td class="text-right">
                                     <a href="edit_department.html"
                                        th:href="'/edit_department/' + ${department.departmentId}"

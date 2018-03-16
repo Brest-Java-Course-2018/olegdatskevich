@@ -7,6 +7,7 @@ public class EmployeeTest {
 
     private static final Integer ID = 2;
     private static final String OLEG = "Oleg";
+    private static final String EMAIL = "oleg@ex.com";
     private static final Integer SALARY = 1000;
     private static final Integer DEP_ID = 1;
 
@@ -44,7 +45,7 @@ public class EmployeeTest {
 
     @Test
     public void employeeConstructorTest() {
-        Employee employee = new Employee(OLEG, SALARY, DEP_ID);
-        Assert.assertTrue(employee.equals(new Employee(OLEG, SALARY, DEP_ID)));
+        Employee employee = new Employee(OLEG, EMAIL, SALARY, DEP_ID);
+        Assert.assertTrue(employee.equals(new Employee(OLEG, EMAIL, SALARY, DEP_ID)));
     }
 }

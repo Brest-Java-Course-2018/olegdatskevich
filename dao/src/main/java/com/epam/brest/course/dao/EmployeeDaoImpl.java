@@ -36,6 +36,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
      */
     private static final String EMPLOYEE_ID = "employeeId";
     private static final String EMPLOYEE_NAME = "employeeName";
+    private static final String EMPLOYEE_EMAIL = "employeeEmail";
     private static final String EMPLOYEE_SALARY = "employeeSalary";
     private static final String DEPARTMENT_ID = "departmentId";
 
@@ -139,6 +140,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         if (result == 0) {
             namedParameters = new MapSqlParameterSource();
             namedParameters.addValue(EMPLOYEE_NAME, employee.getEmployeeName());
+            namedParameters.addValue(EMPLOYEE_EMAIL, employee.getEmployeeEmail());
             namedParameters.addValue(EMPLOYEE_SALARY,
                     employee.getEmployeeSalary());
             namedParameters.addValue(DEPARTMENT_ID, employee.getDepartmentId());

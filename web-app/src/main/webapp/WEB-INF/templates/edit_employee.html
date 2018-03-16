@@ -99,21 +99,29 @@
                                     <!--</div>-->
                                 </div>
                             </div>
-                            <!--<div class="form-group">-->
-                                <!--<label for="emailInput">Email</label>-->
-                                <!--<input type="email"-->
-                                       <!--class="form-control"-->
-                                       <!--id="emailInput"-->
-                                       <!--placeholder="Input email">-->
-                            <!--</div>-->
+                            <div class="form-group">
+                                <label for="emailInput">Email</label>
+                                <input type="email"
+                                       value="Employee email"
+                                       th:value="${employee.employeeEmail}"
+                                       class="form-control"
+                                       id="emailInput"
+                                       placeholder="Input email">
+                            </div>
                             <div class="form-group">
                                 <label for="departmentChose">Department</label>
-                                <select class="custom-select" id="departmentChose">
-                                    <option selected>Chose department</option>
-                                    <option value="1">CEO</option>
-                                    <option value="2">Accounting</option>
-                                    <option value="3">Development</option>
-                                    <option value="4">Management</option>
+                                <select class="custom-select"
+                                        id="departmentChose">
+                                    <option selected
+                                            th:text="${employee.departmentId}">
+                                        Chose department
+                                    </option>
+                                    <div th:each="department : ${departments}">
+                                        <option value="1"
+                                                th:text="${department.departmentName}">
+                                            DEP_NAME
+                                        </option>
+                                    </div>
                                 </select>
                             </div>
                             <div class="form-group">
