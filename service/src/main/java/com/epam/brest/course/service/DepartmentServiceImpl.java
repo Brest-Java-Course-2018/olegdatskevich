@@ -75,16 +75,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     /**
      * Updating department.
-     * @param departmentId - id of department.
-     * @param departmentDescription - department's description.
+     * @param department - department that need to update.
      */
     @Override
-    public final void serviceUpdateDepartmentDescription(
-            final Integer departmentId, final String departmentDescription) {
-        LOGGER.debug("serviceUpdateDepartmentDescription({}, {})",
-                departmentId, departmentDescription);
-        Department department = departmentDao.getDepartmentById(departmentId);
-        department.setDepartmentDescription(departmentDescription);
+    public final void serviceUpdateDepartment(final Department department) {
+        LOGGER.debug("serviceUpdateDepartment({})", department);
         departmentDao.updateDepartment(department);
     }
 
@@ -94,7 +89,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      */
     @Override
     public final void serviceRemoveDepartmentById(final Integer departmentId) {
-        departmentDao.removeDepartmentById(departmentId);
         LOGGER.debug("serviceRemoveDepartmentById {}", departmentId);
+        departmentDao.removeDepartmentById(departmentId);
     }
 }

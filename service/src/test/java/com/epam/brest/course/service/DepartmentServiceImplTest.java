@@ -27,9 +27,6 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void serviceGetDepartmentById() {
-        departmentService.serviceUpdateDepartmentDescription(ID, DEPARTMENT_DESCRIPTION);
-        Department department = departmentService.serviceGetDepartmentById(ID);
-        Assert.assertEquals(DEPARTMENT_DESCRIPTION, department.getDepartmentDescription());
     }
 
     @Test

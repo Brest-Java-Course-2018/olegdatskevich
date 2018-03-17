@@ -53,11 +53,9 @@ public interface EmployeeService {
 
     /**
      * Updating information about employee.
-     * @param employeeId - employee's id.
-     * @param newEmployeeSalary - updatable value of salary.
+     * @param employee - prepared instance of the object Employee to update.
      */
-    void serviceUpdateEmployeeSalary(final Integer employeeId,
-                                     final Integer newEmployeeSalary);
+    void serviceUpdateEmployee(final Employee employee);
 
     /**
      * Deleting the employee from DB.

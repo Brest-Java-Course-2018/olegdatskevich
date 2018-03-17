@@ -1,6 +1,7 @@
 package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.Department;
+import com.epam.brest.course.model.dto.DepartmentAvgSalary;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,6 +50,12 @@ public class DepartmentDaoImplTest {
         Assert.assertTrue(department.getDepartmentName().equals("Management"));
         Assert.assertTrue(department.getDepartmentDescription().equals("Managers Dep"));
     }
+
+    /*@Test
+    public void departmentAvgSalary() {
+        Collection<DepartmentAvgSalary> departments = departmentDao.departmentAvgSalary();
+        Assert.assertFalse(departments.isEmpty());
+    }*/
 
     @Test
     public void addDepartment() {

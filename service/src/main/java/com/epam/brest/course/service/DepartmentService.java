@@ -36,11 +36,9 @@ public interface DepartmentService {
 
     /**
      * Updating department.
-     * @param departmentId - id of department.
-     * @param departmentDescription - department's description.
+     * @param department - department that need to update.
      */
-    void serviceUpdateDepartmentDescription(final Integer departmentId,
-                                     final String departmentDescription);
+    void serviceUpdateDepartment(final Department department);
 
     /**
      * Remove department from DB.

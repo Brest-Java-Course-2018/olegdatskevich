@@ -123,16 +123,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * Updating information about employee.
-     * @param employeeId - employee's id.
-     * @param newEmployeeSalary - updatable value of salary.
+     * @param employee - prepared instance of the object Employee to udate.
      */
     @Override
-    public final void serviceUpdateEmployeeSalary(final Integer employeeId,
-                                            final Integer newEmployeeSalary) {
-        LOGGER.debug("serviceUpdateEmployeeSalary({}, {})", employeeId,
-                newEmployeeSalary);
-        Employee employee = employeeDao.getEmployeeById(employeeId);
-        employee.setEmployeeSalary(newEmployeeSalary);
+    public final void serviceUpdateEmployee(final Employee employee) {
+        LOGGER.debug("serviceUpdateEmployee({})", employee);
         employeeDao.updateEmployee(employee);
     }
 
@@ -142,7 +137,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public final void serviceRemoveEmployee(final Integer employeeId) {
-        employeeDao.removeEmployee(employeeId);
         LOGGER.debug("serviceRemoveEmployee {}", employeeId);
+        employeeDao.removeEmployee(employeeId);
     }
 }
