@@ -93,77 +93,62 @@
                                    type="hidden"
                                    th:field="*{employeeId}"/>
                             <div class="form-group">
-                                <div class="form-row">
-                                    <div class="col">
-                                        <label for="firstName">First name</label>
-                                        <input type="text"
-                                               value="Employee name"
-                                               th:value="${employee.employeeName}"
-                                               class="form-control"
-                                               placeholder="Input first name"
-                                               id="firstName">
-                                    </div>
-                                    <!--<div class="col">-->
-                                        <!--<label for="lastName">Last name</label>-->
-                                        <!--<input type="text"-->
-                                               <!--value="Last name"-->
-                                               <!--class="form-control"-->
-                                               <!--placeholder="Input last name"-->
-                                               <!--id="lastName">-->
-                                    <!--</div>-->
-                                </div>
+                                <label for="firstName">First name</label>
+                                <input type="text"
+                                       th:field="*{employeeName}"
+                                       class="form-control"
+                                       placeholder="Input first name"
+                                       id="firstName">
                             </div>
                             <div class="form-group">
                                 <label for="emailInput">Email</label>
                                 <input type="email"
-                                       value="Employee email"
-                                       th:value="${employee.employeeEmail}"
+                                       th:field="*{employeeEmail}"
                                        class="form-control"
                                        id="emailInput"
                                        placeholder="Input email">
                             </div>
                             <div class="form-group">
                                 <label for="departmentChose">Department</label>
-                                <select class="custom-select"
-                                        id="departmentChose">
-                                    <option selected
-                                            th:text="${employee.departmentId}">
-                                        Chose department
-                                    </option>
-                                    <div th:each="department : ${departments}">
-                                        <option value="1"
-                                                th:text="${department.departmentName}">
-                                            DEP_NAME
-                                        </option>
-                                    </div>
+                                <select id="departmentChose"
+                                        th:field="*{departmentId}"
+                                        class="form-control"
+                                        multiple="multiple">
+                                    <option th:each="department : ${departments}"
+                                            th:value="${department.departmentId}"
+                                            th:text="${department.departmentName}">Part name</option>
                                 </select>
+
+
+
+                                <!--<select class="custom-select"-->
+                                        <!--id="departmentChose">-->
+                                    <!--<option selected-->
+                                            <!--th:each="department : ${departments}"-->
+                                            <!--th:if="${employee.departmentId == department.departmentId}"-->
+                                            <!--th:text="${department.departmentName}">-->
+                                        <!--Chose department-->
+                                    <!--</option>-->
+                                    <!--<div>-->
+                                        <!--<option th:value="${department.departmentId}"-->
+
+                                                <!--th:text="${department.departmentName}">-->
+                                            <!--DEP_NAME-->
+                                        <!--</option>-->
+                                    <!--</div>-->
+                                <!--</select>-->
                             </div>
                             <div class="form-group">
                                 <label for="salaryInput">Salary</label>
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                     <input type="number"
-                                           value="999"
-                                           th:value="${employee.employeeSalary}"
+                                           th:field="*{employeeSalary}"
                                            class="form-control"
                                            aria-label="Amount (to the nearest dollar)"
                                            id="salaryInput">
                                 </div>
                             </div>
-                            <!--<div class="form-group">-->
-                                <!--<label for="dateInput">Date of birth</label>-->
-                                    <!--<input class="form-control"-->
-                                           <!--type="date"-->
-                                           <!--value="2018-01-01"-->
-                                           <!--id="dateInput">-->
-                            <!--</div>-->
-                            <!--<div class="form-group">-->
-                                <!--<label for="hiringDateInput">Hiring date</label>-->
-                                <!--<input class="form-control"-->
-                                       <!--type="date"-->
-                                       <!--value="2018-01-01"-->
-                                       <!--id="hiringDateInput">-->
-                            <!--</div>-->
                         </form>
                     </div>
                 </div>

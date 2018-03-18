@@ -47,7 +47,8 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a title="Add employee"
-                   href="add_employee.html"
+                   href="employee.html"
+                   th:href="@{/employee}"
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom">
@@ -79,7 +80,10 @@
                             <tr th:each="employee : ${employees}">
                                 <td th:text="${employee.employeeName}">Oleg Datskevich</td>
                                 <td th:text="${employee.employeeEmail}">datskevich@ex.com</td>
-                                <td th:text="${employee.departmentId}">Development</td>
+                                <td th:each="department : ${departments}"
+                                    th:if="${employee.departmentId == department.departmentId}"
+                                        th:text="${department.departmentName}">
+                                    Development</td>
                                 <td th:text="${employee.employeeSalary}">999</td>
                                 <td class="text-right">
                                     <a href="employee.html"

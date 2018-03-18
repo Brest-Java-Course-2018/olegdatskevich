@@ -6,12 +6,18 @@ Web application for HR-manager. The application is designed to work with departm
 ## Used technologies
 * JDK 1.8  
 * Spring 4 Framework  
-* Maven v3.2.2  
+* Maven v3.2.2
+* Jetty v.9.4.8  
 * H2 database v1.4.196
 
 ## Build  
 
        $mvn clean install  
+       $mvn jetty:run  
+
+## Run  
+
+       http://localhost:8080/  
 
 ## 
 EPAM Java Course, Brest 2018  

@@ -72,7 +72,7 @@ public class EmployeeController {
      * @param result
      * @return
      */
-    @PostMapping(value = "/department/{id}")
+    @PostMapping(value = "/employee/{id}")
     public String updateEmployee(/*@Valid*/ final Employee employee,
                                               final BindingResult result) {
         LOGGER.debug("PostUpdateEmployee({}, {})", employee, result);
@@ -93,6 +93,8 @@ public class EmployeeController {
     public String addEmployee(final Model model) {
         LOGGER.debug("GetAddEmployee({})", model);
         Employee employee = new Employee();
+        Collection<Department> departments = departmentService.serviceGetDepartments();
+        model.addAttribute("departments", departments);
         model.addAttribute("employee", employee);
         model.addAttribute("isNew", true);
         return "employee";
