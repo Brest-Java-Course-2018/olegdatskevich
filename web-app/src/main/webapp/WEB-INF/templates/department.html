@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title th:text="${isNew} ? 'New department' : 'Edit department'">
+    <title th:text="${isNew} ? #{new_department} : #{edit_department}">
         Edit department/New department
     </title>
     <link rel="stylesheet"
@@ -34,10 +34,12 @@
                 <nav class="navbar-nav">
                     <a class="nav-item nav-link active"
                        href="departments.html"
-                       th:href="@{/departments}">Departments</a>
+                       th:href="@{/departments}"
+                       th:text="#{departments}">Departments</a>
                     <a class="nav-item nav-link"
                        href="employees.html"
-                       th:href="@{/employees}">Employees</a>
+                       th:href="@{/employees}"
+                       th:text="#{employees}">Employees</a>
                 </nav>
         </div>
     </nav>
@@ -57,7 +59,7 @@
             </li>
         </ul>
         <span class="navbar-brand text-uppercase mr-auto"
-              th:text="${isNew} ? 'New department' : 'Edit department'">
+              th:text="${isNew} ? #{new_department} : #{edit_department}">
             Edit department
         </span>
         <ul class="navbar-nav">
@@ -88,10 +90,16 @@
                               action="departments.html"
                               th:action="@{${#httpServletRequest.servletPath}}"
                               th:method="@{post}">
+
+                            <!--<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">-->
+                                <!--<p>Please fix errors below:</p>-->
+                            <!--</div>-->
+
                             <input id="field_departmentId"
                                    name="field_departmentId"
                                    type="hidden"
                                    th:field="*{departmentId}"/>
+
                             <div class="form-group">
                                 <label class="form-control-label"
                                        for="departmentNameInput">
@@ -102,17 +110,29 @@
                                        type="text"
                                        class="form-control"
                                        placeholder="Input department name">
+                                <div th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}">Name Error</div>
                             </div>
+                            <!--<div th:if="${#fields.hasErrors('departmentName')}"-->
+                                 <!--class="invalid-feedback"-->
+                                 <!--th:errors="*{departmentName}">-->
+                                <!--[ERRORS]-->
+                            <!--</div>-->
                             <div class="form-group">
                                 <label class="form-control-label"
                                        for="departmentDescriptionInput">
                                     Department description
                                 </label>
                                 <input type="text"
+                                       th:class="${#fields.hasErrors('departmentDescription')} ? 'form-control is-invalid' : 'form-control'"
                                        th:field="*{departmentDescription}"
                                        class="form-control"
                                        id="departmentDescriptionInput"
                                        placeholder="Input department description">
+                                <div th:if="${#fields.hasErrors('departmentDescription')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{departmentDescription}">
+                                    [ERRORS]
+                                </div>
                             </div>
                         </form>
                     </div>

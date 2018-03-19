@@ -5,12 +5,14 @@ import com.epam.brest.course.model.Department;
 import com.epam.brest.course.model.dto.DepartmentAvgSalary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
 /**
  * Implementation of DepartmentService class.
  */
+@Transactional
 public class DepartmentServiceImpl implements DepartmentService {
 
     /**

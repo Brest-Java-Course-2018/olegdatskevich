@@ -1,21 +1,33 @@
 package com.epam.brest.course.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  *
  * POJO Employee in model.
  */
 public class Employee {
+
     /**
      * Id number of employee.
      */
     private Integer employeeId;
+
     /**
      * Name of employee.
      */
+    @NotNull(message = "Employee name can not be null.")
+    @Size(min = 5, max = 40, message =
+            "Employee name must be between 5 and 40 characters.")
     private String employeeName;
+
     /**
      * Email of employee.
      */
+    @NotNull(message = "Employee email can not be null.")
+    @Email (message = "Nat a valid email.")
     private String employeeEmail;
     /**
      * Salary of employee.

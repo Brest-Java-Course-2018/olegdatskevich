@@ -10,6 +10,27 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*" />
+            <ref bean="localeChangeInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="/WEB-INF/locales/messages" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="lang" />
+    </bean>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+
     <import resource="sample-db-spring.xml"/>
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.brest.course.*"/>
@@ -41,6 +62,9 @@
     <mvc:annotation-driven/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"

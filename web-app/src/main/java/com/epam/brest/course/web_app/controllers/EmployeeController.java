@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 /**
@@ -22,9 +23,15 @@ import java.util.Collection;
 @Controller
 public class EmployeeController {
 
+    /**
+     *
+     */
     @Autowired
     private DepartmentService departmentService;
 
+    /**
+     *
+     */
     @Autowired
     private EmployeeService employeeService;
 
@@ -39,10 +46,11 @@ public class EmployeeController {
      * @return
      */
     @GetMapping(value = "/employees")
-    public String getEmployees(final Model model) {
+    public final String getEmployees(final Model model) {
         LOGGER.debug("GetEmployees({})", model);
         Collection<Employee> employees = employeeService.serviceGetEmployees();
-        Collection<Department> departments = departmentService.serviceGetDepartments();
+        Collection<Department> departments =
+                departmentService.serviceGetDepartments();
         model.addAttribute("employees", employees);
         model.addAttribute("departments", departments);
         return "employees";
@@ -73,7 +81,7 @@ public class EmployeeController {
      * @return
      */
     @PostMapping(value = "/employee/{id}")
-    public String updateEmployee(/*@Valid*/ final Employee employee,
+    public final String updateEmployee(@Valid final Employee employee,
                                               final BindingResult result) {
         LOGGER.debug("PostUpdateEmployee({}, {})", employee, result);
         if (result.hasErrors()) {
@@ -90,10 +98,11 @@ public class EmployeeController {
      * @return
      */
     @GetMapping(value = "/employee")
-    public String addEmployee(final Model model) {
+    public final String addEmployee(final Model model) {
         LOGGER.debug("GetAddEmployee({})", model);
         Employee employee = new Employee();
-        Collection<Department> departments = departmentService.serviceGetDepartments();
+        Collection<Department> departments =
+                departmentService.serviceGetDepartments();
         model.addAttribute("departments", departments);
         model.addAttribute("employee", employee);
         model.addAttribute("isNew", true);
@@ -107,11 +116,8 @@ public class EmployeeController {
      * @return
      */
     @PostMapping(value = "/employee")
-    public String addEmployee(/*@Valid*/ final Employee employee,
+    public final String addEmployee(@Valid final Employee employee,
                                          final BindingResult result) {
-        //TODO validation
-        //TODO localization все текста из html перенести в отдельные файлы
-        //accept-language
         LOGGER.debug("PostAddEmployee({},{})", employee, result);
         if (result.hasErrors()) {
             return "/employee";

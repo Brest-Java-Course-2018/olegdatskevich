@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Departments</title>
+    <title th:text="#{departments}">Departments</title>
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
           th:href="@{/resources/static/css/font-awesome.min.css}">
@@ -32,16 +32,19 @@
             <nav class="navbar-nav">
                 <a class="nav-item nav-link active"
                    href="departments.html"
-                   th:href="@{/departments}">Departments</a>
+                   th:href="@{/departments}"
+                   th:text="#{departments}">Departments</a>
                 <a class="nav-item nav-link"
                    href="employees.html"
-                   th:href="@{/employees}">Employees</a>
+                   th:href="@{/employees}"
+                   th:text="#{employees}">Employees</a>
             </nav>
         </div>
     </nav>
 <header>
     <nav class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
-        <span class="navbar-brand text-uppercase mr-auto">
+        <span class="navbar-brand text-uppercase mr-auto"
+              th:text="#{departments}">
             Departments
         </span>
         <ul class="navbar-nav">
@@ -51,10 +54,9 @@
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom"
-                   title="Add department">
+                   th:title="#{add_department}">
                     <i class="fa fa-plus"></i>
-                    Add
-                    <span class="d-none dm-sm-inline"></span>
+                    <span class="d-none d-md-inline" th:text="#{add}">Add</span>
                 </a>
             </li>
         </ul>
@@ -69,8 +71,8 @@
                         <table class="mb-2 table table-striped">
                             <thead class="thead-inverse">
                             <tr>
-                                <th>Title</th>
-                                <th>Avg salary</th>
+                                <th th:text="#{title}">Title</th>
+                                <th th:text="#{avgsalary}">Avg salary</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -86,11 +88,13 @@
                                        data-placement="bottom"
                                        title="Edit department">
                                         <i class="fa fa-pencil"></i>
-                                        <span class="d-none d-md-inline">
+                                        <span class="d-none d-md-inline"
+                                              th:text="#{edit}">
                                             Edit
                                         </span>
                                     </a>
                                     <span data-toggle="modal"
+                                          th:data-target="${department.averageSalary == 0} ? '#confirmRemoveModal' : '#warningRemove'"
                                           data-target="#confirmRemoveModal"
                                           th:attr="data-id=${department.departmentId}, data-name=${department.departmentName}">
                                         <a href="#"
@@ -99,7 +103,10 @@
                                            data-placement="bottom"
                                            title="Remove department">
                                             <i class="fa fa-remove"></i>
-                                                <span class="d-none d-md-inline">Remove</span>
+                                            <span class="d-none d-md-inline"
+                                                  th:text="#{remove}">
+                                                Remove
+                                            </span>
                                         </a>
                                     </span>
                                 </td>
@@ -156,7 +163,7 @@
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header alert alert-danger">
                     <h5 class="modal-title" id="warningRemoveTitle">WARNING</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

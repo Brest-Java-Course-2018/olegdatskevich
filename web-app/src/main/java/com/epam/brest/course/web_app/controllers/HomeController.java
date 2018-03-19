@@ -18,9 +18,10 @@ public class HomeController {
 
     /**
      * Redirect to departments.html.
+     * @return
      */
     @GetMapping(value = "/")
-    public String defaultPageRedirect() {
+    public final String defaultPageRedirect() {
         LOGGER.debug("defaultPageRedirect");
         return "redirect:departments";
     }

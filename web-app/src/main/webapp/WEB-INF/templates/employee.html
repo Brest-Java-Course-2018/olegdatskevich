@@ -112,31 +112,13 @@
                                 <label for="departmentChose">Department</label>
                                 <select id="departmentChose"
                                         th:field="*{departmentId}"
-                                        class="form-control"
-                                        multiple="multiple">
+                                        class="custom-select">
                                     <option th:each="department : ${departments}"
                                             th:value="${department.departmentId}"
-                                            th:text="${department.departmentName}">Part name</option>
+                                            th:text="${department.departmentName}">
+                                        Department name
+                                    </option>
                                 </select>
-
-
-
-                                <!--<select class="custom-select"-->
-                                        <!--id="departmentChose">-->
-                                    <!--<option selected-->
-                                            <!--th:each="department : ${departments}"-->
-                                            <!--th:if="${employee.departmentId == department.departmentId}"-->
-                                            <!--th:text="${department.departmentName}">-->
-                                        <!--Chose department-->
-                                    <!--</option>-->
-                                    <!--<div>-->
-                                        <!--<option th:value="${department.departmentId}"-->
-
-                                                <!--th:text="${department.departmentName}">-->
-                                            <!--DEP_NAME-->
-                                        <!--</option>-->
-                                    <!--</div>-->
-                                <!--</select>-->
                             </div>
                             <div class="form-group">
                                 <label for="salaryInput">Salary</label>

@@ -1,21 +1,33 @@
 package com.epam.brest.course.model;
 
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  *
  * POJO Department for model.
  */
 public class Department {
+
     /**
      * Id of department.
      */
     private Integer departmentId;
+
     /**
      * Name of department.
      */
+    @NotNull (message = "Department name can not be null.")
+    @Size (min = 2, max = 50, message =
+            "Department name must be between 2 and 50 characters.")
     private String departmentName;
+
     /**
      * Description of department.
      */
+    @Size (min = 2, max = 100, message =
+            "Department description must be between 2 and 100 characters.")
     private String departmentDescription;
 
     /**
