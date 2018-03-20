@@ -41,8 +41,11 @@
             </nav>
 
         </div>
-        <a href="departments?lang=en">en</a>
-        <a href="departments?lang=ru">ru</a>
+        <div>
+            <a href="departments?lang=en" class="badge badge-light">en</a>
+            <a href="departments?lang=ru" class="badge badge-light">ru</a>
+        </div>
+
     </nav>
 <header>
     <nav class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
@@ -104,7 +107,7 @@
                                            class="btn-outline-secondary btn-sm"
                                            data-toggle="tooltip"
                                            data-placement="bottom"
-                                           title="Remove department">
+                                           th:title="#{remove_department}">
                                             <i class="fa fa-remove"></i>
                                             <span class="d-none d-md-inline"
                                                   th:text="#{remove}">

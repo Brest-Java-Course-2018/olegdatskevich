@@ -1,7 +1,9 @@
 package com.epam.brest.course.model;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
 /**
@@ -32,10 +34,13 @@ public class Employee {
     /**
      * Salary of employee.
      */
+    @NotNull(message = "Employee salary can not be null.")
+    @PositiveOrZero(message = "Employee salary can not be negative.")
     private Integer employeeSalary;
     /**
      * Id of employee's department.
      */
+    @Valid
     private Integer departmentId;
 
     /**

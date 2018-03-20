@@ -40,6 +40,10 @@
                    th:href="@{/employees}">Employees</a>
             </nav>
         </div>
+        <div>
+            <a href="employee?lang=en" class="badge badge-light">en</a>
+            <a href="employee?lang=ru" class="badge badge-light">ru</a>
+        </div>
     </nav>
 <header>
     <nav id="main-header" class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
@@ -96,22 +100,34 @@
                                 <label for="firstName">First name</label>
                                 <input type="text"
                                        th:field="*{employeeName}"
+                                       th:class="${#fields.hasErrors('employeeName')} ? 'form-control is-invalid' : 'form-control'"
                                        class="form-control"
                                        placeholder="Input first name"
                                        id="firstName">
+                                <div th:if="${#fields.hasErrors('employeeName')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{employeeName}">[ERRORS]
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="emailInput">Email</label>
-                                <input type="email"
+                                <input type="text"
                                        th:field="*{employeeEmail}"
+                                       th:class="${#fields.hasErrors('employeeEmail')} ? 'form-control is-invalid' : 'form-control'"
                                        class="form-control"
                                        id="emailInput"
                                        placeholder="Input email">
+                                <div th:if="${#fields.hasErrors('employeeEmail')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{employeeEmail}">
+                                    [ERRORS]
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="departmentChose">Department</label>
                                 <select id="departmentChose"
                                         th:field="*{departmentId}"
+                                        th:class="${#fields.hasErrors('departmentId')} ? 'form-control is-invalid' : 'form-control'"
                                         class="custom-select">
                                     <option th:each="department : ${departments}"
                                             th:value="${department.departmentId}"
@@ -119,6 +135,11 @@
                                         Department name
                                     </option>
                                 </select>
+                                <div th:if="${#fields.hasErrors('departmentId')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{departmentId}">
+                                    [ERRORS]
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="salaryInput">Salary</label>
@@ -126,9 +147,15 @@
                                     <span class="input-group-text">$</span>
                                     <input type="number"
                                            th:field="*{employeeSalary}"
+                                           th:class="${#fields.hasErrors('employeeSalary')} ? 'form-control is-invalid' : 'form-control'"
                                            class="form-control"
                                            aria-label="Amount (to the nearest dollar)"
                                            id="salaryInput">
+                                </div>
+                                <div th:if="${#fields.hasErrors('employeeSalary')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{employeeSalary}">
+                                    [ERRORS]
                                 </div>
                             </div>
                         </form>
