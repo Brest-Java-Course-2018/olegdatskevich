@@ -32,6 +32,7 @@
         <module>test-db</module>
         <module>service</module>
         <module>web-app</module>
+        <module>rest-app</module>
     </modules>
 
     <distributionManagement>
@@ -51,6 +52,8 @@
         <thymeleaf-spring4.version>3.0.9.RELEASE</thymeleaf-spring4.version>
         <javax-validation.version>2.0.1.Final</javax-validation.version>
         <hibernate-validator.version>6.0.2.Final</hibernate-validator.version>
+        <jackson.databind.version>2.9.4</jackson.databind.version>
+        <javax.servlet.version>3.1.0</javax.servlet.version>
     </properties>
 
     <dependencyManagement>
@@ -157,6 +160,17 @@
                 <artifactId>easymock</artifactId>
                 <version>${mock.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.databind.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

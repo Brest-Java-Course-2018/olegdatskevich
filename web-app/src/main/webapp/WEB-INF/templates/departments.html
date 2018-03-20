@@ -39,7 +39,10 @@
                    th:href="@{/employees}"
                    th:text="#{employees}">Employees</a>
             </nav>
+
         </div>
+        <a href="departments?lang=en">en</a>
+        <a href="departments?lang=ru">ru</a>
     </nav>
 <header>
     <nav class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
@@ -86,7 +89,7 @@
                                        class="btn-outline-secondary btn-sm"
                                        data-toggle="tooltip"
                                        data-placement="bottom"
-                                       title="Edit department">
+                                       th:title="#{edit_department}">
                                         <i class="fa fa-pencil"></i>
                                         <span class="d-none d-md-inline"
                                               th:text="#{edit}">
