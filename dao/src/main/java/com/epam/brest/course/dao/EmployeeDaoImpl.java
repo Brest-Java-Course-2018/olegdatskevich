@@ -41,39 +41,57 @@ public class EmployeeDaoImpl implements EmployeeDao {
     private static final String DEPARTMENT_ID = "departmentId";
 
     /**
-     * SQL queries located in classpath/sql.properties.
+     * SQL query for get all.
      */
     @Value("${employee.selectAll}")
     private String employeeSelectAll;
+    /**
+     * SQL query for get by id.
+     */
     @Value("${employee.selectById}")
     private String employeeSelectById;
+    /**
+     * SQL query for get by name.
+     */
     @Value("${employee.selectByName}")
     private String employeeSelectByName;
+    /**
+     * SQL query for check emp.
+     */
     @Value("${employee.check}")
     private String checkEmployee;
+    /**
+     * SQL query for insert.
+     */
     @Value("${employee.insert}")
     private String employeeInsert;
+    /**
+     * SQL query for update.
+     */
     @Value("${employee.update}")
     private String employeeUpdate;
+    /**
+     * SQL query for remove.
+     */
     @Value("${employee.remove}")
     private String employeeRemove;
 
     /**
      * Constructor for namedParameterJdbcTemplate.
-     * @param namedParameterJdbcTemplate - for named queries.
+     * @param parameterJdbcTemplate - for named queries.
      */
     public EmployeeDaoImpl(
-            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+            final NamedParameterJdbcTemplate parameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = parameterJdbcTemplate;
     }
 
     /**
      * Setter for namedParameterJdbcTemplate.
-     * @param namedParameterJdbcTemplate - for named queries.
+     * @param parameterJdbcTemplate - for named queries.
      */
     public final void setNamedParameterJdbcTemplate(
-            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+            final NamedParameterJdbcTemplate parameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = parameterJdbcTemplate;
     }
 
     /**
@@ -140,7 +158,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
         if (result == 0) {
             namedParameters = new MapSqlParameterSource();
             namedParameters.addValue(EMPLOYEE_NAME, employee.getEmployeeName());
-            namedParameters.addValue(EMPLOYEE_EMAIL, employee.getEmployeeEmail());
+            namedParameters.addValue(EMPLOYEE_EMAIL,
+                    employee.getEmployeeEmail());
             namedParameters.addValue(EMPLOYEE_SALARY,
                     employee.getEmployeeSalary());
             namedParameters.addValue(DEPARTMENT_ID, employee.getDepartmentId());

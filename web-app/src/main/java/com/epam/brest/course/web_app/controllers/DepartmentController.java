@@ -29,7 +29,7 @@ public class DepartmentController {
      */
     private static final Logger LOGGER = LogManager.getLogger();
     /**
-     *
+     * DepartmentService.
      */
     @Autowired
     private DepartmentService departmentService;
@@ -38,9 +38,9 @@ public class DepartmentController {
     //private MessageSource messageSource;
 
     /**
-     * Goto departments list page.
-     * @param model
-     * @return
+     * Get method for departments page.
+     * @param model - attributes for templates.
+     * @return - template name.
      */
     @GetMapping(value = "/departments")
     public final String getDepartments(final Model model) {
@@ -52,10 +52,10 @@ public class DepartmentController {
     }
 
     /**
-     *
-     * @param id
-     * @param model
-     * @return
+     * Get method for department.
+     * @param id - department id.
+     * @param model - attributes for templates.
+     * @return - template name.
      */
     @GetMapping(value = "/department/{id}")
     public final String updateDepartment(@PathVariable final Integer id,
@@ -68,19 +68,19 @@ public class DepartmentController {
     }
 
     /**
-     *
-     * @param department
-     * @param result
-     * @return
+     * Post method for update department.
+     * @param department - for adding.
+     * @param result - check errors result.
+     * @return - template name.
      */
     @PostMapping(value = "/department/{id}")
     public final String updateDepartment(@Valid final Department department,
                                          final BindingResult result) {
         LOGGER.debug("PostUpdateDepartment ({}, {})", department, result);
 
-        System.out.println("Has errors="+result.hasErrors()); // Output: Has errors=true
-        for (FieldError err : result.getFieldErrors()){
-            System.out.println(err.getDefaultMessage()); // Output: must be greater than or equal to 10
+        System.out.println("Has errors=" + result.hasErrors());
+        for (FieldError err : result.getFieldErrors()) {
+            System.out.println(err.getDefaultMessage());
         }
 //        if (result.hasErrors()){
 //            return "/department";
@@ -95,9 +95,9 @@ public class DepartmentController {
     }
 
     /**
-     *
-     * @param model
-     * @return
+     * Get method for department.
+     * @param model - attributes for templates.
+     * @return  - template name.
      */
     @GetMapping(value = "/department")
     public final String addDepartment(final Model model) {
@@ -109,18 +109,18 @@ public class DepartmentController {
     }
 
     /**
-     * Post method for department.
+     * Post method for create department.
      * @param department - for adding.
-     * @param result
-     * @return
+     * @param result - check errors result.
+     * @return - template name.
      */
     @PostMapping(value = "/department")
     public final String addDepartment(@Valid final Department department,
                                 final BindingResult result) {
         LOGGER.debug("PostAddDepartment({},{})", department, result);
-        System.out.println("Has errors="+result.hasErrors()); // Output: Has errors=true
-        for (FieldError err : result.getFieldErrors()){
-            System.out.println(err.getDefaultMessage()); // Output: must be greater than or equal to 10
+        System.out.println("Has errors = " + result.hasErrors());
+        for (FieldError err : result.getFieldErrors()) {
+            System.out.println(err.getDefaultMessage());
         }
         if (result.hasErrors()) {
             return "/department";
@@ -133,7 +133,7 @@ public class DepartmentController {
     /**
      * Delete department.
      * @param id - department's id for deleting department.
-     * @return
+     * @return - template name.
      */
     @GetMapping(value = "/department/{id}/delete")
     public final String deleteDepartmentById(@PathVariable final Integer id) {

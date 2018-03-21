@@ -1,10 +1,7 @@
 package com.epam.brest.course.model;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 /**
  *
@@ -20,7 +17,7 @@ public class Employee {
     /**
      * Name of employee.
      */
-    @NotNull(message = "Employee name can not be null.")
+    @NotEmpty(message = "Employee name can not be null.")
     @Size(min = 5, max = 40, message =
             "Employee name must be between 5 and 40 characters.")
     private String employeeName;
@@ -28,7 +25,7 @@ public class Employee {
     /**
      * Email of employee.
      */
-    @NotNull(message = "Employee email can not be null.")
+    @NotEmpty(message = "Employee email can not be null.")
     @Email (message = "Nat a valid email.")
     private String employeeEmail;
     /**
@@ -52,15 +49,16 @@ public class Employee {
 
     /**
      * Constructor with arguments.
-     * @param employeeName - name of employee.
-     * @param employeeSalary - salary of employee.
-     * @param departmentId - id of employee's department.
+     * @param empName - name of employee.
+     * @param empSalary - salary of employee.
+     * @param depId - id of employee's department.
      */
-    public Employee(String employeeName, String employeeEmail, Integer employeeSalary, Integer departmentId) {
-        this.employeeName = employeeName;
-        this.employeeEmail = employeeEmail;
-        this.employeeSalary = employeeSalary;
-        this.departmentId = departmentId;
+    public Employee(final String empName, final String empEmail,
+                    final Integer empSalary, final Integer depId) {
+        this.employeeName = empName;
+        this.employeeEmail = empEmail;
+        this.employeeSalary = empSalary;
+        this.departmentId = depId;
     }
 
     /**
@@ -73,10 +71,10 @@ public class Employee {
 
     /**
      * Setter for employeeId.
-     * @param employeeId - id of employee.
+     * @param empId - id of employee.
      */
-    public final void setEmployeeId(final Integer employeeId) {
-        this.employeeId = employeeId;
+    public final void setEmployeeId(final Integer empId) {
+        this.employeeId = empId;
     }
 
     /**
@@ -89,18 +87,18 @@ public class Employee {
 
     /**
      * Setter for employeeName.
-     * @param employeeName - name of employee.
+     * @param empName - name of employee.
      */
-    public final void setEmployeeName(final String employeeName) {
-        this.employeeName = employeeName;
+    public final void setEmployeeName(final String empName) {
+        this.employeeName = empName;
     }
 
     public String getEmployeeEmail() {
         return employeeEmail;
     }
 
-    public void setEmployeeEmail(String employeeEmail) {
-        this.employeeEmail = employeeEmail;
+    public void setEmployeeEmail(String empEmail) {
+        this.employeeEmail = empEmail;
     }
 
     /**
@@ -113,10 +111,10 @@ public class Employee {
 
     /**
      * Setter for employeeSalary of employee.
-     * @param employeeSalary - employeeSalary of employee.
+     * @param empSalary - employeeSalary of employee.
      */
-    public final void setEmployeeSalary(final Integer employeeSalary) {
-        this.employeeSalary = employeeSalary;
+    public final void setEmployeeSalary(final Integer empSalary) {
+        this.employeeSalary = empSalary;
     }
 
     /**
@@ -129,48 +127,63 @@ public class Employee {
 
     /**
      * Setter for employee's department.
-     * @param departmentId - employee's department.
+     * @param depId - employee's department.
      */
-    public final void setDepartmentId(final Integer departmentId) {
-        this.departmentId = departmentId;
+    public final void setDepartmentId(final Integer depId) {
+        this.departmentId = depId;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public final boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Employee employee = (Employee) o;
 
-        if (employeeId != null ? !employeeId.equals(employee.employeeId) : employee.employeeId != null)
+        if (employeeId != null ? !employeeId
+                .equals(employee.employeeId) : employee.employeeId != null)
             return false;
-        if (employeeName != null ? !employeeName.equals(employee.employeeName) : employee.employeeName != null)
+        if (employeeName != null ? !employeeName
+                .equals(employee.employeeName) : employee.employeeName != null)
             return false;
-        if (employeeEmail != null ? !employeeEmail.equals(employee.employeeEmail) : employee.employeeEmail != null)
+        if (employeeEmail != null ? !employeeEmail
+                .equals(employee.employeeEmail)
+                : employee.employeeEmail != null)
             return false;
-        if (employeeSalary != null ? !employeeSalary.equals(employee.employeeSalary) : employee.employeeSalary != null)
+        if (employeeSalary != null ? !employeeSalary
+                .equals(employee.employeeSalary)
+                : employee.employeeSalary != null)
             return false;
-        return departmentId != null ? departmentId.equals(employee.departmentId) : employee.departmentId == null;
+        return departmentId != null ? departmentId
+                .equals(employee.departmentId) : employee.departmentId == null;
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = employeeId != null ? employeeId.hashCode() : 0;
-        result = 31 * result + (employeeName != null ? employeeName.hashCode() : 0);
-        result = 31 * result + (employeeEmail != null ? employeeEmail.hashCode() : 0);
-        result = 31 * result + (employeeSalary != null ? employeeSalary.hashCode() : 0);
-        result = 31 * result + (departmentId != null ? departmentId.hashCode() : 0);
+        result = 31 * result + (employeeName != null
+                ? employeeName.hashCode() : 0);
+        result = 31 * result + (employeeEmail != null
+                ? employeeEmail.hashCode() : 0);
+        result = 31 * result + (employeeSalary != null
+                ? employeeSalary.hashCode() : 0);
+        result = 31 * result + (departmentId != null
+                ? departmentId.hashCode() : 0);
         return result;
     }
 
     @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", employeeName='" + employeeName + '\'' +
-                ", employeeEmail='" + employeeEmail + '\'' +
-                ", employeeSalary=" + employeeSalary +
-                ", departmentId=" + departmentId +
-                '}';
+    public final String toString() {
+        return "Employee{"
+                + "employeeId=" + employeeId
+                + ", employeeName='" + employeeName + '\''
+                + ", employeeEmail='" + employeeEmail + '\''
+                + ", employeeSalary=" + employeeSalary
+                + ", departmentId=" + departmentId
+                + '}';
     }
 }

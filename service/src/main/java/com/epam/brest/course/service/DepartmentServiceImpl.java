@@ -27,10 +27,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     /**
      * Constructor for departmentDao.
-     * @param departmentDao - instance of DepartmentDao class.
+     * @param depDao - instance of DepartmentDao class.
      */
-    public DepartmentServiceImpl(final DepartmentDao departmentDao) {
-        this.departmentDao = departmentDao;
+    public DepartmentServiceImpl(final DepartmentDao depDao) {
+        this.departmentDao = depDao;
     }
 
     /**
@@ -50,16 +50,22 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @return department.
      */
     @Override
-    public final Department serviceGetDepartmentById(final Integer departmentId) {
+    public final Department serviceGetDepartmentById(
+            final Integer departmentId) {
         Department department = departmentDao.getDepartmentById(departmentId);
         LOGGER.debug("serviceGetDepartmentById {}", departmentId);
         return department;
     }
 
+    /**
+     * Create collection of departments with average salary.
+     * @return - collection of departments with average salary.
+     */
     @Override
-    public Collection<DepartmentAvgSalary> serviceDepartmentAvgSalary() {
+    public final Collection<DepartmentAvgSalary> serviceDepartmentAvgSalary() {
         LOGGER.debug("serviceDepartmentAvgSalary()");
-        Collection<DepartmentAvgSalary> departmentAvgSalaries = departmentDao.departmentAvgSalary();
+        Collection<DepartmentAvgSalary> departmentAvgSalaries =
+                departmentDao.departmentAvgSalary();
         return departmentAvgSalaries;
     }
 

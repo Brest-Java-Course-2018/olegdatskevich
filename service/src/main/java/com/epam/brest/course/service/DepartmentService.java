@@ -25,6 +25,10 @@ public interface DepartmentService {
      */
     Department serviceGetDepartmentById(final Integer departmentId);
 
+    /**
+     * Create collection of departments with average salary.
+     * @return - collection of departments with average salary.
+     */
     Collection<DepartmentAvgSalary> serviceDepartmentAvgSalary();
 
     /**

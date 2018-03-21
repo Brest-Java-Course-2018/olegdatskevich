@@ -24,13 +24,13 @@ import java.util.Collection;
 public class EmployeeController {
 
     /**
-     *
+     * DepartmentService.
      */
     @Autowired
     private DepartmentService departmentService;
 
     /**
-     *
+     * EmployeeService.
      */
     @Autowired
     private EmployeeService employeeService;
@@ -41,9 +41,9 @@ public class EmployeeController {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     *
-     * @param model
-     * @return
+     * Get method for employees page.
+     * @param model - attributes for templates.
+     * @return - template name.
      */
     @GetMapping(value = "/employees")
     public final String getEmployees(final Model model) {
@@ -57,17 +57,18 @@ public class EmployeeController {
     }
 
     /**
-     *
-     * @param id
-     * @param model
-     * @return
+     * Get method for update employee.
+     * @param id - employee id.
+     * @param model - attributes for templates.
+     * @return - template name.
      */
     @GetMapping(value = "/employee/{id}")
-    public String updateEmployee(@PathVariable final Integer id,
+    public final String updateEmployee(@PathVariable final Integer id,
                                  final Model model) {
         LOGGER.debug("GetUpdateEmployee({},{})", id, model);
         Employee employee = employeeService.serviceGetEmployeeById(id);
-        Collection<Department> departments = departmentService.serviceGetDepartments();
+        Collection<Department> departments
+                = departmentService.serviceGetDepartments();
         model.addAttribute("departments", departments);
         model.addAttribute("employee", employee);
         model.addAttribute("isNew", false);
@@ -75,10 +76,10 @@ public class EmployeeController {
     }
 
     /**
-     *
-     * @param employee
-     * @param result
-     * @return
+     * Post method for update employee.
+     * @param employee - employee for update.
+     * @param result - check errors result.
+     * @return - template name.
      */
     @PostMapping(value = "/employee/{id}")
     public final String updateEmployee(@Valid final Employee employee,
@@ -93,9 +94,9 @@ public class EmployeeController {
     }
 
     /**
-     *
-     * @param model
-     * @return
+     * Get method for create employee.
+     * @param model - attributes for templates.
+     * @return - template name.
      */
     @GetMapping(value = "/employee")
     public final String addEmployee(final Model model) {
@@ -110,10 +111,10 @@ public class EmployeeController {
     }
 
     /**
-     *
-     * @param employee
-     * @param result
-     * @return
+     * Post method for create employee.
+     * @param employee - employee for adding.
+     * @param result - check errors result.
+     * @return - template name.
      */
     @PostMapping(value = "/employee")
     public final String addEmployee(@Valid final Employee employee,
@@ -129,8 +130,9 @@ public class EmployeeController {
 
     /**
      * Delete employee.
-     *
-     * @return view name
+     * @param id - employee id.
+     * @param model - attributes for templates.
+     * @return - template name.
      */
     @GetMapping(value = "/employee/{id}/delete")
     public final String deleteEmployeeById(@PathVariable final Integer id,

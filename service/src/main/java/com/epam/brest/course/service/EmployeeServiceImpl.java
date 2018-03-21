@@ -24,10 +24,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * Constructor.
-     * @param employeeDao - employee dao.
+     * @param empDao - employee dao.
      */
-    public EmployeeServiceImpl(final EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
+    public EmployeeServiceImpl(final EmployeeDao empDao) {
+        this.employeeDao = empDao;
     }
 
     /**
@@ -78,7 +78,8 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return - average salary fo list.
      */
     @Override
-    public final Integer calculateAverageSalary(final Collection<Employee> employees) {
+    public final Integer calculateAverageSalary(
+            final Collection<Employee> employees) {
         Integer averageSalary = 0;
         if (employees != null) {
             for (Employee employee: employees) {

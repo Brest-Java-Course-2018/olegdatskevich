@@ -18,7 +18,7 @@ public class HomeController {
 
     /**
      * Redirect to departments.html.
-     * @return
+     * @return - template name.
      */
     @GetMapping(value = "/")
     public final String defaultPageRedirect() {

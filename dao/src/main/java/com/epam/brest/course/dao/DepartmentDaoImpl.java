@@ -42,48 +42,62 @@ public class DepartmentDaoImpl implements DepartmentDao {
             "departmentDescription";
 
     /**
-     * SQL queries located in classpath/sql.properties.
+     * SQL query for get all.
      */
     @Value("${department.select}")
     private String departmentSelect;
-
+    /**
+     * SQL query for get by id.
+     */
     @Value("${department.selectById}")
     private String departmentSelectById;
-
+    /**
+     * SQL query for get by name.
+     */
     @Value("${department.selectByName}")
     private String departmentSelectByName;
-
+    /**
+     * SQL query for check emp.
+     */
     @Value("${department.checkDepartment}")
     private String checkDepartment;
-
+    /**
+     * SQL query for get departments with avg salary.
+     */
     @Value("${department.avgSalary}")
     private String departmentColculateAvgSalary;
-
+    /**
+     * SQL query for insert.
+     */
     @Value("${department.insert}")
     private String insert;
-
+    /**
+     * SQL query for update.
+     */
     @Value("${department.update}")
     private String update;
-
+    /**
+     * SQL query for remove.
+     */
     @Value("${department.remove}")
     private String remove;
 
     /**
      * Constructor for namedParameterJdbcTemplate.
-     * @param namedParameterJdbcTemplate - for named queries.
+     * @param parameterJdbcTemplate - for named queries.
      */
     public DepartmentDaoImpl(
-            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+            final NamedParameterJdbcTemplate parameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = parameterJdbcTemplate;
     }
 
     /**
      * Setter for namedParameterJdbcTemplate.
-     * @param namedParameterJdbcTemplate - for named queries.
+     * @param parameterJdbcTemplate - for named queries.
      */
     public final void setNamedParameterJdbcTemplate(
-            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+            final NamedParameterJdbcTemplate parameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = parameterJdbcTemplate;
     }
 
     /**
@@ -91,7 +105,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
      * @return List of Departments.
      */
     @Override
-    public final Collection<Department> getDepartments() throws DataAccessException {
+    public final Collection<Department> getDepartments()
+            throws DataAccessException {
         LOGGER.debug("getDepartments()");
         Collection<Department> departments =
                 namedParameterJdbcTemplate.getJdbcOperations().
@@ -134,8 +149,12 @@ public class DepartmentDaoImpl implements DepartmentDao {
         return department;
     }
 
+    /**
+     *
+     * @return collection departments with avg salary.
+     */
     @Override
-    public Collection<DepartmentAvgSalary> departmentAvgSalary() {
+    public final Collection<DepartmentAvgSalary> departmentAvgSalary() {
         LOGGER.debug("departmentAvgSalary()");
         Collection<DepartmentAvgSalary> avgSalaries =
                 namedParameterJdbcTemplate.getJdbcOperations().

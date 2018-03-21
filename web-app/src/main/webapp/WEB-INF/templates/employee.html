@@ -127,7 +127,7 @@
                                 <label for="departmentChose">Department</label>
                                 <select id="departmentChose"
                                         th:field="*{departmentId}"
-                                        th:class="${#fields.hasErrors('departmentId')} ? 'form-control is-invalid' : 'form-control'"
+                                        th:class="${#fields.hasErrors('departmentId')} ? 'custom-select is-invalid' : 'custom-select'"
                                         class="custom-select">
                                     <option th:each="department : ${departments}"
                                             th:value="${department.departmentId}"

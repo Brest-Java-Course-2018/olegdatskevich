@@ -1,7 +1,6 @@
 package com.epam.brest.course.model;
 
-
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 /**
@@ -18,7 +17,7 @@ public class Department {
     /**
      * Name of department.
      */
-    @NotNull (message = "Department name can not be null.")
+    @NotEmpty(message = "Department name can not be empty.")
     @Size (min = 2, max = 50, message =
             "Department name must be between 2 and 50 characters.")
     private String departmentName;
@@ -26,6 +25,7 @@ public class Department {
     /**
      * Description of department.
      */
+    @NotEmpty(message = "Department description can not be empty.")
     @Size (min = 2, max = 100, message =
             "Department description must be between 2 and 100 characters.")
     private String departmentDescription;
@@ -38,13 +38,13 @@ public class Department {
 
     /**
      * Constructor for two parameters.
-     * @param departmentName - name of the department.
-     * @param departmentDescription - description of the departments.
+     * @param depName - name of the department.
+     * @param depDescr - description of the departments.
      */
-    public Department(final String departmentName,
-                      final String departmentDescription) {
-        this.departmentName = departmentName;
-        this.departmentDescription = departmentDescription;
+    public Department(final String depName,
+                      final String depDescr) {
+        this.departmentName = depName;
+        this.departmentDescription = depDescr;
     }
 
     @Override
@@ -66,10 +66,10 @@ public class Department {
 
     /**
      * Setter for departmentId.
-     * @param departmentId - id of the department.
+     * @param depId - id of the department.
      */
-    public final void setDepartmentId(final Integer departmentId) {
-        this.departmentId = departmentId;
+    public final void setDepartmentId(final Integer depId) {
+        this.departmentId = depId;
     }
 
     /**
@@ -82,10 +82,10 @@ public class Department {
 
     /**
      * Setter for departmentName.
-     * @param departmentName - name of the department.
+     * @param depName - name of the department.
      */
-    public final void setDepartmentName(final String departmentName) {
-        this.departmentName = departmentName;
+    public final void setDepartmentName(final String depName) {
+        this.departmentName = depName;
     }
 
     /**
@@ -98,39 +98,43 @@ public class Department {
 
     /**
      * Setter for departmentDescription.
-     * @param departmentDescription - description of the department.
+     * @param depDescr - description of the department.
      */
     public final void setDepartmentDescription(
-            final String departmentDescription) {
-        this.departmentDescription = departmentDescription;
+            final String depDescr) {
+        this.departmentDescription = depDescr;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public final boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Department that = (Department) o;
 
-        if (departmentId != null ? !departmentId.equals(that.departmentId) :
-                that.departmentId != null)
+        if (departmentId != null ? !departmentId.equals(that.departmentId)
+                : that.departmentId != null)
             return false;
-        if (departmentName != null ?
-                !departmentName.equals(that.departmentName) :
-                that.departmentName != null)
+        if (departmentName != null
+                ? !departmentName.equals(that.departmentName)
+                : that.departmentName != null)
             return false;
-        return departmentDescription != null ?
-                departmentDescription.equals(that.departmentDescription) :
-                that.departmentDescription == null;
+        return departmentDescription != null
+                ? departmentDescription.equals(that.departmentDescription)
+                : that.departmentDescription == null;
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = departmentId != null ? departmentId.hashCode() : 0;
-        result = 31 * result +
-                (departmentName != null ? departmentName.hashCode() : 0);
-        result = 31 * result + (departmentDescription != null ?
-                departmentDescription.hashCode() : 0);
+        result = 31 * result
+                + (departmentName != null ? departmentName.hashCode() : 0);
+        result = 31 * result + (departmentDescription != null
+                ? departmentDescription.hashCode() : 0);
         return result;
     }
 }

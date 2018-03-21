@@ -29,6 +29,10 @@ public interface DepartmentDao {
      */
     Department getDepartmentByName(final String departmentName);
 
+    /**
+     *
+     * @return collection departments with avg salary.
+     */
     Collection<DepartmentAvgSalary> departmentAvgSalary();
 
     /**
