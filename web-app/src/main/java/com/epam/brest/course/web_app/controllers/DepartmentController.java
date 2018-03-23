@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,7 +58,7 @@ public class DepartmentController {
      */
     @GetMapping(value = "/department/{id}")
     public final String updateDepartment(@PathVariable final Integer id,
-                                   final Model model) {
+                                         final Model model) {
         LOGGER.debug("GetUpdateDepartment({},{})", id, model);
         Department department = departmentService.serviceGetDepartmentById(id);
         model.addAttribute("department", department);
@@ -75,35 +74,27 @@ public class DepartmentController {
      */
     @PostMapping(value = "/department/{id}")
     public final String updateDepartment(@Valid final Department department,
-                                         final BindingResult result) {
+                                         final BindingResult result,
+                                         final Model model) {
         LOGGER.debug("PostUpdateDepartment ({}, {})", department, result);
-
-        System.out.println("Has errors=" + result.hasErrors());
-        for (FieldError err : result.getFieldErrors()) {
-            System.out.println(err.getDefaultMessage());
-        }
-//        if (result.hasErrors()){
-//            return "/department";
-//        }
-//        return "redirect:/departments";
         if (result.hasErrors()) {
-            return "/department";
+            model.addAttribute("isNew", false);
+            return "department";
         } else {
-            this.departmentService.serviceUpdateDepartment(department);
+            departmentService.serviceUpdateDepartment(department);
             return "redirect:/departments";
         }
     }
 
     /**
-     * Get method for department.
+     * Get method for add department.
      * @param model - attributes for templates.
      * @return  - template name.
      */
     @GetMapping(value = "/department")
     public final String addDepartment(final Model model) {
         LOGGER.debug("GetAddDepartment({})", model);
-        Department department = new Department();
-        model.addAttribute("department", department);
+        model.addAttribute("department", new Department());
         model.addAttribute("isNew", true);
         return "department";
     }
@@ -116,14 +107,11 @@ public class DepartmentController {
      */
     @PostMapping(value = "/department")
     public final String addDepartment(@Valid final Department department,
-                                final BindingResult result) {
+                                final BindingResult result, final Model model) {
         LOGGER.debug("PostAddDepartment({},{})", department, result);
-        System.out.println("Has errors = " + result.hasErrors());
-        for (FieldError err : result.getFieldErrors()) {
-            System.out.println(err.getDefaultMessage());
-        }
         if (result.hasErrors()) {
-            return "/department";
+            model.addAttribute("isNew", true);
+            return "department";
         } else {
             departmentService.serviceAddDepartment(department);
             return "redirect:/departments";

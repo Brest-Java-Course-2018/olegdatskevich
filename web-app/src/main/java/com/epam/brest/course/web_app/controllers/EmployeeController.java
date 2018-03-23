@@ -64,7 +64,7 @@ public class EmployeeController {
      */
     @GetMapping(value = "/employee/{id}")
     public final String updateEmployee(@PathVariable final Integer id,
-                                 final Model model) {
+                                       final Model model) {
         LOGGER.debug("GetUpdateEmployee({},{})", id, model);
         Employee employee = employeeService.serviceGetEmployeeById(id);
         Collection<Department> departments
@@ -82,13 +82,20 @@ public class EmployeeController {
      * @return - template name.
      */
     @PostMapping(value = "/employee/{id}")
-    public final String updateEmployee(@Valid final Employee employee,
-                                              final BindingResult result) {
-        LOGGER.debug("PostUpdateEmployee({}, {})", employee, result);
+    public final String updateEmployee(@PathVariable final Integer id,
+                                       @Valid final Employee employee,
+                                       final BindingResult result,
+                                       final Model model) {
+        LOGGER.debug("PostUpdateEmployee({}, {}, {}, {},)", id, employee,
+                result, model);
         if (result.hasErrors()) {
-            return "/employee";
+            Collection<Department> departments
+                    = departmentService.serviceGetDepartments();
+            model.addAttribute("departments", departments);
+            model.addAttribute("isNew", true);
+            return "employee";
         } else {
-            this.employeeService.serviceUpdateEmployee(employee);
+            employeeService.serviceUpdateEmployee(employee);
             return "redirect:/employees";
         }
     }
@@ -101,11 +108,10 @@ public class EmployeeController {
     @GetMapping(value = "/employee")
     public final String addEmployee(final Model model) {
         LOGGER.debug("GetAddEmployee({})", model);
-        Employee employee = new Employee();
         Collection<Department> departments =
                 departmentService.serviceGetDepartments();
         model.addAttribute("departments", departments);
-        model.addAttribute("employee", employee);
+        model.addAttribute("employee", new Employee());
         model.addAttribute("isNew", true);
         return "employee";
     }
@@ -118,10 +124,15 @@ public class EmployeeController {
      */
     @PostMapping(value = "/employee")
     public final String addEmployee(@Valid final Employee employee,
-                                         final BindingResult result) {
+                                    final BindingResult result,
+                                    final Model model) {
         LOGGER.debug("PostAddEmployee({},{})", employee, result);
         if (result.hasErrors()) {
-            return "/employee";
+            Collection<Department> departments =
+                    departmentService.serviceGetDepartments();
+            model.addAttribute("departments", departments);
+            model.addAttribute("isNew", true);
+            return "employee";
         } else {
             employeeService.serviceAddEmployee(employee);
             return "redirect:/employees";
@@ -131,13 +142,11 @@ public class EmployeeController {
     /**
      * Delete employee.
      * @param id - employee id.
-     * @param model - attributes for templates.
      * @return - template name.
      */
     @GetMapping(value = "/employee/{id}/delete")
-    public final String deleteEmployeeById(@PathVariable final Integer id,
-                                           final Model model) {
-        LOGGER.debug("deleteEmployeeById({},{})", id, model);
+    public final String deleteEmployeeById(@PathVariable final Integer id) {
+        LOGGER.debug("deleteEmployeeById({})", id);
         employeeService.serviceRemoveEmployee(id);
         return "redirect:/employees";
     }

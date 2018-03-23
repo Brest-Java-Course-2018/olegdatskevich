@@ -22,14 +22,13 @@
     </bean>
 
     <jdbc:initialize-database>
-        <jdbc:script location="classpath:create-table.sql"/>
-        <jdbc:script location="classpath:data-script.sql"/>
+        <jdbc:script location="classpath:sample-db/create-table.sql"/>
+        <jdbc:script location="classpath:sample-db/data-script.sql"/>
     </jdbc:initialize-database>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
 
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.brest.course.rest"/>
@@ -43,8 +42,16 @@
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
+    <bean id="employeeDao" class="com.epam.brest.course.dao.EmployeeDaoImpl">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
     <bean id="departmentService" class="com.epam.brest.course.service.DepartmentServiceImpl">
         <constructor-arg ref="departmentDao"/>
+    </bean>
+
+    <bean id="employeeService" class="com.epam.brest.course.service.EmployeeServiceImpl">
+        <constructor-arg ref="employeeDao"/>
     </bean>
 
     <mvc:annotation-driven/>
