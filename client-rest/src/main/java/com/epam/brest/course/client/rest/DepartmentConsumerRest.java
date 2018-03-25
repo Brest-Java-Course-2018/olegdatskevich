@@ -25,12 +25,17 @@ public class DepartmentConsumerRest implements DepartmentService {
 
     @Override
     public Collection<Department> serviceGetDepartments() {
-        return null;
+        LOGGER.debug("serviceGetDepartmentsClientRest()");
+        ResponseEntity<List> responseEntity
+                = restTemplate.getForEntity(url, List.class);
+        List<Department> departments
+                = (List<Department>)responseEntity.getBody();
+        return departments;
     }
 
     @Override
     public Department serviceGetDepartmentById(Integer departmentId) {
-        LOGGER.debug("serviceGetDepartmentByIdClient({})", departmentId);
+        LOGGER.debug("serviceGetDepartmentByIdClientRest({})", departmentId);
         ResponseEntity<Department> responseEntity = restTemplate
                 .getForEntity(url + "/" + departmentId, Department.class);
         Department department = responseEntity.getBody();
@@ -40,8 +45,9 @@ public class DepartmentConsumerRest implements DepartmentService {
     @Override
     @SuppressWarnings("unchecked")
     public Collection<DepartmentAvgSalary> serviceDepartmentAvgSalary() {
-        LOGGER.debug("serviceDepartmentAvgSalaryClient({})");
-        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url, List.class);
+        LOGGER.debug("serviceDepartmentAvgSalaryClientRest()");
+        ResponseEntity<List> responseEntity
+                = restTemplate.getForEntity(url, List.class);
         List<DepartmentAvgSalary> departmentAvgSalaries
                 = (List<DepartmentAvgSalary>)responseEntity.getBody();
         return departmentAvgSalaries;
@@ -49,7 +55,7 @@ public class DepartmentConsumerRest implements DepartmentService {
 
     @Override
     public Department serviceAddDepartment(Department department) {
-        LOGGER.debug("serviceAddDepartmentClient({})", department);
+        LOGGER.debug("serviceAddDepartmentClientRest({})", department);
         ResponseEntity responseEntity
                 = restTemplate.postForEntity(url, department, Department.class);
         Department result = (Department)responseEntity.getBody();
@@ -58,13 +64,13 @@ public class DepartmentConsumerRest implements DepartmentService {
 
     @Override
     public void serviceUpdateDepartment(Department department) {
-        LOGGER.debug("serviceUpdateDepartment({})", department);
+        LOGGER.debug("serviceUpdateDepartmentClientRest({})", department);
         restTemplate.put(url, department);
     }
 
     @Override
     public void serviceRemoveDepartmentById(Integer departmentId) {
-        LOGGER.debug("serviceRemoveDepartmentById({})", departmentId);
+        LOGGER.debug("serviceRemoveDepartmentByIdClientRest({})", departmentId);
         restTemplate.delete(url + "/" + departmentId);
     }
 }

@@ -62,15 +62,6 @@ public class EmployeeServiceImplMockTest {
         verify(mockEmployeeDao);
     }
 
-    @Test
-    public void serviceGetEmployeesByDepartmentIdTest() {
-        List<Employee> employees = new ArrayList<>();
-        expect(mockEmployeeDao.getEmployees()).andReturn(employees);
-        replay(mockEmployeeDao);
-        employeeService.serviceGetEmployeesByDepartmentId(DEPT_ID);
-        verify(mockEmployeeDao);
-    }
-//
 //    @Test
 //    public void calculateAverageSalary() {
 //    }
@@ -78,7 +69,7 @@ public class EmployeeServiceImplMockTest {
 //    @Test
 //    public void serviceGetEmployeeBySalaryMore() {
 //    }
-//
+
     @Test
     public void serviceAddEmployeeTest() {
         expect(mockEmployeeDao.addEmployee(EMPLOYEE)).andReturn(new Employee());

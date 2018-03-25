@@ -13,10 +13,11 @@ Web application for HR-manager. The application is designed to work with departm
 ## Build  
 
        $mvn clean install  
-       $mvn jetty:run  
 
 ## Run  
 
+       $mvn jetty:run  
+       
        http://localhost:8080/  
 
 ## 

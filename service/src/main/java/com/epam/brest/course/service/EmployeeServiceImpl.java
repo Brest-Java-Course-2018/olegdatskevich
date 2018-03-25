@@ -54,63 +54,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     * Getting the list of employees by department id.
-     * @param departmentId - department id.
-     * @return - list of employees.
-     */
-    @Override
-    public final Collection<Employee> serviceGetEmployeesByDepartmentId(
-            final Integer departmentId) {
-        LOGGER.debug("serviceGetEmployeesByDepartmentId {}", departmentId);
-        Collection<Employee> employees = employeeDao.getEmployees();
-        Collection<Employee> employeesByDepartmentId = null;
-        for (Employee employee : employees) {
-            if (employee.getDepartmentId().equals(departmentId)) {
-                employeesByDepartmentId.add(employee);
-            }
-        }
-        return employeesByDepartmentId;
-    }
-
-    /**
-     * Calculating average salary fo list of employees.
-     * @param employees - list of employees.
-     * @return - average salary fo list.
-     */
-    @Override
-    public final Integer calculateAverageSalary(
-            final Collection<Employee> employees) {
-        Integer averageSalary = 0;
-        if (employees != null) {
-            for (Employee employee: employees) {
-                averageSalary += employee.getEmployeeSalary();
-            }
-            return averageSalary / employees.size();
-        } else {
-            return averageSalary;
-        }
-    }
-
-    /**
-     * Getting employees from DB which have salary more than employeeSalary.
-     * @param employeeSalary - value of salary.
-     * @return employees.
-     */
-    @Override
-    public final Collection<Employee> serviceGetEmployeeBySalaryMore(
-            final Integer employeeSalary) {
-        LOGGER.debug("serviceGetEmployeeByName {}", employeeSalary);
-        Collection<Employee> employees = employeeDao.getEmployees();
-        Collection<Employee> employeesSalaryMore = null;
-        for (Employee employee: employees) {
-            if (employee.getEmployeeSalary() >= employeeSalary) {
-                employeesSalaryMore.add(employee);
-            }
-        }
-        return employeesSalaryMore;
-    }
-
-    /**
      * Adding the employee to the DB.
      * @param employee - prepared instance of the object Employee to added.
      * @return employee that was added to the DB.

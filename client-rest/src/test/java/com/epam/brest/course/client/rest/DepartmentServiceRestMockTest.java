@@ -29,7 +29,7 @@ public class DepartmentServiceRestMockTest {
     private static Department department;
 
     @Autowired
-    DepartmentService mockDepartmentService;
+    private DepartmentService mockDepartmentService;
 
     @Autowired
     private RestTemplate mockRestTemplate;
