@@ -74,6 +74,5 @@ public class DepartmentRestController {
             @PathVariable(value = "id") final Integer id) {
         LOGGER.debug("REST deleteDepartment({})", id);
         departmentService.serviceRemoveDepartmentById(id);
-
     }
 }

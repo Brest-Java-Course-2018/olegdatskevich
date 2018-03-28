@@ -44,8 +44,20 @@
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="departmentService" class="com.epam.brest.course.service.DepartmentServiceImpl">
+    <!--<bean id="departmentService" class="com.epam.brest.course.service.DepartmentServiceImpl">
         <constructor-arg ref="departmentDao"/>
+    </bean>-->
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="departmentService" class="com.epam.brest.course.client.rest.DepartmentConsumerRest">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.departments}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
     <bean id="employeeDao" class="com.epam.brest.course.dao.EmployeeDaoImpl">
@@ -96,6 +108,7 @@
             <list>
                 <value>classpath:sql.properties</value>
                 <value>classpath:application.properties</value>
+                <value>classpath:rest.properties</value>
             </list>
         </property>
     </bean>

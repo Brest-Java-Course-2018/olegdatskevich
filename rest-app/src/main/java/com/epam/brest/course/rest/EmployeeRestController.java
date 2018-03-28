@@ -55,7 +55,7 @@ public class EmployeeRestController {
      * @param employee - employee for posting.
      * @return posted employee.
      */
-    @GetMapping(value = "/employees")
+    @PostMapping(value = "/employees")
     @ResponseStatus(HttpStatus.CREATED)
     public final Employee addEmployee(@RequestBody final Employee employee) {
         LOGGER.debug("REST addEmployee({})", employee);
@@ -73,5 +73,4 @@ public class EmployeeRestController {
         LOGGER.debug("REST deleteEmployee({})", id);
         employeeService.serviceRemoveEmployee(id);
     }
-
 }
