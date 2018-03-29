@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/Brest-Java-Course-2018/olegdatskevich/badge.svg?branch=master)](https://coveralls.io/github/Brest-Java-Course-2018/olegdatskevich?branch=master)  
 
 ## Description    
-Web application for HR-manager. The application is designed to work with departments and employees.  
+Web application for cinema. The application is designed to work with movies and sessions.  
 ## Used technologies
 * JDK 1.8  
 * Spring 4 Framework  
@@ -24,3 +24,4 @@ Web application for HR-manager. The application is designed to work with departm
 EPAM Java Course, Brest 2018  
 by **Oleg Datskevich**  
 e-mail: olegdac@gmail.com
+tel: +375295266584
