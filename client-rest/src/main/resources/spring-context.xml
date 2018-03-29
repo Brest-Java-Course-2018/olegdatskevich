@@ -35,7 +35,7 @@
     </bean>
 
     <bean id="employeeService" class="com.epam.brest.course.client.rest.EmployeeConsumerRest">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.employee}"/>
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.employees}"/>
         <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 </beans>
