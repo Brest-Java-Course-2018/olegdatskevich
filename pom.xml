@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <name>cinema</name>
 
-    <description>Test project</description>
+    <description>Cinema project</description>
     <inceptionYear>2018</inceptionYear>
     <organization>
         <name>EPAM</name>
@@ -29,6 +29,7 @@
     <modules>
         <module>model</module>
         <module>dao</module>
+        <module>testdb</module>
     </modules>
 
     <distributionManagement>

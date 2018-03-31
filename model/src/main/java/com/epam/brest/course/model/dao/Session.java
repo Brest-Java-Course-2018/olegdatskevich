@@ -8,21 +8,21 @@ public class Session {
     private String sessionTime;
     private int sessionCost;
     private int sessionSold;
-    private boolean sessionIsActive;
+    private boolean sessionActive;
     private int movieId;
 
     public Session() {
     }
 
     public Session(int sessionId, Date sessionDate, String sessionTime,
-                   int sessionCost, int sessionSold, boolean sessionIsActive,
+                   int sessionCost, int sessionSold, boolean sessionActive,
                    int movieId) {
         this.sessionId = sessionId;
         this.sessionDate = sessionDate;
         this.sessionTime = sessionTime;
         this.sessionCost = sessionCost;
         this.sessionSold = sessionSold;
-        this.sessionIsActive = sessionIsActive;
+        this.sessionActive = sessionActive;
         this.movieId = movieId;
     }
 
@@ -66,12 +66,12 @@ public class Session {
         this.sessionSold = sessionSold;
     }
 
-    public boolean isSessionIsActive() {
-        return sessionIsActive;
+    public boolean isSessionActive() {
+        return sessionActive;
     }
 
-    public void setSessionIsActive(boolean sessionIsActive) {
-        this.sessionIsActive = sessionIsActive;
+    public void setSessionActive(boolean sessionActive) {
+        this.sessionActive = sessionActive;
     }
 
     public int getMovieId() {
@@ -92,7 +92,7 @@ public class Session {
         if (sessionId != session.sessionId) return false;
         if (sessionCost != session.sessionCost) return false;
         if (sessionSold != session.sessionSold) return false;
-        if (sessionIsActive != session.sessionIsActive) return false;
+        if (sessionActive != session.sessionActive) return false;
         if (movieId != session.movieId) return false;
         if (sessionDate != null ? !sessionDate.equals(session.sessionDate)
                 : session.sessionDate != null)
@@ -104,11 +104,13 @@ public class Session {
     @Override
     public int hashCode() {
         int result = sessionId;
-        result = 31 * result + (sessionDate != null ? sessionDate.hashCode() : 0);
-        result = 31 * result + (sessionTime != null ? sessionTime.hashCode() : 0);
+        result = 31 * result
+                + (sessionDate != null ? sessionDate.hashCode() : 0);
+        result = 31 * result
+                + (sessionTime != null ? sessionTime.hashCode() : 0);
         result = 31 * result + sessionCost;
         result = 31 * result + sessionSold;
-        result = 31 * result + (sessionIsActive ? 1 : 0);
+        result = 31 * result + (sessionActive ? 1 : 0);
         result = 31 * result + movieId;
         return result;
     }
@@ -121,7 +123,7 @@ public class Session {
                 ", sessionTime='" + sessionTime + '\'' +
                 ", sessionCost=" + sessionCost +
                 ", sessionSold=" + sessionSold +
-                ", sessionIsActive=" + sessionIsActive +
+                ", sessionIsActive=" + sessionActive +
                 ", movieId=" + movieId +
                 '}';
     }

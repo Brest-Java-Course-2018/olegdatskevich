@@ -6,7 +6,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import java.util.Collection;
 
@@ -20,7 +25,7 @@ public class MovieDaoImpl implements MovieDao {
     private static final String MOVIE_ID = "movieId";
     private static final String MOVIE_NAME = "movieName";
     private static final String MOVIE_DESCR = "movieDescription";
-    private static final String MOVIE_IS_ACTIVE = "movieIsActive";
+    private static final String MOVIE_ACTIVE = "movieActive";
 
     @Value("${movie.select}")
     private String movieSelect;
@@ -53,27 +58,58 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Movie getMovieById(int movieId) {
-        return null;
+    public Movie getMovieById(final int movieId) {
+        LOGGER.debug("getMovieById({})", movieId);
+        SqlParameterSource namedParameters
+                = new MapSqlParameterSource(MOVIE_ID, movieId);
+        Movie movie = namedParameterJdbcTemplate.queryForObject(movieSelectById,
+                namedParameters,BeanPropertyRowMapper.newInstance(Movie.class));
+        return movie;
     }
 
     @Override
-    public Collection<MovieEarned> movieEarned() {
-        return null;
+    public Collection<MovieEarned> moviesEarned() {
+        LOGGER.debug("moviesEarned()");
+        Collection<MovieEarned> movies = namedParameterJdbcTemplate
+                .getJdbcOperations()
+                .query(movieCalcalulateEarn,
+                        BeanPropertyRowMapper.newInstance(MovieEarned.class));
+        return movies;
     }
 
     @Override
     public Movie addMovie(Movie movie) {
-        return null;
+        LOGGER.debug("addMovie({})", movie);
+        MapSqlParameterSource namedParameter
+                = new MapSqlParameterSource(MOVIE_NAME, movie.getMovieName());
+        Integer result = namedParameterJdbcTemplate
+                .queryForObject(checkMovie, namedParameter, Integer.class);
+        if (result == 0) {
+            namedParameter = new MapSqlParameterSource();
+            namedParameter.addValue(MOVIE_NAME, movie.getMovieName());
+            namedParameter.addValue(MOVIE_DESCR, movie.getMovieDescription());
+            namedParameter.addValue(MOVIE_ACTIVE, movie.isMovieActive());
+            KeyHolder generatedKey = new GeneratedKeyHolder();
+            namedParameterJdbcTemplate.update(insert, namedParameter, generatedKey);
+            movie.setMovieId(generatedKey.getKey().intValue());
+        } else {
+            throw new IllegalArgumentException(
+                    "Movie with the same name already exists in DB.");
+        }
+        return movie;
     }
 
     @Override
     public void updateMovie(Movie movie) {
-
+        LOGGER.debug("updateMovie({})", movie);
+        SqlParameterSource namedParameter
+                = new BeanPropertySqlParameterSource(movie);
+        namedParameterJdbcTemplate.update(update, namedParameter);
     }
 
     @Override
     public void deleteMovie(int movieId) {
-
+        LOGGER.debug("deleteMovie({})", movieId);
+        namedParameterJdbcTemplate.getJdbcOperations().update(delete, movieId);
     }
 }

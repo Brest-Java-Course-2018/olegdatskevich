@@ -2,17 +2,19 @@ package com.epam.brest.course.model.dao;
 
 public class Movie {
     private int movieId;
-    private String movieMame;
+    private String movieName;
     private String movieDescription;
-    private boolean movieIsActive;
+    private boolean movieActive;
 
     public Movie() {
     }
 
-    public Movie(String movieMame, String movieDescription, boolean movieIsActive) {
-        this.movieMame = movieMame;
+    public Movie(String movieName,
+                 String movieDescription,
+                 boolean movieActive) {
+        this.movieName = movieName;
         this.movieDescription = movieDescription;
-        this.movieIsActive = movieIsActive;
+        this.movieActive = movieActive;
     }
 
     public Integer getMovieId() {
@@ -23,12 +25,12 @@ public class Movie {
         this.movieId = movieId;
     }
 
-    public String getMovieMame() {
-        return movieMame;
+    public String getMovieName() {
+        return movieName;
     }
 
-    public void setMovieMame(String movieMame) {
-        this.movieMame = movieMame;
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
     }
 
     public String getMovieDescription() {
@@ -39,34 +41,47 @@ public class Movie {
         this.movieDescription = movieDescription;
     }
 
-    public boolean isMovieIsActive() {
-        return movieIsActive;
+    public boolean isMovieActive() {
+        return movieActive;
     }
 
-    public void setMovieIsActive(boolean movieIsActive) {
-        this.movieIsActive = movieIsActive;
+    public void setMovieActive(boolean movieActive) {
+        this.movieActive = movieActive;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Movie movie = (Movie) o;
 
-        if (movieId != movie.movieId) return false;
-        if (movieIsActive != movie.movieIsActive) return false;
-        if (movieMame != null ? !movieMame.equals(movie.movieMame) : movie.movieMame != null)
+        if (movieId != movie.movieId) {
             return false;
-        return movieDescription != null ? movieDescription.equals(movie.movieDescription) : movie.movieDescription == null;
+        }
+        if (movieActive != movie.movieActive) {
+            return false;
+        }
+        if (movieName != null ? !movieName.equals(movie.movieName)
+                : movie.movieName != null) {
+            return false;
+        }
+        return movieDescription != null
+                ? movieDescription.equals(movie.movieDescription)
+                : movie.movieDescription == null;
     }
 
     @Override
     public int hashCode() {
         int result = movieId;
-        result = 31 * result + (movieMame != null ? movieMame.hashCode() : 0);
-        result = 31 * result + (movieDescription != null ? movieDescription.hashCode() : 0);
-        result = 31 * result + (movieIsActive ? 1 : 0);
+        result = 31 * result + (movieName != null ? movieName.hashCode() : 0);
+        result = 31 * result
+                + (movieDescription != null ? movieDescription.hashCode() : 0);
+        result = 31 * result + (movieActive ? 1 : 0);
         return result;
     }
 
@@ -74,9 +89,9 @@ public class Movie {
     public String toString() {
         return "Movie{" +
                 "movieId=" + movieId +
-                ", movieMame='" + movieMame + '\'' +
+                ", movieName='" + movieName + '\'' +
                 ", movieDescription='" + movieDescription + '\'' +
-                ", movieIsActive=" + movieIsActive +
+                ", movieIsActive=" + movieActive +
                 '}';
     }
 }

@@ -11,7 +11,7 @@ public interface MovieDao {
 
     Movie getMovieById(final int movieId);
 
-    Collection<MovieEarned> movieEarned();
+    Collection<MovieEarned> moviesEarned();
 
     Movie addMovie(final Movie movie);
 
