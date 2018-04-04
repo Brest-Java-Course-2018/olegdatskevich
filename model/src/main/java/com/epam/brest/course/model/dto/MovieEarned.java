@@ -39,26 +39,6 @@ public class MovieEarned {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MovieEarned that = (MovieEarned) o;
-
-        if (movieId != that.movieId) return false;
-        if (earned != that.earned) return false;
-        return movieName != null ? movieName.equals(that.movieName) : that.movieName == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = movieId;
-        result = 31 * result + (movieName != null ? movieName.hashCode() : 0);
-        result = 31 * result + earned;
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "MovieEarned{" +
                 "movieId=" + movieId +

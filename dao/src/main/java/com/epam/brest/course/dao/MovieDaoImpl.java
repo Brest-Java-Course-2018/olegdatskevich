@@ -28,7 +28,7 @@ public class MovieDaoImpl implements MovieDao {
     private static final String MOVIE_ACTIVE = "movieActive";
 
     @Value("${movie.select}")
-    private String movieSelect;
+    private String moviesSelect;
     @Value("${movie.selectById}")
     private String movieSelectById;
     @Value("${movie.check}")
@@ -52,7 +52,7 @@ public class MovieDaoImpl implements MovieDao {
         LOGGER.debug("getMovies()");
         Collection<Movie> movies = namedParameterJdbcTemplate
                 .getJdbcOperations()
-                .query(movieSelect,
+                .query(moviesSelect,
                         BeanPropertyRowMapper.newInstance(Movie.class));
         return movies;
     }
@@ -62,8 +62,10 @@ public class MovieDaoImpl implements MovieDao {
         LOGGER.debug("getMovieById({})", movieId);
         SqlParameterSource namedParameters
                 = new MapSqlParameterSource(MOVIE_ID, movieId);
-        Movie movie = namedParameterJdbcTemplate.queryForObject(movieSelectById,
-                namedParameters,BeanPropertyRowMapper.newInstance(Movie.class));
+        Movie movie = namedParameterJdbcTemplate.queryForObject(
+                movieSelectById,
+                namedParameters,
+                BeanPropertyRowMapper.newInstance(Movie.class));
         return movie;
     }
 

@@ -30,6 +30,9 @@
         <module>model</module>
         <module>dao</module>
         <module>testdb</module>
+        <module>service-api</module>
+        <module>service</module>
+        <module>dao-api</module>
     </modules>
 
     <distributionManagement>
@@ -61,6 +64,26 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>dao-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
@@ -68,6 +91,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>

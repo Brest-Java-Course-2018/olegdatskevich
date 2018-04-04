@@ -10,15 +10,14 @@ DROP TABLE IF EXISTS session;
 CREATE TABLE session (
  sessionId INT NOT NULL AUTO_INCREMENT,
  sessionDate DATE NOT NULL,
- sessionTime VARCHAR(20) NOT NULL,
+ sessionTime VARCHAR(10) NOT NULL,
  sessionCost INT NOT NULL,
  sessionSold INT NOT NULL,
  sessionActive BOOLEAN,
  movieId INT NOT NULL,
  PRIMARY KEY (sessionId),
- CONSTRAINT mv_to_ses_fk
-    FOREIGN KEY (movieId)
-    REFERENCES movie (movieId)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+ FOREIGN KEY (movieId)
+ REFERENCES movie (movieId)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION
 );

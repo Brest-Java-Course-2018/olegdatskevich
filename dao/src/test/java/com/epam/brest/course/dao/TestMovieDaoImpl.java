@@ -36,7 +36,6 @@ public class TestMovieDaoImpl {
     @Test
     public void testGetMovies() {
         Collection<Movie> movies = movieDao.getMovies();
-        System.out.println(movies.size());
         LOGGER.debug("testGetMovies({})", movies);
         assertFalse(movies.isEmpty());
     }
@@ -69,14 +68,11 @@ public class TestMovieDaoImpl {
                 "testAddDescr",
                 true));
         int addedMovieId = newMovie.getMovieId();
-        //assertNotNull(addedMovieId);
         assertEquals(newMovie.getMovieName(),
                 movieDao.getMovieById(addedMovieId).getMovieName());
         assertEquals(newMovie.getMovieDescription(),
                 movieDao.getMovieById(addedMovieId).getMovieDescription());
         assertTrue(movieDao.getMovieById(addedMovieId).isMovieActive());
-        //assertTrue(newMovie.getMovieName().equals(testDepartment.getDepartmentName()));
-        //assertTrue(newDepartment.getDepartmentDescription().equals(testDepartment.getDepartmentDescription()));
         assertTrue((sizeBeforeAdd + 1) == movieDao.getMovies().size());
     }
 

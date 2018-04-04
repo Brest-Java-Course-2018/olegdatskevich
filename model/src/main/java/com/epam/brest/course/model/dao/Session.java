@@ -14,10 +14,9 @@ public class Session {
     public Session() {
     }
 
-    public Session(int sessionId, Date sessionDate, String sessionTime,
+    public Session(Date sessionDate, String sessionTime,
                    int sessionCost, int sessionSold, boolean sessionActive,
                    int movieId) {
-        this.sessionId = sessionId;
         this.sessionDate = sessionDate;
         this.sessionTime = sessionTime;
         this.sessionCost = sessionCost;
@@ -80,39 +79,6 @@ public class Session {
 
     public void setMovieId(int movieId) {
         this.movieId = movieId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Session session = (Session) o;
-
-        if (sessionId != session.sessionId) return false;
-        if (sessionCost != session.sessionCost) return false;
-        if (sessionSold != session.sessionSold) return false;
-        if (sessionActive != session.sessionActive) return false;
-        if (movieId != session.movieId) return false;
-        if (sessionDate != null ? !sessionDate.equals(session.sessionDate)
-                : session.sessionDate != null)
-            return false;
-        return sessionTime != null ? sessionTime.equals(session.sessionTime)
-                : session.sessionTime == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = sessionId;
-        result = 31 * result
-                + (sessionDate != null ? sessionDate.hashCode() : 0);
-        result = 31 * result
-                + (sessionTime != null ? sessionTime.hashCode() : 0);
-        result = 31 * result + sessionCost;
-        result = 31 * result + sessionSold;
-        result = 31 * result + (sessionActive ? 1 : 0);
-        result = 31 * result + movieId;
-        return result;
     }
 
     @Override
