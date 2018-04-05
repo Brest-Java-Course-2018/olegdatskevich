@@ -9,32 +9,32 @@ import java.util.Collection;
 public class MovieServiceImpl implements MovieService {
 
     @Override
-    public Collection<Movie> serviceGetMovies() {
+    public Collection<Movie> getMovies() {
         return null;
     }
 
     @Override
-    public Movie serviceGetMovieById(final int movieId) {
+    public Movie getMovieById(int movieId) {
         return null;
     }
 
     @Override
-    public Collection<MovieEarned> serviceMoviesEarned() {
+    public Collection<MovieEarned> moviesEarned() {
         return null;
     }
 
     @Override
-    public Movie serviceAddMovie(final Movie movie) {
+    public Movie addMovie(Movie movie) {
         return null;
     }
 
     @Override
-    public void serviceUpdateMovie(final Movie movie) {
+    public void updateMovie(Movie movie) {
 
     }
 
     @Override
-    public void serviceDeleteMovie(final int movieId) {
+    public void deleteMovie(int movieId) {
 
     }
 }

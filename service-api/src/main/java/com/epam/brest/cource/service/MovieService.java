@@ -7,15 +7,15 @@ import java.util.Collection;
 
 public interface MovieService {
 
-    Collection<Movie> serviceGetMovies();
+    Collection<Movie> getMovies();
 
-    Movie serviceGetMovieById(final int movieId);
+    Movie getMovieById(final int movieId);
 
-    Collection<MovieEarned> serviceMoviesEarned();
+    Collection<MovieEarned> moviesEarned();
 
-    Movie serviceAddMovie(final Movie movie);
+    Movie addMovie(final Movie movie);
 
-    void serviceUpdateMovie(final Movie movie);
+    void updateMovie(final Movie movie);
 
-    void serviceDeleteMovie(final int movieId);
+    void deleteMovie(final int movieId);
 }

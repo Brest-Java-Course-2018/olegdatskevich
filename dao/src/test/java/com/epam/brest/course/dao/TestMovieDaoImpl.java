@@ -78,12 +78,12 @@ public class TestMovieDaoImpl {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAddSameMovie() {
-        Movie testDepartment = new Movie(
+        Movie testMovie = new Movie(
                 "testAddSameName",
                 "TestAddSameDescr",
                 true);
-        movieDao.addMovie(testDepartment);
-        movieDao.addMovie(testDepartment);
+        movieDao.addMovie(testMovie);
+        movieDao.addMovie(testMovie);
     }
 
     @Rule

@@ -7,16 +7,16 @@ import java.util.Date;
 
 public interface SessionService {
 
-    Collection<Session> serviceGetSessions();
+    Collection<Session> getSessions();
 
-    Session serviceGetSessionById(final int sessionId);
+    Session getSessionById(final int sessionId);
 
-    Session serviceAddSession(final Session session);
+    Session addSession(final Session session);
 
-    void serviceUpdateSession(final Session session);
+    void updateSession(final Session session);
 
-    void serviceDeleteSession(final int sessionId);
+    void deleteSession(final int sessionId);
 
-    Collection<Session> serviceFilterSessionByDate(final Date fromDate,
+    Collection<Session> filterSessionByDate(final Date fromDate,
                                                    final Date toDate);
 }

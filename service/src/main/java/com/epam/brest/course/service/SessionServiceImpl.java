@@ -9,33 +9,32 @@ import java.util.Date;
 public class SessionServiceImpl implements SessionService {
 
     @Override
-    public Collection<Session> serviceGetSessions() {
+    public Collection<Session> getSessions() {
         return null;
     }
 
     @Override
-    public Session serviceGetSessionById(final int sessionId) {
+    public Session getSessionById(int sessionId) {
         return null;
     }
 
     @Override
-    public Session serviceAddSession(final Session session) {
+    public Session addSession(Session session) {
         return null;
     }
 
     @Override
-    public void serviceUpdateSession(final Session session) {
+    public void updateSession(Session session) {
 
     }
 
     @Override
-    public void serviceDeleteSession(final int sessionId) {
+    public void deleteSession(int sessionId) {
 
     }
 
     @Override
-    public Collection<Session> serviceFilterSessionByDate(final Date fromDate,
-                                                          final Date toDate) {
+    public Collection<Session> filterSessionByDate(Date fromDate, Date toDate) {
         return null;
     }
 }
