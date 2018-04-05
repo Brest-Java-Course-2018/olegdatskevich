@@ -1,6 +1,9 @@
 package com.epam.brest.course.model.dao;
-
+/**
+ * POJO Movie.
+ */
 public class Movie {
+
     private int movieId;
     private String movieName;
     private String movieDescription;
@@ -9,53 +12,43 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String movieName,
-                 String movieDescription,
-                 boolean movieActive) {
+    public Movie(final String movieName,
+                 final String movieDescription,
+                 final boolean movieActive) {
         this.movieName = movieName;
         this.movieDescription = movieDescription;
         this.movieActive = movieActive;
     }
 
-    public Integer getMovieId() {
+    public final Integer getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(Integer movieId) {
+    public final void setMovieId(final Integer movieId) {
         this.movieId = movieId;
     }
 
-    public String getMovieName() {
+    public final String getMovieName() {
         return movieName;
     }
 
-    public void setMovieName(String movieName) {
+    public final void setMovieName(final String movieName) {
         this.movieName = movieName;
     }
 
-    public String getMovieDescription() {
+    public final String getMovieDescription() {
         return movieDescription;
     }
 
-    public void setMovieDescription(String movieDescription) {
+    public final void setMovieDescription(final String movieDescription) {
         this.movieDescription = movieDescription;
     }
 
-    public boolean isMovieActive() {
+    public final boolean isMovieActive() {
         return movieActive;
     }
 
-    public void setMovieActive(boolean movieActive) {
+    public final void setMovieActive(final boolean movieActive) {
         this.movieActive = movieActive;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "movieId=" + movieId +
-                ", movieName='" + movieName + '\'' +
-                ", movieDescription='" + movieDescription + '\'' +
-                ", movieIsActive=" + movieActive +
-                '}';
     }
 }

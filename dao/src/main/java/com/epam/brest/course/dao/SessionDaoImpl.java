@@ -15,40 +15,97 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.util.Collection;
 import java.util.Date;
 
+/**
+ * Implementation of DAO layer for session.
+ */
 public class SessionDaoImpl implements SessionDao {
 
+    /**
+     * Logger for SessionDaoImpl.
+     */
     private static final Logger LOGGER
-            = LogManager.getLogger(MovieDaoImpl.class);
+            = LogManager.getLogger(SessionDaoImpl.class);
 
+    /**
+     * NamedParameterJdbcTemplate.
+     */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    /**
+     * Column sessionId in session table DB.
+     */
     private static final String SESSION_ID = "sessionId";
+    /**
+     * Column sessionDate in session table DB.
+     */
     private static final String SESSION_DATE = "sessionDate";
+    /**
+     * Column sessionTime in session table DB.
+     */
     private static final String SESSION_TIME = "sessionTime";
+    /**
+     * Column sessionCost in session table DB.
+     */
     private static final String SESSION_COST = "sessionCost";
+    /**
+     * Column sessionSold in session table DB.
+     */
     private static final String SESSION_SOLD = "sessionSold";
+    /**
+     * Column sessionActive in session table DB.
+     */
     private static final String SESSION_ACTIVE = "sessionActive";
+    /**
+     * Column movieId in session table DB.
+     */
     private static final String MOVIE_ID = "movieId";
+    /**
+     * fromDate for SQL query.
+     */
     private static final String FROM_DATE = "fromDate";
+    /**
+     * toDate for SQL query.
+     */
     private static final String TO_DATE = "toDate";
 
+    /**
+     * SQL query for select all sessions.
+     */
     @Value("${session.select}")
     private String sessionsSelect;
+    /**
+     * SQL query for select session by id.
+     */
     @Value("${session.selectById}")
     private String sessionSelectById;
-    @Value("${session.check}")
-    private String checkSession;
+    /**
+     * SQL query for filter sessions by date.
+     */
     @Value("${session.filter}")
     private String sessionFilter;
+    /**
+     * SQL query for insert session.
+     */
     @Value("${session.insert}")
     private String insert;
+    /**
+     * SQL query for update session.
+     */
     @Value("${session.update}")
     private String update;
+    /**
+     * SQL query for delete session.
+     */
     @Value("${session.delete}")
     private String delete;
 
-    public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    /**
+     * Setter for NamedParameterJdbcTemplate.
+     * @param namedParameterJdbc - namedParam.
+     */
+    public final void setNamedParameterJdbcTemplate(
+            final NamedParameterJdbcTemplate namedParameterJdbc) {
+        this.namedParameterJdbcTemplate = namedParameterJdbc;
     }
 
     @Override
@@ -75,28 +132,17 @@ public class SessionDaoImpl implements SessionDao {
 
     @Override
     public final Session addSession(final Session session) {
-        LOGGER.debug("addSession({})", session);
-        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue(SESSION_DATE, session.getSessionDate());
-        namedParameters.addValue(SESSION_TIME, session.getSessionTime());
-        Integer result = namedParameterJdbcTemplate
-                .queryForObject(checkSession, namedParameters, Integer.class);
-        if (result == 0) {
-            namedParameters = new MapSqlParameterSource()
-            .addValue(SESSION_DATE, session.getSessionDate())
-            .addValue(SESSION_TIME, session.getSessionTime())
-            .addValue(SESSION_COST, session.getSessionCost())
-            .addValue(SESSION_SOLD, session.getSessionSold())
-            .addValue(SESSION_ACTIVE, session.isSessionActive())
-            .addValue(MOVIE_ID, session.getMovieId());
-            KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-            namedParameterJdbcTemplate.update(insert, namedParameters,
-                    generatedKeyHolder);
-            session.setSessionId(generatedKeyHolder.getKey().intValue());
-        } else {
-            throw new IllegalArgumentException(
-                    "Session with the same date and time already exists in DB.");
-        }
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue(SESSION_DATE, session.getSessionDate())
+                .addValue(SESSION_TIME, session.getSessionTime())
+                .addValue(SESSION_COST, session.getSessionCost())
+                .addValue(SESSION_SOLD, session.getSessionSold())
+                .addValue(SESSION_ACTIVE, session.isSessionActive())
+                .addValue(MOVIE_ID, session.getMovieId());
+        KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(insert, namedParameters,
+                generatedKeyHolder);
+        session.setSessionId(generatedKeyHolder.getKey().intValue());
         return session;
     }
 
@@ -116,8 +162,8 @@ public class SessionDaoImpl implements SessionDao {
     }
 
     @Override
-    public Collection<Session> filterSessionByDate(final Date fromDate,
-                                                   final Date toDate) {
+    public final Collection<Session> filterSessionByDate(final Date fromDate,
+                                                         final Date toDate) {
         LOGGER.debug("filterSessionByDate({}, {})", fromDate, toDate);
 
         SqlParameterSource namedParameters = new MapSqlParameterSource()

@@ -1,8 +1,11 @@
 package com.epam.brest.course.model.dao;
 
 import java.util.Date;
-
+/**
+ * POJO Session.
+ */
 public class Session {
+
     private int sessionId;
     private Date sessionDate;
     private String sessionTime;
@@ -14,9 +17,9 @@ public class Session {
     public Session() {
     }
 
-    public Session(Date sessionDate, String sessionTime,
-                   int sessionCost, int sessionSold, boolean sessionActive,
-                   int movieId) {
+    public Session(final Date sessionDate, final String sessionTime,
+                   final int sessionCost, final int sessionSold,
+                   final boolean sessionActive, final int movieId) {
         this.sessionDate = sessionDate;
         this.sessionTime = sessionTime;
         this.sessionCost = sessionCost;
@@ -25,72 +28,59 @@ public class Session {
         this.movieId = movieId;
     }
 
-    public int getSessionId() {
+    public final int getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(int sessionId) {
+    public final void setSessionId(final int sessionId) {
         this.sessionId = sessionId;
     }
 
-    public Date getSessionDate() {
+    public final Date getSessionDate() {
         return sessionDate;
     }
 
-    public void setSessionDate(Date sessionDate) {
+    public final void setSessionDate(final Date sessionDate) {
         this.sessionDate = sessionDate;
     }
 
-    public String getSessionTime() {
+    public final String getSessionTime() {
         return sessionTime;
     }
 
-    public void setSessionTime(String sessionTime) {
+    public final void setSessionTime(final String sessionTime) {
         this.sessionTime = sessionTime;
     }
 
-    public int getSessionCost() {
+    public final int getSessionCost() {
         return sessionCost;
     }
 
-    public void setSessionCost(int sessionCost) {
+    public final void setSessionCost(final int sessionCost) {
         this.sessionCost = sessionCost;
     }
 
-    public int getSessionSold() {
+    public final int getSessionSold() {
         return sessionSold;
     }
 
-    public void setSessionSold(int sessionSold) {
+    public final void setSessionSold(final int sessionSold) {
         this.sessionSold = sessionSold;
     }
 
-    public boolean isSessionActive() {
+    public final boolean isSessionActive() {
         return sessionActive;
     }
 
-    public void setSessionActive(boolean sessionActive) {
+    public final void setSessionActive(final boolean sessionActive) {
         this.sessionActive = sessionActive;
     }
 
-    public int getMovieId() {
+    public final int getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(int movieId) {
+    public final void setMovieId(final int movieId) {
         this.movieId = movieId;
-    }
-
-    @Override
-    public String toString() {
-        return "Session{" +
-                "sessionId=" + sessionId +
-                ", sessionDate=" + sessionDate +
-                ", sessionTime='" + sessionTime + '\'' +
-                ", sessionCost=" + sessionCost +
-                ", sessionSold=" + sessionSold +
-                ", sessionIsActive=" + sessionActive +
-                ", movieId=" + movieId +
-                '}';
     }
 }

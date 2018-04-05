@@ -2,39 +2,45 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.cource.service.SessionService;
 import com.epam.brest.course.model.dao.Session;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Date;
 
+/**
+ * Implementation of SessionService from service-api.
+ */
+@Transactional
 public class SessionServiceImpl implements SessionService {
 
     @Override
-    public Collection<Session> getSessions() {
+    public final Collection<Session> getSessions() {
         return null;
     }
 
     @Override
-    public Session getSessionById(int sessionId) {
+    public final Session getSessionById(final int sessionId) {
         return null;
     }
 
     @Override
-    public Session addSession(Session session) {
+    public final Session addSession(final Session session) {
         return null;
     }
 
     @Override
-    public void updateSession(Session session) {
+    public final void updateSession(final Session session) {
 
     }
 
     @Override
-    public void deleteSession(int sessionId) {
+    public final void deleteSession(final int sessionId) {
 
     }
 
     @Override
-    public Collection<Session> filterSessionByDate(Date fromDate, Date toDate) {
+    public final Collection<Session> filterSessionByDate(final Date fromDate,
+                                                         final Date toDate) {
         return null;
     }
 }

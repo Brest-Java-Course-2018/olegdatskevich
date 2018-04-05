@@ -1,5 +1,8 @@
 package com.epam.brest.course.model.dto;
 
+/**
+ * DTO for Movie earning.
+ */
 public class MovieEarned {
     private int movieId;
     private String movieName;
@@ -8,42 +11,34 @@ public class MovieEarned {
     public MovieEarned() {
     }
 
-    public MovieEarned(int movieId, String movieName, int earned) {
+    public MovieEarned(final int movieId, final String movieName,
+                       final int earned) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.earned = earned;
     }
 
-    public int getMovieId() {
+    public final int getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(int movieId) {
+    public final void setMovieId(final int movieId) {
         this.movieId = movieId;
     }
 
-    public String getMovieName() {
+    public final String getMovieName() {
         return movieName;
     }
 
-    public void setMovieName(String movieName) {
+    public final void setMovieName(final String movieName) {
         this.movieName = movieName;
     }
 
-    public int getEarned() {
+    public final int getEarned() {
         return earned;
     }
 
-    public void setEarned(int earned) {
+    public final void setEarned(final int earned) {
         this.earned = earned;
-    }
-
-    @Override
-    public String toString() {
-        return "MovieEarned{" +
-                "movieId=" + movieId +
-                ", movieName='" + movieName + '\'' +
-                ", earned=" + earned +
-                '}';
     }
 }

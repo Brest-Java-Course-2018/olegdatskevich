@@ -4,11 +4,10 @@ import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -60,7 +59,7 @@ public class TestMovieDaoImpl {
     }
 
     @Test
-    public void addDepartment() {
+    public void testAddMovie() {
         Collection<Movie> movies = movieDao.getMovies();
         int sizeBeforeAdd = movies.size();
         Movie newMovie = movieDao.addMovie(new Movie(
@@ -68,6 +67,7 @@ public class TestMovieDaoImpl {
                 "testAddDescr",
                 true));
         int addedMovieId = newMovie.getMovieId();
+        LOGGER.debug("testAddMovie({})", newMovie);
         assertEquals(newMovie.getMovieName(),
                 movieDao.getMovieById(addedMovieId).getMovieName());
         assertEquals(newMovie.getMovieDescription(),
@@ -76,25 +76,13 @@ public class TestMovieDaoImpl {
         assertTrue((sizeBeforeAdd + 1) == movieDao.getMovies().size());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DuplicateKeyException.class)
     public void testAddSameMovie() {
         Movie testMovie = new Movie(
                 "testAddSameName",
                 "TestAddSameDescr",
                 true);
         movieDao.addMovie(testMovie);
-        movieDao.addMovie(testMovie);
-    }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-    @Test
-    public void addSameMovieWithRule() {
-        Movie testMovie = new Movie(
-                "TestAddSameNameRule", "TestAddSameDescrRule", true);
-        movieDao.addMovie(testMovie);
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Movie with the same name already exists in DB.");
         movieDao.addMovie(testMovie);
     }
 

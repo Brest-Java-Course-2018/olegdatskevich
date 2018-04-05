@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -76,7 +77,7 @@ public class TestSessionDaoImpl {
         assertTrue((sizeBefore + 1) == sessionDao.getSessions().size());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DuplicateKeyException.class)
     public void testAddSameSession() throws ParseException {
         Date date = formatDate.parse(DATE);
         Session session = sessionDao.addSession(

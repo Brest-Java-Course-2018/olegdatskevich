@@ -6,35 +6,38 @@ import com.epam.brest.course.model.dto.MovieEarned;
 
 import java.util.Collection;
 
+/**
+ * Implementation of MovieService from service-api.
+ */
 public class MovieServiceImpl implements MovieService {
 
     @Override
-    public Collection<Movie> getMovies() {
+    public final Collection<Movie> getMovies() {
         return null;
     }
 
     @Override
-    public Movie getMovieById(int movieId) {
+    public final Movie getMovieById(final int movieId) {
         return null;
     }
 
     @Override
-    public Collection<MovieEarned> moviesEarned() {
+    public final Collection<MovieEarned> moviesEarned() {
         return null;
     }
 
     @Override
-    public Movie addMovie(Movie movie) {
+    public final Movie addMovie(final Movie movie) {
         return null;
     }
 
     @Override
-    public void updateMovie(Movie movie) {
+    public final void updateMovie(final Movie movie) {
 
     }
 
     @Override
-    public void deleteMovie(int movieId) {
+    public final void deleteMovie(final int movieId) {
 
     }
 }

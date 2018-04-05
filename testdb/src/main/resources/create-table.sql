@@ -4,7 +4,8 @@ CREATE TABLE movie (
  movieName VARCHAR(255) NOT NULL,
  movieDescription VARCHAR(255) NULL,
  movieActive BOOLEAN,
- PRIMARY KEY (movieId)
+ PRIMARY KEY (movieId),
+ UNIQUE (movieName)
 );
 DROP TABLE IF EXISTS session;
 CREATE TABLE session (
@@ -16,8 +17,8 @@ CREATE TABLE session (
  sessionActive BOOLEAN,
  movieId INT NOT NULL,
  PRIMARY KEY (sessionId),
- FOREIGN KEY (movieId)
- REFERENCES movie (movieId)
+ UNIQUE (sessionDate, sessionTime),
+ FOREIGN KEY (movieId) REFERENCES movie (movieId)
  ON DELETE NO ACTION
  ON UPDATE NO ACTION
 );

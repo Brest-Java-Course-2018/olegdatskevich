@@ -5,6 +5,7 @@ import com.epam.brest.course.model.dto.MovieEarned;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -15,40 +16,69 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.util.Collection;
 
+/**
+ * Implementation of DAO layer for movies.
+ */
 public class MovieDaoImpl implements MovieDao {
 
+    /**
+     * Logger for MovieDaoImpl.
+     */
     private static final Logger LOGGER
             = LogManager.getLogger(MovieDaoImpl.class);
 
+    /**
+     * NamedParameterJdbcTemplate.
+     */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    /**
+     * Column name in movie table DB.
+     */
     private static final String MOVIE_ID = "movieId";
-    private static final String MOVIE_NAME = "movieName";
-    private static final String MOVIE_DESCR = "movieDescription";
-    private static final String MOVIE_ACTIVE = "movieActive";
 
+    /**
+     * SQL query for select all movies.
+     */
     @Value("${movie.select}")
     private String moviesSelect;
+    /**
+     * SQL query for select movie by id.
+     */
     @Value("${movie.selectById}")
     private String movieSelectById;
-    @Value("${movie.check}")
-    private String checkMovie;
+    /**
+     * SQL query for calculate earn.
+     */
     @Value("${movie.calculate}")
     private String movieCalcalulateEarn;
+    /**
+     * SQL query for insert movie.
+     */
     @Value("${movie.insert}")
     private String insert;
+    /**
+     * SQL query for update movie.
+     */
     @Value("${movie.update}")
     private String update;
+    /**
+     * SQL query for delete movie.
+     */
     @Value("${movie.delete}")
     private String delete;
 
-    public void setNamedParameterJdbcTemplate(
-            NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    /**
+     * Setter for NamedParameterJdbcTemplate.
+     * @param namedParameterJdbc - namedParam.
+     */
+    public final void setNamedParameterJdbcTemplate(
+            final NamedParameterJdbcTemplate namedParameterJdbc) {
+        this.namedParameterJdbcTemplate = namedParameterJdbc;
     }
 
     @Override
-    public Collection<Movie> getMovies() {
+    public final Collection<Movie> getMovies() {
         LOGGER.debug("getMovies()");
         Collection<Movie> movies = namedParameterJdbcTemplate
                 .getJdbcOperations()
@@ -58,7 +88,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Movie getMovieById(final int movieId) {
+    public final Movie getMovieById(final int movieId) {
         LOGGER.debug("getMovieById({})", movieId);
         SqlParameterSource namedParameters
                 = new MapSqlParameterSource(MOVIE_ID, movieId);
@@ -70,7 +100,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Collection<MovieEarned> moviesEarned() {
+    public final Collection<MovieEarned> moviesEarned() {
         LOGGER.debug("moviesEarned()");
         Collection<MovieEarned> movies = namedParameterJdbcTemplate
                 .getJdbcOperations()
@@ -80,29 +110,19 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public Movie addMovie(Movie movie) {
+    public final Movie addMovie(final Movie movie) throws DataAccessException {
         LOGGER.debug("addMovie({})", movie);
-        MapSqlParameterSource namedParameter
-                = new MapSqlParameterSource(MOVIE_NAME, movie.getMovieName());
-        Integer result = namedParameterJdbcTemplate
-                .queryForObject(checkMovie, namedParameter, Integer.class);
-        if (result == 0) {
-            namedParameter = new MapSqlParameterSource();
-            namedParameter.addValue(MOVIE_NAME, movie.getMovieName());
-            namedParameter.addValue(MOVIE_DESCR, movie.getMovieDescription());
-            namedParameter.addValue(MOVIE_ACTIVE, movie.isMovieActive());
-            KeyHolder generatedKey = new GeneratedKeyHolder();
-            namedParameterJdbcTemplate.update(insert, namedParameter, generatedKey);
-            movie.setMovieId(generatedKey.getKey().intValue());
-        } else {
-            throw new IllegalArgumentException(
-                    "Movie with the same name already exists in DB.");
-        }
+        SqlParameterSource namedParameters
+                = new BeanPropertySqlParameterSource(movie);
+        KeyHolder generatedKey = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate
+                .update(insert, namedParameters, generatedKey);
+        movie.setMovieId(generatedKey.getKey().intValue());
         return movie;
     }
 
     @Override
-    public void updateMovie(Movie movie) {
+    public final void updateMovie(final Movie movie) {
         LOGGER.debug("updateMovie({})", movie);
         SqlParameterSource namedParameter
                 = new BeanPropertySqlParameterSource(movie);
@@ -110,7 +130,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public void deleteMovie(int movieId) {
+    public final void deleteMovie(final int movieId) {
         LOGGER.debug("deleteMovie({})", movieId);
         namedParameterJdbcTemplate.getJdbcOperations().update(delete, movieId);
     }
