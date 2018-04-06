@@ -41,4 +41,13 @@ public class MovieEarned {
     public final void setEarned(final int earned) {
         this.earned = earned;
     }
+
+    @Override
+    public final String toString() {
+        return "\n\tMovieEarned{"
+                + "Id=" + movieId
+                + ", Name='" + movieName + '\''
+                + ", Earned=" + earned
+                + '}';
+    }
 }

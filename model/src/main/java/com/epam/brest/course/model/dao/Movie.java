@@ -51,4 +51,14 @@ public class Movie {
     public final void setMovieActive(final boolean movieActive) {
         this.movieActive = movieActive;
     }
+
+    @Override
+    public final String toString() {
+        return "\n\tMovie{"
+                + "Id=" + movieId
+                + ", Name='" + movieName + '\''
+                + ", Description='" + movieDescription + '\''
+                + ", Active=" + movieActive
+                + '}';
+    }
 }

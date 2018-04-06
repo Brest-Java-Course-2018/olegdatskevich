@@ -83,4 +83,17 @@ public class Session {
     public final void setMovieId(final int movieId) {
         this.movieId = movieId;
     }
+
+    @Override
+    public final String toString() {
+        return "\n\tSession{"
+                + "Id=" + sessionId
+                + ", Date=" + sessionDate
+                + ", Time='" + sessionTime + '\''
+                + ", Cost=" + sessionCost
+                + ", Sold=" + sessionSold
+                + ", Active=" + sessionActive
+                + ", movieId=" + movieId
+                + '}';
+    }
 }
