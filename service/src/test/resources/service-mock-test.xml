@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="movieDao" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.course.dao.MovieDao"/>
+    </bean>
+
+    <bean id="movieService" class="com.epam.brest.course.service.MovieServiceImpl">
+        <property name="movieDao" ref="movieDao"/>
+    </bean>
+
+    <bean id="sessionDao" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.course.dao.SessionDao"/>
+    </bean>
+
+    <bean id="sessionService" class="com.epam.brest.course.service.SessionServiceImpl">
+        <property name="sessionDao" ref="sessionDao"/>
+    </bean>
+
+</beans>

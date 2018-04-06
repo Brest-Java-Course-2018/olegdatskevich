@@ -1,4 +1,4 @@
-package com.epam.brest.cource.service;
+package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.dao.Session;
 
