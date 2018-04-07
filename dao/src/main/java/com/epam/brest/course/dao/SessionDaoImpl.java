@@ -101,11 +101,11 @@ public class SessionDaoImpl implements SessionDao {
 
     /**
      * Setter for NamedParameterJdbcTemplate.
-     * @param namedParameterJdbc - namedParam.
+     * @param namedParameterJdbcTemplate - namedParam.
      */
     public final void setNamedParameterJdbcTemplate(
-            final NamedParameterJdbcTemplate namedParameterJdbc) {
-        this.namedParameterJdbcTemplate = namedParameterJdbc;
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     @Override
