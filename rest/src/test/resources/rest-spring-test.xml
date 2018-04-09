@@ -21,4 +21,8 @@
         <constructor-arg value="com.epam.brest.course.service.SessionService"/>
     </bean>
 
+    <bean id="sessionRestController" class="com.epam.brest.course.rest.SessionRestController">
+        <property name="sessionService" ref="sessionService"/>
+    </bean>
+
 </beans>
