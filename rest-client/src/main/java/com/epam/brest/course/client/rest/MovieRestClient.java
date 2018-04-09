@@ -24,6 +24,7 @@ public class MovieRestClient implements MovieService {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Collection<Movie> getMovies() {
         ResponseEntity<List> responseEntity
                 = restTemplate.getForEntity(url, List.class);
@@ -42,6 +43,7 @@ public class MovieRestClient implements MovieService {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Collection<MovieEarned> moviesEarned() {
         ResponseEntity<List> responseEntity
                 = restTemplate.getForEntity(url, List.class);

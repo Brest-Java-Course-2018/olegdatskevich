@@ -58,7 +58,8 @@ public class SessionRestController {
     @GetMapping(value = "/sessions/{fromDate}/{toDate}")
     public final Collection<Session> filterByDate(
             @PathVariable(value = "fromDate") final String fromDate,
-            @PathVariable(value = "toDate") final String toDate) throws ParseException {
+            @PathVariable(value = "toDate") final String toDate)
+            throws ParseException {
         LOGGER.debug("REST filterByDate({} - {})", fromDate, toDate);
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = formatDate.parse(fromDate);

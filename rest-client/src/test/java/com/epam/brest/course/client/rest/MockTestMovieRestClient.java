@@ -114,7 +114,7 @@ public class MockTestMovieRestClient {
 
     @Test
     public void mockTestUpdateMovieClient() {
-        mockRestTemplate.put("http://localhost:8088/movies", MOVIE_1);
+        mockRestTemplate.put(anyString(), anyObject());
         expectLastCall();
         replay(mockRestTemplate);
         mockMovieService.updateMovie(MOVIE_1);
@@ -122,7 +122,7 @@ public class MockTestMovieRestClient {
 
     @Test
     public void mockTestDeleteMovieClient() {
-        mockRestTemplate.put("http://localhost:8088/movies/1", MOVIE_ID);
+        mockRestTemplate.put(anyString(), anyObject());
         expectLastCall();
         replay(mockRestTemplate);
         mockMovieService.deleteMovie(MOVIE_ID);
