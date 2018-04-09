@@ -71,6 +71,5 @@ public class MovieServiceImpl implements MovieService {
             throws DataAccessException {
         LOGGER.debug("deleteMovie({})", movieId);
         movieDao.deleteMovie(movieId);
-
     }
 }

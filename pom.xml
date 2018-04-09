@@ -34,6 +34,7 @@
         <module>service</module>
         <module>dao-api</module>
         <module>rest</module>
+        <module>rest-client</module>
     </modules>
 
     <distributionManagement>
@@ -87,6 +88,11 @@
             <dependency>
                 <groupId>com.epam.brest.course</groupId>
                 <artifactId>rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>rest-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

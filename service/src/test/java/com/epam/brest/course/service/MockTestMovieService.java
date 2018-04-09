@@ -86,6 +86,6 @@ public class MockTestMovieService {
         mockMovieDao.deleteMovie(MOVIE_ID);
         expectLastCall();
         replay(mockMovieDao);
-        mockMovieDao.deleteMovie(MOVIE_ID);
+        movieService.deleteMovie(MOVIE_ID);
     }
 }

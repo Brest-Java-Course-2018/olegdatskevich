@@ -23,5 +23,5 @@ Web application for cinema. The application is designed to work with movies and 
 ## 
 EPAM Java Course, Brest 2018  
 by **Oleg Datskevich**  
-e-mail: olegdac@gmail.com
-tel: +375295266584
+e-mail: olegdac@gmail.com  
+tel: +375(29)5266584

@@ -61,8 +61,8 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public final void deleteSession(final int sessionId)
             throws DataAccessException {
-        sessionDao.deleteSession(sessionId);
         LOGGER.debug("deleteSession({})", sessionId);
+        sessionDao.deleteSession(sessionId);
     }
 
     @Override
