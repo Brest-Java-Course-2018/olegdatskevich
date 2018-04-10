@@ -101,11 +101,11 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public final Collection<MovieEarned> moviesEarned() {
-        LOGGER.debug("moviesEarned()");
         Collection<MovieEarned> movies = namedParameterJdbcTemplate
                 .getJdbcOperations()
                 .query(movieCalcalulateEarn,
                         BeanPropertyRowMapper.newInstance(MovieEarned.class));
+        LOGGER.debug("moviesEarned({})", movies);
         return movies;
     }
 

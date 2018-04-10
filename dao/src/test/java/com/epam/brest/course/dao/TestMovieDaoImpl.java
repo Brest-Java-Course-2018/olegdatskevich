@@ -54,7 +54,6 @@ public class TestMovieDaoImpl {
     public void testMoviesEarned() {
         Collection<MovieEarned> movies = movieDao.moviesEarned();
         LOGGER.debug("testMoviesEarned({})", movies);
-        System.out.println(movies.size());
         assertFalse(movies.isEmpty());
     }
 
@@ -112,10 +111,8 @@ public class TestMovieDaoImpl {
         movie = movieDao.addMovie(movie);
         int delMovieId = movie.getMovieId();
         LOGGER.debug("testDeleteMovie({})", movie);
-        Collection<Movie> movies = movieDao.getMovies();
-        int sizeBeforeDelete = movies.size();
         movieDao.deleteMovie(movie.getMovieId());
-        assertTrue(sizeBeforeDelete - 1 == movieDao.getMovies().size());
+        assertFalse(movieDao.getMovieById(delMovieId).isMovieActive());
         assertEquals(movie.getMovieName(),
                 movieDao.getMovieById(delMovieId).getMovieName());
     }
