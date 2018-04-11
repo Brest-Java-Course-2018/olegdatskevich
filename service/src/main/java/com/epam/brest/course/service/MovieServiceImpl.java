@@ -48,7 +48,7 @@ public class MovieServiceImpl implements MovieService {
     public final Collection<MovieEarned> moviesEarned()
             throws DataAccessException {
         Collection<MovieEarned> moviesEarn = movieDao.moviesEarned();
-        LOGGER.debug("moviesEarned({})");
+        LOGGER.debug("moviesEarned({})", moviesEarn);
         return moviesEarn;
     }
 

@@ -23,7 +23,7 @@ public class MovieRestController {
 
     @GetMapping(value = "/movies")
     public final Collection<MovieEarned> movies() {
-        LOGGER.debug("REST movies()");
+        LOGGER.debug("REST moviesEarned()");
         return movieService.moviesEarned();
     }
 

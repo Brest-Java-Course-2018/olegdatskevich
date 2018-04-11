@@ -24,7 +24,7 @@ public class MockTestMovieService {
     private static final Movie MOVIE
             = new Movie("TestMovie", "TestMovieDep", true);
     private static final MovieEarned MOVIE_EARNED
-            = new MovieEarned(1, "Money", 100);
+            = new MovieEarned(1, "Money", 100, true);
 
     @Autowired
     private MovieDao mockMovieDao;
@@ -56,7 +56,6 @@ public class MockTestMovieService {
         expect(mockMovieDao.moviesEarned()).andReturn(moviesEarn);
         replay(mockMovieDao);
         movieService.moviesEarned();
-
     }
 
     @Test

@@ -49,6 +49,7 @@ public class MockTestMovieController {
         MOVIE_EARNED.setMovieId(MOVIE_ID);
         MOVIE_EARNED.setMovieName("REST_MOVIE");
         MOVIE_EARNED.setEarned(100500);
+        MOVIE_EARNED.setMovieActive(true);
 
         MOVIE.setMovieId(MOVIE_ID);
         MOVIE.setMovieName("REST_MOVIE");
@@ -83,7 +84,8 @@ public class MockTestMovieController {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].movieId", Matchers.is(1)))
                 .andExpect(jsonPath("$[0].movieName", Matchers.is("REST_MOVIE")))
-                .andExpect(jsonPath("$[0].earned", Matchers.is(100500)));
+                .andExpect(jsonPath("$[0].earned", Matchers.is(100500)))
+                .andExpect(jsonPath("$[0].movieActive", Matchers.is(true)));
     }
 
 
