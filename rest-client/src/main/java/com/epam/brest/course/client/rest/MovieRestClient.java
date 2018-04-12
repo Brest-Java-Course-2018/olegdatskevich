@@ -12,13 +12,30 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Rest client for MOVIE.
+ */
 public class MovieRestClient implements MovieService {
 
+    /**
+     * Logger for MovieRestClient.
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * URL for MOVIES.
+     */
     private String url;
+    /**
+     * For interaction with REST module.
+     */
     private RestTemplate restTemplate;
 
+    /**
+     * Constructor of MovieRestClient
+     * @param url - url request.
+     * @param restTemplate - REST Template
+     */
     public MovieRestClient(final String url, final RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
@@ -26,7 +43,8 @@ public class MovieRestClient implements MovieService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Collection<Movie> getMovies() throws ServerDataAccessException  {
+    public final Collection<Movie> getMovies()
+            throws ServerDataAccessException  {
         ResponseEntity<List> responseEntity
                 = restTemplate.getForEntity(url, List.class);
         List<Movie> movies = (List<Movie>)responseEntity.getBody();
@@ -35,7 +53,8 @@ public class MovieRestClient implements MovieService {
     }
 
     @Override
-    public Movie getMovieById(int movieId) throws ServerDataAccessException {
+    public final Movie getMovieById(final int movieId)
+            throws ServerDataAccessException {
         ResponseEntity<Movie> responseEntity = restTemplate
                 .getForEntity(url + "/" + movieId, Movie.class);
         Movie movie = responseEntity.getBody();
@@ -45,7 +64,7 @@ public class MovieRestClient implements MovieService {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Collection<MovieEarned> moviesEarned()
+    public final Collection<MovieEarned> moviesEarned()
             throws ServerDataAccessException {
         ResponseEntity<List> responseEntity
                 = restTemplate.getForEntity(url, List.class);
@@ -56,7 +75,8 @@ public class MovieRestClient implements MovieService {
     }
 
     @Override
-    public Movie addMovie(Movie movie) throws ServerDataAccessException {
+    public final Movie addMovie(final Movie movie)
+            throws ServerDataAccessException {
         ResponseEntity<Movie> responseEntity
                 = restTemplate.postForEntity(url, movie, Movie.class);
         Movie result = (Movie)responseEntity.getBody();
@@ -65,13 +85,15 @@ public class MovieRestClient implements MovieService {
     }
 
     @Override
-    public void updateMovie(Movie movie) throws ServerDataAccessException {
+    public final  void updateMovie(final Movie movie)
+            throws ServerDataAccessException {
         LOGGER.debug("REST-client updateMovie({})", movie);
         restTemplate.put(url, movie);
     }
 
     @Override
-    public void deleteMovie(int movieId) throws ServerDataAccessException {
+    public final void deleteMovie(final int movieId)
+            throws ServerDataAccessException {
         LOGGER.debug("REST-client deleteMovie({})", movieId);
         restTemplate.put(url + "/" + movieId, movieId);
         //restTemplate.put(url + "/{}", movieId);

@@ -93,7 +93,6 @@ public class TestMovieDaoImpl {
                 true));
         newMovie.setMovieName("NEW" + newMovie.getMovieName());
         newMovie.setMovieDescription("NEW" + newMovie.getMovieDescription());
-        newMovie.setMovieActive(!newMovie.isMovieActive());
         LOGGER.debug("testUpdateMovie({})", newMovie);
         int updatedMovieId = newMovie.getMovieId();
         movieDao.updateMovie(newMovie);
@@ -101,7 +100,8 @@ public class TestMovieDaoImpl {
                 movieDao.getMovieById(updatedMovieId).getMovieName());
         assertEquals(newMovie.getMovieDescription(),
                 movieDao.getMovieById(updatedMovieId).getMovieDescription());
-        assertFalse(movieDao.getMovieById(updatedMovieId).isMovieActive());
+        assertEquals(movieDao.getMovieById(updatedMovieId).isMovieActive(),
+                newMovie.isMovieActive());
     }
 
     @Test

@@ -34,27 +34,27 @@ public class SeanceDaoImpl implements SeanceDao {
     /**
      * Column seanceId in seance table DB.
      */
-    private static final String Seance_ID = "seanceId";
+    private static final String SEANCE_ID = "seanceId";
     /**
      * Column seanceDate in seance table DB.
      */
-    private static final String Seance_DATE = "seanceDate";
+    private static final String SEANCE_DATE = "seanceDate";
     /**
      * Column seanceTime in seance table DB.
      */
-    private static final String Seance_TIME = "seanceTime";
+    private static final String SEANCE_TIME = "seanceTime";
     /**
      * Column seanceCost in seance table DB.
      */
-    private static final String Seance_COST = "seanceCost";
+    private static final String SEANCE_COST = "seanceCost";
     /**
      * Column seanceSold in seance table DB.
      */
-    private static final String Seance_SOLD = "seanceSold";
+    private static final String SEANCE_SOLD = "seanceSold";
     /**
      * Column seanceActive in seance table DB.
      */
-    private static final String Seance_ACTIVE = "seanceActive";
+    private static final String SEANCE_ACTIVE = "seanceActive";
     /**
      * Column movieId in seance table DB.
      */
@@ -122,7 +122,7 @@ public class SeanceDaoImpl implements SeanceDao {
     public final Seance getSeanceById(final int seanceId) {
         LOGGER.debug("getSeanceById()");
         SqlParameterSource namedParameters
-                = new MapSqlParameterSource(Seance_ID, seanceId);
+                = new MapSqlParameterSource(SEANCE_ID, seanceId);
         Seance seance = namedParameterJdbcTemplate.queryForObject(
                 seanceSelectById,
                 namedParameters,
@@ -133,11 +133,11 @@ public class SeanceDaoImpl implements SeanceDao {
     @Override
     public final Seance addSeance(final Seance seance) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource()
-                .addValue(Seance_DATE, seance.getSeanceDate())
-                .addValue(Seance_TIME, seance.getSeanceTime())
-                .addValue(Seance_COST, seance.getSeanceCost())
-                .addValue(Seance_SOLD, seance.getSeanceSold())
-                .addValue(Seance_ACTIVE, seance.isSeanceActive())
+                .addValue(SEANCE_DATE, seance.getSeanceDate())
+                .addValue(SEANCE_TIME, seance.getSeanceTime())
+                .addValue(SEANCE_COST, seance.getSeanceCost())
+                .addValue(SEANCE_SOLD, seance.getSeanceSold())
+                .addValue(SEANCE_ACTIVE, seance.isSeanceActive())
                 .addValue(MOVIE_ID, seance.getMovieId());
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(insert, namedParameters,

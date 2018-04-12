@@ -19,11 +19,22 @@ import java.util.Collection;
 @Transactional
 public class MovieServiceImpl implements MovieService {
 
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private MovieDao movieDao;
 
+    /**
+     *
+     * @param movieDao
+     * @throws DataAccessException
+     */
     public final void setMovieDao(final MovieDao movieDao)
             throws DataAccessException {
         this.movieDao = movieDao;

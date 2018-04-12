@@ -19,12 +19,22 @@ import java.util.Date;
 @Transactional
 public class SeanceServiceImpl implements SeanceService {
 
+    /**
+     *
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private SeanceDao seanceDao;
 
-    public void setSeanceDao(SeanceDao seanceDao) {
+    /**
+     *
+     * @param seanceDao
+     */
+    public final void setSeanceDao(final SeanceDao seanceDao) {
         this.seanceDao = seanceDao;
     }
 

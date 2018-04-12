@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.Collection;
 
+/**
+ *
+ */
 @Controller
 public class SeanceController {
 
@@ -25,12 +28,23 @@ public class SeanceController {
      */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private MovieService movieService;
 
+    /**
+     *
+     */
     @Autowired
     private SeanceService seanceService;
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/seances")
     public final String getSeances(final Model model) {
         LOGGER.debug("getSeancesWebApp({})", model);
@@ -41,6 +55,11 @@ public class SeanceController {
         return "seances";
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/seance")
     public final String addSeance(final Model model) {
         LOGGER.debug("getAddSeance({})", model);
@@ -51,6 +70,13 @@ public class SeanceController {
         return "seance";
     }
 
+    /**
+     *
+     * @param seance
+     * @param result
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/seance")
     public final String addSeance(@Valid final Seance seance,
                                    final BindingResult result,
@@ -67,6 +93,12 @@ public class SeanceController {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/seance/{id}")
     public final String updateSeance(@PathVariable final int id,
                                       final Model model) {
@@ -79,6 +111,13 @@ public class SeanceController {
         return "seance";
     }
 
+    /**
+     *
+     * @param seance
+     * @param result
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/seance/{id}")
     public final String updateSeance(@Valid final Seance seance,
                                       final BindingResult result,
@@ -95,6 +134,11 @@ public class SeanceController {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GetMapping(value = "/seance/{id}/delete")
     public final String deleteSeance(@PathVariable final int id) {
         LOGGER.debug("deleteSeance({})", id);

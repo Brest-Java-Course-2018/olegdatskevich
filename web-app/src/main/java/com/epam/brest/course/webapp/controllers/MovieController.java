@@ -24,9 +24,17 @@ public class MovieController {
      */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     *
+     */
     @Autowired
     private MovieService movieService;
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/movies")
     public final String getMovies(final Model model) {
         LOGGER.debug("getMovies({})", model);
@@ -35,6 +43,11 @@ public class MovieController {
         return "movies";
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/movie")
     public final String addMovie(final Model model) {
         LOGGER.debug("GetAddMovie({})", model);
@@ -44,6 +57,13 @@ public class MovieController {
 
     }
 
+    /**
+     *
+     * @param movie
+     * @param result
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/movie")
     public final String addMovie(@Valid final Movie movie,
                                     final BindingResult result,
@@ -58,6 +78,12 @@ public class MovieController {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping(value = "/movie/{id}")
     public final String updateMovie(
             @PathVariable final int id, final Model model) {
@@ -69,6 +95,13 @@ public class MovieController {
 
     }
 
+    /**
+     *
+     * @param movie
+     * @param result
+     * @param model
+     * @return
+     */
     @PostMapping(value = "/movie/{id}")
     public final String updateMovie(@Valid final Movie movie,
                                     final BindingResult result,
@@ -83,6 +116,11 @@ public class MovieController {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GetMapping(value = "/movie/{id}/delete")
     public final String deleteMovie(@PathVariable final int id) {
         LOGGER.debug("deleteMovie({})", id);

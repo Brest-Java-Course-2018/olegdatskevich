@@ -108,7 +108,7 @@
                             <div class="form-group">
                                 <label for="seanceDate">Date</label>
                                 <input type="date"
-                                       th:field="*{seanceDate}"
+                                       th:field="*{{seanceDate}}"
                                        th:class="${#fields.hasErrors('seanceDate')} ? 'form-control is-invalid' : 'form-control'"
                                        class="form-control"
                                        placeholder="Input seance date"

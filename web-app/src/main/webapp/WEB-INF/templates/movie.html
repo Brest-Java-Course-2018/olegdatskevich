@@ -139,7 +139,14 @@
                                      th:errors="*{movieDescription}">[ERRORS]
                                 </div>
                             </div>
-                            <div class="form-group form-check">
+                            <h4>
+                            <span th:class="${movie.movieActive} ? 'badge badge-success' : 'badge badge-danger'"
+                                  class="text-uppercase mr-auto"
+                                  th:text="${movie.movieActive} ? #{active} : #{removed}">
+                                ACTIVE/REMOVED
+                            </span>
+                            </h4>
+                            <!--<div class="form-group form-check">
                                 <input th:field="*{movieActive}"
                                        th:if="${movieActive} ? 'checked' : ''"
                                        type="checkbox"
@@ -148,7 +155,7 @@
                                 <label class="form-check-label" for="movieActivity">
                                     Active movie
                                 </label>
-                            </div>
+                            </div>-->
                         </form>
                     </div>
                 </div>
