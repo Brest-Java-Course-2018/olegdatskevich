@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/Brest-Java-Course-2018/olegdatskevich/badge.svg?branch=master)](https://coveralls.io/github/Brest-Java-Course-2018/olegdatskevich?branch=master)  
 
 ## Description    
-Web application for cinema. The application is designed to work with movies and sessions.  
+Web application for cinema. The application is designed to work with movies and seances.  
 ## Used technologies
 * JDK 1.8  
 * Spring 4 Framework  

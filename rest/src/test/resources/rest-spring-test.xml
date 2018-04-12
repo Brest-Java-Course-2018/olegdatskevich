@@ -17,12 +17,12 @@
         <property name="movieService" ref="movieService"/>
     </bean>
 
-    <bean id="sessionService" class="org.easymock.EasyMock" factory-method="createMock">
-        <constructor-arg value="com.epam.brest.course.service.SessionService"/>
+    <bean id="seanceService" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.course.service.SeanceService"/>
     </bean>
 
-    <bean id="sessionRestController" class="com.epam.brest.course.rest.SessionRestController">
-        <property name="sessionService" ref="sessionService"/>
+    <bean id="seanceRestController" class="com.epam.brest.course.rest.SeanceRestController">
+        <property name="seanceService" ref="seanceService"/>
     </bean>
 
 </beans>

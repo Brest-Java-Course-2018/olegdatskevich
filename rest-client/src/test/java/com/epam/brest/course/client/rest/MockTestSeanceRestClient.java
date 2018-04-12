@@ -1,7 +1,7 @@
 package com.epam.brest.course.client.rest;
 
-import com.epam.brest.course.model.dao.Session;
-import com.epam.brest.course.service.SessionService;
+import com.epam.brest.course.model.dao.Seance;
+import com.epam.brest.course.service.SeanceService;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,35 +28,35 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-context-test.xml"})
-public class MockTestSessionRestClient {
+public class MockTestSeanceRestClient {
 
     @Autowired
-    private SessionService mockSessionService;
+    private SeanceService mockSeanceService;
 
     @Autowired
     private RestTemplate mockRestTemplate;
 
-    private static final int SESSION_ID = 1;
-    private static final Session SESSION_1 = new Session();
-    private static final Session SESSION_2 = new Session();
+    private static final int Seance_ID = 1;
+    private static final Seance Seance_1 = new Seance();
+    private static final Seance Seance_2 = new Seance();
 
     @BeforeClass
     public static void beforeClass() throws ParseException {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
-        SESSION_1.setSessionId(1);
-        SESSION_1.setSessionDate(formatDate.parse("2018-05-01"));
-        SESSION_1.setSessionTime("13:00:00");
-        SESSION_1.setSessionCost(5);
-        SESSION_1.setSessionSold(25);
-        SESSION_1.setSessionActive(true);
-        SESSION_1.setMovieId(1);
-        SESSION_2.setSessionId(1);
-        SESSION_2.setSessionDate(formatDate.parse("2018-05-02"));
-        SESSION_2.setSessionTime("13:00:00");
-        SESSION_2.setSessionCost(6);
-        SESSION_2.setSessionSold(26);
-        SESSION_2.setSessionActive(true);
-        SESSION_2.setMovieId(2);
+        Seance_1.setSeanceId(1);
+        Seance_1.setSeanceDate(formatDate.parse("2018-05-01"));
+        Seance_1.setSeanceTime("13:00:00");
+        Seance_1.setSeanceCost(5);
+        Seance_1.setSeanceSold(25);
+        Seance_1.setSeanceActive(true);
+        Seance_1.setMovieId(1);
+        Seance_2.setSeanceId(1);
+        Seance_2.setSeanceDate(formatDate.parse("2018-05-02"));
+        Seance_2.setSeanceTime("13:00:00");
+        Seance_2.setSeanceCost(6);
+        Seance_2.setSeanceSold(26);
+        Seance_2.setSeanceActive(true);
+        Seance_2.setMovieId(2);
     }
 
     @After
@@ -66,68 +66,68 @@ public class MockTestSessionRestClient {
     }
 
     @Test
-    public void mockTestSessionsClient() {
-        List<Session> sessions = Arrays.asList(SESSION_1, SESSION_2);
-        ResponseEntity entity = new ResponseEntity<>(sessions, HttpStatus.OK);
+    public void mockTestSeancesClient() {
+        List<Seance> seances = Arrays.asList(Seance_1, Seance_2);
+        ResponseEntity entity = new ResponseEntity<>(seances, HttpStatus.OK);
         expect(mockRestTemplate.getForEntity(anyString(), anyObject()))
                 .andReturn(entity);
         replay(mockRestTemplate);
 
-        Collection<Session> results = mockSessionService.getSessions();
+        Collection<Seance> results = mockSeanceService.getSeances();
         assertNotNull(results);
         assertEquals(2, results.size());
     }
 
     @Test
     public void mockTestFilterByDateClient() {
-        List<Session> sessionsByDate = Arrays.asList(SESSION_1, SESSION_2);
-        ResponseEntity entity = new ResponseEntity<>(sessionsByDate, HttpStatus.OK);
+        List<Seance> seancesByDate = Arrays.asList(Seance_1, Seance_2);
+        ResponseEntity entity = new ResponseEntity<>(seancesByDate, HttpStatus.OK);
         expect(mockRestTemplate.getForEntity(anyString(), anyObject())).andReturn(entity);
         replay(mockRestTemplate);
 
-        Collection<Session> results = mockSessionService.filterSessionByDate(
-                SESSION_1.getSessionDate(), SESSION_2.getSessionDate());
+        Collection<Seance> results = mockSeanceService.filterSeanceByDate(
+                Seance_1.getSeanceDate(), Seance_2.getSeanceDate());
         assertNotNull(results);
         assertEquals(2, results.size());
     }
 
     @Test
-    public void mockTestSessionByIdClient() {
-        ResponseEntity entity = new ResponseEntity<>(SESSION_1, HttpStatus.FOUND);
+    public void mockTestSeanceByIdClient() {
+        ResponseEntity entity = new ResponseEntity<>(Seance_1, HttpStatus.FOUND);
         expect(mockRestTemplate.getForEntity(anyString(), anyObject()))
                 .andReturn(entity);
         replay(mockRestTemplate);
 
-        Session result = mockSessionService.getSessionById(SESSION_1.getSessionId());
+        Seance result = mockSeanceService.getSeanceById(Seance_1.getSeanceId());
         assertNotNull(result);
-        assertEquals(SESSION_1, result);
+        assertEquals(Seance_1, result);
     }
 
     @Test
-    public void mockTestAddSessionClient() {
-        ResponseEntity entity = new ResponseEntity<>(SESSION_1, HttpStatus.OK);
+    public void mockTestAddSeanceClient() {
+        ResponseEntity entity = new ResponseEntity<>(Seance_1, HttpStatus.OK);
         expect(mockRestTemplate.postForEntity(anyString(), anyObject(), anyObject()))
                 .andReturn(entity);
         replay(mockRestTemplate);
 
-        Session result = mockSessionService.addSession(SESSION_1);
+        Seance result = mockSeanceService.addSeance(Seance_1);
         assertNotNull(result);
-        assertEquals(SESSION_1, result);
+        assertEquals(Seance_1, result);
     }
 
     @Test
-    public void mockTestUpdateSessionClient() {
+    public void mockTestUpdateSeanceClient() {
         mockRestTemplate.put(anyString(), anyObject());
         expectLastCall();
         replay(mockRestTemplate);
-        mockSessionService.updateSession(SESSION_1);
+        mockSeanceService.updateSeance(Seance_1);
     }
 
     @Test
-    public void mockTestDeleteSessionClient() {
+    public void mockTestDeleteSeanceClient() {
         mockRestTemplate.put(anyString(), anyObject());
         expectLastCall();
         replay(mockRestTemplate);
-        mockSessionService.deleteSession(SESSION_ID);
+        mockSeanceService.deleteSeance(Seance_ID);
     }
 }

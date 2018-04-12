@@ -1,9 +1,9 @@
 package com.epam.brest.course.webapp.controllers;
 
 import com.epam.brest.course.model.dao.Movie;
-import com.epam.brest.course.model.dao.Session;
+import com.epam.brest.course.model.dao.Seance;
 import com.epam.brest.course.service.MovieService;
-import com.epam.brest.course.service.SessionService;
+import com.epam.brest.course.service.SeanceService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +18,10 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @Controller
-public class SessionController {
+public class SeanceController {
 
     /**
-     * Logger for Session controller.
+     * Logger for Seance controller.
      */
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -29,76 +29,76 @@ public class SessionController {
     private MovieService movieService;
 
     @Autowired
-    private SessionService sessionService;
+    private SeanceService seanceService;
 
-    @GetMapping(value = "/sessions")
-    public final String getSessions(final Model model) {
-        LOGGER.debug("getSessionsWebApp({})", model);
+    @GetMapping(value = "/seances")
+    public final String getSeances(final Model model) {
+        LOGGER.debug("getSeancesWebApp({})", model);
         Collection<Movie> movies = movieService.getMovies();
-        Collection<Session> sessions = sessionService.getSessions();
+        Collection<Seance> seances = seanceService.getSeances();
         model.addAttribute("movies", movies);
-        model.addAttribute("sessions", sessions);
-        return "sessions";
+        model.addAttribute("seances", seances);
+        return "seances";
     }
 
-    @GetMapping(value = "/session")
-    public final String addSession(final Model model) {
-        LOGGER.debug("getAddSession({})", model);
+    @GetMapping(value = "/seance")
+    public final String addSeance(final Model model) {
+        LOGGER.debug("getAddSeance({})", model);
         Collection<Movie> movies = movieService.getMovies();
         model.addAttribute("movies", movies);
-        model.addAttribute("session", new Session());
+        model.addAttribute("seance", new Seance());
         model.addAttribute("isNew", true);
-        return "session";
+        return "seance";
     }
 
-    @PostMapping(value = "/session")
-    public final String addSession(@Valid final Session session,
+    @PostMapping(value = "/seance")
+    public final String addSeance(@Valid final Seance seance,
                                    final BindingResult result,
                                    final Model model) {
-        LOGGER.debug("postAddSession({}, {})", session, result);
+        LOGGER.debug("postAddSeance({}, {})", seance, result);
         if (result.hasErrors()) {
             Collection<Movie> movies = movieService.getMovies();
             model.addAttribute("movies", movies);
             model.addAttribute("isNew", true);
-            return "session";
+            return "seance";
         } else {
-            sessionService.addSession(session);
-            return "redirect:/sessions";
+            seanceService.addSeance(seance);
+            return "redirect:/seances";
         }
     }
 
-    @GetMapping(value = "/session/{id}")
-    public final String updateSession(@PathVariable final int id,
+    @GetMapping(value = "/seance/{id}")
+    public final String updateSeance(@PathVariable final int id,
                                       final Model model) {
-        LOGGER.debug("getUpdateSession({})", id);
-        Session session = sessionService.getSessionById(id);
+        LOGGER.debug("getUpdateSeance({})", id);
+        Seance seance = seanceService.getSeanceById(id);
         Collection<Movie> movies = movieService.getMovies();
         model.addAttribute("movies", movies);
-        model.addAttribute("session", session);
+        model.addAttribute("seance", seance);
         model.addAttribute("isNew", false);
-        return "session";
+        return "seance";
     }
 
-    @PostMapping(value = "/session/{id}")
-    public final String updateSession(@Valid final Session session,
+    @PostMapping(value = "/seance/{id}")
+    public final String updateSeance(@Valid final Seance seance,
                                       final BindingResult result,
                                       final Model model) {
-        LOGGER.debug("postUpdateSession({}, {})", session, result);
+        LOGGER.debug("postUpdateSeance({}, {})", seance, result);
         if (result.hasErrors()) {
             Collection<Movie> movies = movieService.getMovies();
             model.addAttribute("movies", movies);
             model.addAttribute("isNew", false);
-            return "session";
+            return "seance";
         } else {
-            sessionService.updateSession(session);
-            return "redirect:/sessions";
+            seanceService.updateSeance(seance);
+            return "redirect:/seances";
         }
     }
 
-    @GetMapping(value = "/session/{id}/delete")
-    public final String deleteSession(@PathVariable final int id) {
-        LOGGER.debug("deleteSession({})", id);
-        sessionService.deleteSession(id);
-        return "redirect:/sessions";
+    @GetMapping(value = "/seance/{id}/delete")
+    public final String deleteSeance(@PathVariable final int id) {
+        LOGGER.debug("deleteSeance({})", id);
+        seanceService.deleteSeance(id);
+        return "redirect:/seances";
     }
 }

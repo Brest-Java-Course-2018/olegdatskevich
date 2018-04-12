@@ -13,7 +13,7 @@
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="sessionDao" class="com.epam.brest.course.dao.SessionDaoImpl">
+    <bean id="seanceDao" class="com.epam.brest.course.dao.SeanceDaoImpl">
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 

@@ -1,11 +1,23 @@
 package com.epam.brest.course.model.dao;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 /**
  * POJO Movie.
  */
 public class Movie {
 
     private int movieId;
+
+    @NotEmpty(message = "Movie title can not be empty.")
+    @Size (min = 2, max = 50, message =
+            "Movie title must be between 2 and 50 characters.")
     private String movieName;
+
+    @NotEmpty(message = "Movie description can not be empty.")
+    @Size (min = 2, max = 50, message =
+            "Movie description must be between 2 and 50 characters.")
     private String movieDescription;
     private boolean movieActive;
 

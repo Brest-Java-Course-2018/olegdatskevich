@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Sessions</title>
+    <title>Seances</title>
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
           th:href="@{/resources/static/css/font-awesome.min.css}">
@@ -34,25 +34,51 @@
                    href="movies.html"
                    th:href="@{/movies}">Movies</a>
                 <a class="nav-item nav-link active"
-                   href="sessions.html"
-                   th:href="@{/sessions}">Sessions</a>
+                   href="seances.html"
+                   th:href="@{/seances}">Seances</a>
             </nav>
         </div>
         <div>
-            <a href="sessions?lang=en" class="badge badge-light">en</a>
-            <a href="sessions?lang=ru" class="badge badge-light">ru</a>
+            <a href="seances?lang=en" class="badge badge-light">en</a>
+            <a href="seances?lang=ru" class="badge badge-light">ru</a>
         </div>
     </nav>
+
 <header>
     <nav class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
         <span class="navbar-brand text-uppercase mr-auto">
-            Sessions
+            Seances
         </span>
+
+        <span class="mr-auto navbar-nav">
+            <form class="form">
+                <div class="form-group row">
+                    <div class="form-group col input-group-prepend">
+                        <span class="input-group-text">From</span>
+                        <input type="date">
+                    </div>
+                    <div class="form-group col input-group-prepend">
+                        <span class="input-group-text">To</span>
+                        <input type="date">
+                    </div>
+                    <a title="Filter"
+                       href="seances.html"
+                       th:href="@{/seances}"
+                       class="btn btn-light"
+                       data-toggle="tooltip"
+                       data-placement="bottom">
+                        <i class="fa fa-filter" style="font-size:16px"></i>
+                            Filter
+                    </a>
+                </div>
+            </form>
+        </span>
+
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a title="Add session"
-                   href="session.html"
-                   th:href="@{/session}"
+                <a title="Add seance"
+                   href="seance.html"
+                   th:href="@{/seance}"
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom">
@@ -62,13 +88,14 @@
                 </a>
             </li>
         </ul>
+
     </nav>
 </header>
-<section id="sessions">
+<section id="seances">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div class="card" th:if="not ${sessions.isEmpty()}">
+                <div class="card" th:if="not ${seances.isEmpty()}">
                     <div class="card-body">
                         <table class="mb-2 table table-striped">
                             <thead class="thead-inverse">
@@ -78,36 +105,39 @@
                                 <th>Film</th>
                                 <th>Cost</th>
                                 <th>Sold tickets</th>
+                                <th>Activity</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="session : ${sessions}">
-                                <td th:text="${session.sessionDate}">01.05.2018</td>
-                                <td th:text="${session.sessionTime}">12:00</td>
+                            <tr th:each="seance : ${seances}">
+                                <td th:text="${#dates.format(seance.seanceDate, 'dd-MMM-yyyy')}">01.05.2018</td>
+                                <td th:text="${#dates.format(seance.seanceDate, 'HH:mm')}">01.05.2018</td>
+                                <!--<td th:text="${seance.seanceTime}">12:00</td>-->
                                 <td th:each="movie : ${movies}"
-                                    th:if="${session.movieId == movie.movieId}"
+                                    th:if="${seance.movieId == movie.movieId}"
                                         th:text="${movie.movieName}">
                                     Terminator
                                 </td>
-                                <td th:text="${session.sessionCost}">5</td>
-                                <td th:text="${session.sessionSold}">55</td>
+                                <td th:text="${seance.seanceCost}">5</td>
+                                <td th:text="${seance.seanceSold}">55</td>
+                                <td th:text="${seance.seanceActive} ? '' : 'Canceled'">Active/Canceled</td>
                                 <td class="text-right">
-                                    <a href="session.html"
-                                       th:href="@{|/session/${session.sessionId}|}"
+                                    <a href="seance.html"
+                                       th:href="@{|/seance/${seance.seanceId}|}"
                                        class="btn-outline-secondary btn-lg"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="Edit session">
+                                       title="Edit seance">
                                         <i class="fa fa-edit" style="font-size:24px"></i>
                                     </a>
                                     <span data-toggle="modal"
                                           data-target="#confirmRemoveModal"
-                                          th:attr="data-id=${session.sessionId}, data-name=${session.sessionTime}">
+                                          th:attr="data-id=${seance.seanceId}, data-name=${seance.seanceTime}">
                                         <a href="#" class="btn-outline-secondary btn-lg"
                                            data-toggle="tooltip"
                                            data-placement="top"
-                                           title="Remove session">
+                                           title="Remove seance">
                                             <i class="fa fa-trash-o" style="font-size:24px"></i>
                                         </a>
                                     </span>
@@ -117,7 +147,7 @@
                         </table>
                     </div>
                     <div class="card alert alert-warning"
-                         th:if="${sessions.isEmpty()}">
+                         th:if="${seances.isEmpty()}">
                         <h2>Nothing found</h2>
                     </div>
                 </div>
@@ -138,7 +168,7 @@
                 <div class="modal-header alert alert-danger">
                     <h5 class="modal-title "
                         id="exampleModalLongTitle">
-                        Deleting sessions
+                        Deleting seances
                     </h5>
                     <button type="button"
                             class="close"
@@ -148,7 +178,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Are you sure to remove this session?
+                    Are you sure to remove this seance?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -173,7 +203,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    You can not delete this session.
+                    You can not delete this seance.
                     _You do not have rights to this._
                 </div>
                 <div class="modal-footer">
@@ -194,8 +224,8 @@
     })
     $('#confirmRemoveModal').on('show.bs.modal', function (event) {
        var target = $(event.relatedTarget)
-       $(this).find('.modal-body').text('Please confirm delete session: "' + target.data('name') + '"')
-       document.getElementById('deleteUrl').href = '/session/' + target.data('id') + '/delete';
+       $(this).find('.modal-body').text('Please confirm delete seance: "' + target.data('name') + '"')
+       document.getElementById('deleteUrl').href = '/seance/' + target.data('id') + '/delete';
    })
 </script>
 </body>

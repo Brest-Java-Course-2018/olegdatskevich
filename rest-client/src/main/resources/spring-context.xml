@@ -40,8 +40,8 @@
         <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
-    <bean id="sessionService" class="com.epam.brest.course.client.rest.SessionRestClient">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.sessions}"/>
+    <bean id="seanceService" class="com.epam.brest.course.client.rest.SeanceRestClient">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.seances}"/>
         <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 

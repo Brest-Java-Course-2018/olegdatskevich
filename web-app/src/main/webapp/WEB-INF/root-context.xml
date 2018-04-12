@@ -99,7 +99,7 @@
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="sessionDao" class="com.epam.brest.course.dao.SessionDaoImpl">
+    <bean id="seanceDao" class="com.epam.brest.course.dao.SeanceDaoImpl">
         <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
@@ -107,8 +107,8 @@
         <property name="movieDao" ref="movieDao"/>
     </bean>
 
-    <bean id="sessionService" class="com.epam.brest.course.service.SessionServiceImpl">
-        <property name="sessionDao" ref="sessionDao"/>
+    <bean id="seanceService" class="com.epam.brest.course.service.SeanceServiceImpl">
+        <property name="seanceDao" ref="seanceDao"/>
     </bean>
 
     <!--<bean id="movieService" class="com.epam.brest.course.client.rest.MovieRestClient">
