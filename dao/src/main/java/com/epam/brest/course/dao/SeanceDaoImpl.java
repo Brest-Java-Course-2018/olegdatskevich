@@ -40,10 +40,6 @@ public class SeanceDaoImpl implements SeanceDao {
      */
     private static final String SEANCE_DATE = "seanceDate";
     /**
-     * Column seanceTime in seance table DB.
-     */
-    private static final String SEANCE_TIME = "seanceTime";
-    /**
      * Column seanceCost in seance table DB.
      */
     private static final String SEANCE_COST = "seanceCost";
@@ -134,7 +130,6 @@ public class SeanceDaoImpl implements SeanceDao {
     public final Seance addSeance(final Seance seance) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource()
                 .addValue(SEANCE_DATE, seance.getSeanceDate())
-                .addValue(SEANCE_TIME, seance.getSeanceTime())
                 .addValue(SEANCE_COST, seance.getSeanceCost())
                 .addValue(SEANCE_SOLD, seance.getSeanceSold())
                 .addValue(SEANCE_ACTIVE, seance.isSeanceActive())

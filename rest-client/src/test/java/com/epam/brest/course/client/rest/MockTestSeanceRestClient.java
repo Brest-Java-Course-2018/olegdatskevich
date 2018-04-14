@@ -45,14 +45,13 @@ public class MockTestSeanceRestClient {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         Seance_1.setSeanceId(1);
         Seance_1.setSeanceDate(formatDate.parse("2018-05-01"));
-        Seance_1.setSeanceTime("13:00:00");
         Seance_1.setSeanceCost(5);
         Seance_1.setSeanceSold(25);
         Seance_1.setSeanceActive(true);
         Seance_1.setMovieId(1);
+
         Seance_2.setSeanceId(1);
         Seance_2.setSeanceDate(formatDate.parse("2018-05-02"));
-        Seance_2.setSeanceTime("13:00:00");
         Seance_2.setSeanceCost(6);
         Seance_2.setSeanceSold(26);
         Seance_2.setSeanceActive(true);

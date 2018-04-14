@@ -2,6 +2,7 @@ package com.epam.brest.course.webapp.controllers;
 
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dao.Seance;
+import com.epam.brest.course.model.dto.MovieEarned;
 import com.epam.brest.course.service.MovieService;
 import com.epam.brest.course.service.SeanceService;
 import org.apache.logging.log4j.LogManager;
@@ -48,7 +49,7 @@ public class SeanceController {
     @GetMapping(value = "/seances")
     public final String getSeances(final Model model) {
         LOGGER.debug("getSeancesWebApp({})", model);
-        Collection<Movie> movies = movieService.getMovies();
+        Collection<MovieEarned> movies = movieService.moviesEarned();
         Collection<Seance> seances = seanceService.getSeances();
         model.addAttribute("movies", movies);
         model.addAttribute("seances", seances);
@@ -90,6 +91,7 @@ public class SeanceController {
         if (result.hasErrors()) {
             Collection<Movie> movies = movieService.getMovies();
             model.addAttribute("movies", movies);
+            model.addAttribute("seance", seance);
             model.addAttribute("isNew", true);
             return "seance";
         } else {
@@ -130,6 +132,7 @@ public class SeanceController {
         LOGGER.debug("postUpdateSeance({}, {})", seance, result);
         if (result.hasErrors()) {
             Collection<Movie> movies = movieService.getMovies();
+            model.addAttribute("seance", seance);
             model.addAttribute("movies", movies);
             model.addAttribute("isNew", false);
             return "seance";

@@ -77,6 +77,11 @@
               th:text="${isNew} ? 'New seance' : 'Edit seance'">
             New seance / Edit seance
         </span>
+        <span th:if="${not isNew}"
+                class="navbar-brand text-uppercase mr-auto"
+              th:text="${#dates.format(seance.seanceDate, 'dd-MMM-yyyy HH:mm')}">
+            DATE TIME
+        </span>
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a href="seances.html"
@@ -115,24 +120,36 @@
                                    name="field_seanceId"
                                    type="hidden"/>
 
-                            <div class="input-append date form_datetime">
+                            <div class="form-group row">
+                                <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                                <div class="col-10">
+                                    <input class="form-control"
+                                           th:field="*{seanceDate}"
+                                           type="date"
+                                           value="2011-08-19"
+                                           id="example-date-input">
+                                </div>
+                            </div>
+
+                            <div th:if="${isNew}"
+                                 class="input-append date form_datetime">
                                 <label>Date Time</label>
-                                <div>
                                     <span class="add-on">
                                         <i class="fa fa-calendar"></i>
                                     </span>
-                                    <input th:field="*{seanceDate}"
-                                           th:class="${#fields.hasErrors('seanceDate')} ? 'form-control is-invalid' : 'form-control'"
-                                           size="16"
-                                           type="text"
-                                           value=""
-                                           readonly>
-                                </div>
-                                <div th:if="${#fields.hasErrors('seanceDate')}"
-                                     class="invalid-feedback"
-                                     th:errors="*{seanceDate}">
-                                    [ERRORS]
-                                </div>
+                                    <div>
+                                        <input th:field="*{seanceDate}"
+                                               th:class="${#fields.hasErrors('seanceDate')} ? 'form-control is-invalid' : 'form-control'"
+                                               size="16"
+                                               type="text"
+                                               value=""
+                                               readonly>
+                                    </div>
+                                    <div th:if="${#fields.hasErrors('seanceDate')}"
+                                         class="invalid-feedback"
+                                         th:errors="*{seanceDate}">
+                                        [ERRORS]
+                                    </div>
                             </div>
 
                             <div class="form-group">
@@ -171,13 +188,17 @@
                                     [ERRORS]
                                 </div>
                             </div>
-                            <h4>
-                                <span th:class="${seance.seanceActive} ? 'badge badge-success' : 'badge badge-danger'"
-                                      class="text-uppercase mr-auto"
-                                      th:text="${seance.seanceActive} ? #{active} : #{canceled}">
-                                      ACTIVE/REMOVED
-                                </span>
-                            </h4>
+
+                            <div th:if="${not isNew}">
+                                <h4>
+                                    <span th:class="${seance.seanceActive} ? 'badge badge-success' : 'badge badge-danger'"
+                                          class="text-uppercase mr-auto"
+                                          th:text="${seance.seanceActive} ? #{active} : #{canceled}">
+                                        ACTIVE/REMOVED
+                                    </span>
+                                </h4>
+                            </div>
+
                         </form>
 
                     </div>

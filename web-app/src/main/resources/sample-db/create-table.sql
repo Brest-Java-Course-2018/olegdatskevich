@@ -10,14 +10,13 @@ CREATE TABLE movie (
 DROP TABLE IF EXISTS seance;
 CREATE TABLE seance (
  seanceId INT NOT NULL AUTO_INCREMENT,
- seanceDate DATE NOT NULL,
- seanceTime VARCHAR(10) NOT NULL,
+ seanceDate TIMESTAMP NOT NULL,
  seanceCost INT NOT NULL,
- seanceSold INT NOT NULL,
+ seanceSold INT NULL,
  seanceActive BOOLEAN,
  movieId INT NOT NULL,
  PRIMARY KEY (seanceId),
- UNIQUE (seanceDate, seanceTime),
+ UNIQUE (seanceDate),
  FOREIGN KEY (movieId) REFERENCES movie (movieId)
  ON DELETE NO ACTION
  ON UPDATE NO ACTION

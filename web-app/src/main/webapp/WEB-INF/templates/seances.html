@@ -127,8 +127,7 @@
                             <tbody>
                             <tr th:each="seance : ${seances}">
                                 <td th:text="${#dates.format(seance.seanceDate, 'dd-MMM-yyyy')}">01.05.2018</td>
-                                <td th:text="${#dates.format(seance.seanceDate, 'HH:mm')}">01.05.2018</td>
-                                <!--<td th:text="${seance.seanceTime}">12:00</td>-->
+                                <td th:text="${#dates.format(seance.seanceDate, 'HH:mm')}">12:00</td>
                                 <td th:each="movie : ${movies}"
                                     th:if="${seance.movieId == movie.movieId}"
                                         th:text="${movie.movieName}">
@@ -140,7 +139,7 @@
                                 <td class="text-right">
                                     <a href="seance.html"
                                        th:href="@{|/seance/${seance.seanceId}|}"
-                                       class="btn btn-outline-dark btn-md"
+                                       class="btn btn-outline-dark btn-sm"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        title="Edit seance">
@@ -148,9 +147,9 @@
                                     </a>
                                     <span data-toggle="modal"
                                           data-target="#confirmRemoveModal"
-                                          th:attr="data-id=${seance.seanceId}, data-date=${seance.seanceDate}, data-time=${seance.seanceTime}">
+                                          th:attr="data-id=${seance.seanceId}, data-date=${seance.seanceDate}">
                                         <button th:if="${seance.seanceActive} ? 'disabled' : ''"
-                                                class="btn btn-outline-dark btn-md"
+                                                class="btn btn-outline-dark btn-sm"
                                            data-toggle="tooltip"
                                            data-placement="top"
                                            title="Remove seance">
@@ -248,7 +247,7 @@
     })
     $('#confirmRemoveModal').on('show.bs.modal', function (event) {
        var target = $(event.relatedTarget)
-       $(this).find('.modal-body').text('Please confirm delete seance: "' + target.data('date') + ' - ' + target.data('time') + '"')
+       $(this).find('.modal-body').text('Please confirm delete seance: "' + target.data('date') + '"')
        document.getElementById('deleteUrl').href = '/seance/' + target.data('id') + '/delete';
    })
 </script>

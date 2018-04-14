@@ -36,7 +36,6 @@ public class MockTestSeanceService {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         Date date = formatDate.parse("2018-05-01");
         Seance.setSeanceDate(date);
-        Seance.setSeanceTime("09:00:00");
         Seance.setSeanceCost(5);
         Seance.setSeanceSold(25);
         Seance.setSeanceActive(true);

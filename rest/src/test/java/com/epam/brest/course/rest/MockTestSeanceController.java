@@ -54,7 +54,6 @@ public class MockTestSeanceController {
         Date date = formatDate.parse(DATE);
         Seance.setSeanceId(Seance_ID);
         Seance.setSeanceDate(date);
-        Seance.setSeanceTime("13:00:00");
         Seance.setSeanceCost(5);
         Seance.setSeanceSold(25);
         Seance.setSeanceActive(true);
@@ -91,7 +90,6 @@ public class MockTestSeanceController {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0]seanceId", Matchers.is(Seance_ID)))
                 .andExpect(jsonPath("$[0]seanceDate", Matchers.is(date.getTime())))
-                .andExpect(jsonPath("$[0]seanceTime", Matchers.is("13:00:00")))
                 .andExpect(jsonPath("$[0]seanceCost", Matchers.is(5)))
                 .andExpect(jsonPath("$[0]seanceSold", Matchers.is(25)))
                 .andExpect(jsonPath("$[0]seanceActive", Matchers.is(true)))
@@ -114,7 +112,6 @@ public class MockTestSeanceController {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("seanceId", Matchers.is(Seance_ID)))
                 .andExpect(jsonPath("seanceDate", Matchers.is(date.getTime())))
-                .andExpect(jsonPath("seanceTime", Matchers.is("13:00:00")))
                 .andExpect(jsonPath("seanceCost", Matchers.is(5)))
                 .andExpect(jsonPath("seanceSold", Matchers.is(25)))
                 .andExpect(jsonPath("seanceActive", Matchers.is(true)))
@@ -132,14 +129,13 @@ public class MockTestSeanceController {
         mockMvc.perform(
                 post("/seances")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"seanceId\":1,\"seanceDate\":1525122000000,\"seanceTime\":\"13:00:00\",\"seanceCost\":5,\"seanceSold\":25,\"seanceActive\":true,\"movieId\":2}")
+                        .content("{\"seanceId\":1,\"seanceDate\":1525122000000,\"seanceCost\":5,\"seanceSold\":25,\"seanceActive\":true,\"movieId\":2}")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("seanceId", Matchers.is(Seance_ID)))
                 .andExpect(jsonPath("seanceDate", Matchers.is(date.getTime())))
-                .andExpect(jsonPath("seanceTime", Matchers.is("13:00:00")))
                 .andExpect(jsonPath("seanceCost", Matchers.is(5)))
                 .andExpect(jsonPath("seanceSold", Matchers.is(25)))
                 .andExpect(jsonPath("seanceActive", Matchers.is(true)))
@@ -155,7 +151,7 @@ public class MockTestSeanceController {
         mockMvc.perform(
                 put("/seances")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"seanceId\":1,\"seanceDate\":1525122000000,\"seanceTime\":\"13:00:00\",\"seanceCost\":5,\"seanceSold\":25,\"seanceActive\":true,\"movieId\":2}")
+                        .content("{\"seanceId\":1,\"seanceDate\":1525122000000,\"seanceCost\":5,\"seanceSold\":25,\"seanceActive\":true,\"movieId\":2}")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -193,7 +189,6 @@ public class MockTestSeanceController {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0]seanceId", Matchers.is(Seance_ID)))
                 .andExpect(jsonPath("$[0]seanceDate", Matchers.is(date.getTime())))
-                .andExpect(jsonPath("$[0]seanceTime", Matchers.is("13:00:00")))
                 .andExpect(jsonPath("$[0]seanceCost", Matchers.is(5)))
                 .andExpect(jsonPath("$[0]seanceSold", Matchers.is(25)))
                 .andExpect(jsonPath("$[0]seanceActive", Matchers.is(true)))

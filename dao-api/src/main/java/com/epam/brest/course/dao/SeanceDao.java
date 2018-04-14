@@ -49,5 +49,5 @@ public interface SeanceDao {
      * @return collection of seance.
      */
     Collection<Seance> filterSeanceByDate(final Date fromDate,
-                                            final Date toDate);
+                                          final Date toDate);
 }

@@ -30,7 +30,6 @@ public class TestSeanceDaoImpl {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private static final String DATE = "2018-05-01";
-    private static final String TIME = "09:00:00";
     private static final int COST = 5;
     private static final int SOLD = 25;
     private static final boolean ACTIVE = true;
@@ -54,12 +53,11 @@ public class TestSeanceDaoImpl {
     public void testGetSeanceById() throws ParseException {
         Date date = formatDate.parse(DATE);
         Seance seance = seanceDao.addSeance(
-                new Seance(date, TIME, COST, SOLD, ACTIVE, MOVIE_ID));
+                new Seance(date, COST, SOLD, ACTIVE, MOVIE_ID));
         int addedSeance = seance.getSeanceId();
         Seance receivedSeance = seanceDao.getSeanceById(addedSeance);
         LOGGER.debug("testAddSeance({}, {})", seance, receivedSeance);
         assertTrue(seance.getSeanceDate().equals(receivedSeance.getSeanceDate()));
-        assertTrue(seance.getSeanceTime().equals(receivedSeance.getSeanceTime()));
         assertTrue(seance.getSeanceCost() == receivedSeance.getSeanceCost());
     }
 
@@ -68,7 +66,7 @@ public class TestSeanceDaoImpl {
         Date date = formatDate.parse(DATE);
         Collection<Seance> seances = seanceDao.getSeances();
         int sizeBefore = seances.size();
-        Seance seance = new Seance(date, TIME, COST, SOLD, ACTIVE, MOVIE_ID);
+        Seance seance = new Seance(date, COST, SOLD, ACTIVE, MOVIE_ID);
         Seance addedSeance = seanceDao.addSeance(seance);
         LOGGER.debug("testAddSeance({}, {})", seance, addedSeance);
         assertNotNull(addedSeance);
@@ -80,7 +78,7 @@ public class TestSeanceDaoImpl {
     public void testAddSameSeance() throws ParseException {
         Date date = formatDate.parse(DATE);
         Seance seance = seanceDao.addSeance(
-                new Seance(date, TIME, COST, SOLD, ACTIVE, MOVIE_ID));
+                new Seance(date, COST, SOLD, ACTIVE, MOVIE_ID));
         seanceDao.addSeance(seance);
         seanceDao.addSeance(seance);
     }
@@ -89,7 +87,7 @@ public class TestSeanceDaoImpl {
     public void testUpdateSeance() throws ParseException {
         Date date = formatDate.parse(DATE);
         Seance newSeance = seanceDao.addSeance(
-                new Seance(date, TIME, COST, SOLD, ACTIVE, MOVIE_ID));
+                new Seance(date, COST, SOLD, ACTIVE, MOVIE_ID));
         newSeance.setSeanceCost(2);
         newSeance.setMovieId(3);
         LOGGER.debug("testUpdateSeance({})", newSeance);
@@ -104,7 +102,7 @@ public class TestSeanceDaoImpl {
     public void testDeleteSeance() throws ParseException {
         Date date = formatDate.parse(DATE);
         Seance seance = seanceDao.addSeance(
-                new Seance(date, TIME, COST, SOLD, ACTIVE, MOVIE_ID));
+                new Seance(date, COST, SOLD, ACTIVE, MOVIE_ID));
         int deletedSeanceId = seance.getSeanceId();
         LOGGER.debug("testDeleteSeance({})", seance);
         seanceDao.deleteSeance(deletedSeanceId);
