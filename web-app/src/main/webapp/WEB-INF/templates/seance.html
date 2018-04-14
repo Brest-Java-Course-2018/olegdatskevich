@@ -17,6 +17,16 @@
     <link rel="stylesheet"
           href="../../resources/static/css/style.css"
           th:href="@{/resources/static/css/style.css}">
+
+    <link rel="stylesheet"
+          media="screen"
+          href="../../resources/static/css/bootstrap.min.css"
+          th:href="@{/resources/static/css/bootstrap.min.css}">
+    <link rel="stylesheet"
+          media="screen"
+          href="../../resources/static/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/resources/static/css/bootstrap-datetimepicker.min.css}">
+
 </head>
 
 <body>
@@ -105,47 +115,22 @@
                                    name="field_seanceId"
                                    type="hidden"/>
 
-                            <div class="form-group">
-                                <label for="seanceDate">Date</label>
-                                <input type="date"
-                                       th:field="*{{seanceDate}}"
-                                       th:class="${#fields.hasErrors('seanceDate')} ? 'form-control is-invalid' : 'form-control'"
-                                       class="form-control"
-                                       placeholder="Input seance date"
-                                       id="seanceDate">
+                            <div class="input-append date form_datetime">
+                                <label>Date Time</label>
+                                <div>
+                                    <span class="add-on">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input th:field="*{seanceDate}"
+                                           th:class="${#fields.hasErrors('seanceDate')} ? 'form-control is-invalid' : 'form-control'"
+                                           size="16"
+                                           type="text"
+                                           value=""
+                                           readonly>
+                                </div>
                                 <div th:if="${#fields.hasErrors('seanceDate')}"
                                      class="invalid-feedback"
                                      th:errors="*{seanceDate}">
-                                    [ERRORS]
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="seanceDate1">Date1</label>
-                                <input type="text"
-                                       th:field="*{seanceDate}"
-                                       th:class="${#fields.hasErrors('seanceDate')} ? 'form-control is-invalid' : 'form-control'"
-                                       class="form-control disabled"
-                                       placeholder="Input seance date"
-                                       id="seanceDate1">
-                                <div th:if="${#fields.hasErrors('seanceDate')}"
-                                     class="invalid-feedback"
-                                     th:errors="*{seanceDate}">
-                                    [ERRORS]
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="seanceTime">Time</label>
-                                <input type="time"
-                                       th:field="*{seanceTime}"
-                                       th:class="${#fields.hasErrors('seanceTime')} ? 'form-control is-invalid' : 'form-control'"
-                                       class="form-control"
-                                       id="seanceTime"
-                                       placeholder="Input seance time">
-                                <div th:if="${#fields.hasErrors('seanceTime')}"
-                                     class="invalid-feedback"
-                                     th:errors="*{seanceTime}">
                                     [ERRORS]
                                 </div>
                             </div>
@@ -186,6 +171,13 @@
                                     [ERRORS]
                                 </div>
                             </div>
+                            <h4>
+                                <span th:class="${seance.seanceActive} ? 'badge badge-success' : 'badge badge-danger'"
+                                      class="text-uppercase mr-auto"
+                                      th:text="${seance.seanceActive} ? #{active} : #{canceled}">
+                                      ACTIVE/REMOVED
+                                </span>
+                            </h4>
                         </form>
 
                     </div>
@@ -200,10 +192,27 @@
             th:src="@{/resources/static/js/popper.min.js}"></script>
     <script src="../../resources/static/js/bootstrap.min.js"
             th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+    <script src="../../resources/static/js/bootstrap-datetimepicker.js"
+            th:src="@{/resources/static/js/bootstrap-datetimepicker.js}"
+            type="text/javascript"
+            charset="UTF-8"></script>
+    <script src="../../resources/static/js/locales/bootstrap-datetimepicker.ru.js"
+            th:src="@{/resources/static/js/locales/bootstrap-datetimepicker.ru.js}"
+            type="text/javascript"
+            charset="UTF-8"></script>
+
 <script type="text/javascript">
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+<script type="text/javascript">
+    $(".form_datetime").datetimepicker({
+        format: "dd MM yyyy - hh:ii",
+        autoclose: true,
+        todayBtn: true,
+    });
+</script>
+
 </body>
 </html>

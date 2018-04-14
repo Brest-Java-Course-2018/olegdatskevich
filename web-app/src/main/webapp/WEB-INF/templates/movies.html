@@ -91,7 +91,7 @@
                                 <td class="text-right">
                                     <a href="movie.html"
                                        th:href="@{|/movie/${movie.movieId}|}"
-                                       class="btn-outline-secondary btn-lg"
+                                       class="btn btn-outline-dark btn-md"
                                        data-toggle="tooltip"
                                        data-placement="bottom"
                                        th:title="#{edit_movie}">
@@ -101,16 +101,15 @@
                                           th:data-target="${movie.earned != 0} ? '#confirmRemoveModal' : '#warningRemove'"
                                           data-target="#confirmRemoveModal"
                                           th:attr="data-id=${movie.movieId}, data-name=${movie.movieName}">
-                                        <a href="#"
-                                           aria-disabled="false"
+                                        <!--After right query for DTO use this-->
+                                        <button th:if="${movie.movieActive} ? 'disabled' : ''"
                                            role="button"
-
-                                           class="btn-outline-secondary btn-lg"
+                                           class="btn btn-outline-dark btn-md"
                                            data-toggle="tooltip"
                                            data-placement="bottom"
                                            th:title="#{remove_movie}">
                                             <i class="fa fa-trash-o" style="font-size:24px"></i>
-                                        </a>
+                                        </button>
                                     </span>
                                 </td>
                             </tr>

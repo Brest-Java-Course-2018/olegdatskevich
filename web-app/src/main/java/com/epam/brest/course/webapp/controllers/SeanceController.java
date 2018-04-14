@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 /**
- *
+ * Seance Controller for web-app.
  */
 @Controller
 public class SeanceController {
@@ -29,19 +29,19 @@ public class SeanceController {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     *
+     * Service of movie
      */
     @Autowired
     private MovieService movieService;
 
     /**
-     *
+     * Service of seance
      */
     @Autowired
     private SeanceService seanceService;
 
     /**
-     *
+     * Get mapping of
      * @param model
      * @return
      */
@@ -54,6 +54,11 @@ public class SeanceController {
         model.addAttribute("seances", seances);
         return "seances";
     }
+
+    /*@PostMapping(value = "/")
+    public final String filterSeanceByDate() {
+
+    }*/
 
     /**
      *

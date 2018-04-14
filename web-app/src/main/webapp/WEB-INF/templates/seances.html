@@ -14,6 +14,15 @@
     <link rel="stylesheet"
           href="../../resources/static/css/style.css"
           th:href="@{/resources/static/css/style.css}">
+
+    <link rel="stylesheet"
+          media="screen"
+          href="../../resources/static/css/bootstrap.min.css"
+          th:href="@{/resources/static/css/bootstrap.min.css}">
+    <link rel="stylesheet"
+          media="screen"
+          href="../../resources/static/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/resources/static/css/bootstrap-datetimepicker.min.css}">
 </head>
 <body>
     <nav class="p-0 pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light">
@@ -53,22 +62,28 @@
         <span class="mr-auto navbar-nav">
             <form class="form">
                 <div class="form-group row">
-                    <div class="form-group col input-group-prepend">
+                    <div class="input-append date form_datetime">
+                        <input size="16" type="text" value="" readonly>
+                        <span class="add-on"><i class="icon-th"></i></span>
+                    </div>
+                    <div class="input-append date form_datetime">
+                        <input size="16" type="text" value="" readonly>
+                        <span class="add-on"><i class="icon-th"></i></span>
+                    </div>
+                    <!--<div class="form-group col input-group-prepend">
                         <span class="input-group-text">From</span>
                         <input type="date">
                     </div>
+
                     <div class="form-group col input-group-prepend">
                         <span class="input-group-text">To</span>
                         <input type="date">
-                    </div>
-                    <a title="Filter"
-                       href="seances.html"
+                    </div>-->
+                    <a href="seances.html"
                        th:href="@{/seances}"
-                       class="btn btn-light"
-                       data-toggle="tooltip"
-                       data-placement="bottom">
+                       class="btn btn-light">
                         <i class="fa fa-filter" style="font-size:16px"></i>
-                            Filter
+                        Filter
                     </a>
                 </div>
             </form>
@@ -125,7 +140,7 @@
                                 <td class="text-right">
                                     <a href="seance.html"
                                        th:href="@{|/seance/${seance.seanceId}|}"
-                                       class="btn-outline-secondary btn-lg"
+                                       class="btn btn-outline-dark btn-md"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        title="Edit seance">
@@ -133,13 +148,14 @@
                                     </a>
                                     <span data-toggle="modal"
                                           data-target="#confirmRemoveModal"
-                                          th:attr="data-id=${seance.seanceId}, data-name=${seance.seanceTime}">
-                                        <a href="#" class="btn-outline-secondary btn-lg"
+                                          th:attr="data-id=${seance.seanceId}, data-date=${seance.seanceDate}, data-time=${seance.seanceTime}">
+                                        <button th:if="${seance.seanceActive} ? 'disabled' : ''"
+                                                class="btn btn-outline-dark btn-md"
                                            data-toggle="tooltip"
                                            data-placement="top"
                                            title="Remove seance">
                                             <i class="fa fa-trash-o" style="font-size:24px"></i>
-                                        </a>
+                                        </button>
                                     </span>
                                 </td>
                             </tr>
@@ -218,15 +234,31 @@
             th:src="@{/resources/static/js/popper.min.js}"></script>
     <script src="../../resources/static/js/bootstrap.min.js"
             th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+    <script src="../../resources/static/js/bootstrap-datetimepicker.js"
+            th:src="@{/resources/static/js/bootstrap-datetimepicker.js}"
+            type="text/javascript"
+            charset="UTF-8"></script>
+    <script src="../../resources/static/js/locales/bootstrap-datetimepicker.ru.js"
+            th:src="@{/resources/static/js/locales/bootstrap-datetimepicker.ru.js}"
+            type="text/javascript"
+            charset="UTF-8"></script>
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
     $('#confirmRemoveModal').on('show.bs.modal', function (event) {
        var target = $(event.relatedTarget)
-       $(this).find('.modal-body').text('Please confirm delete seance: "' + target.data('name') + '"')
+       $(this).find('.modal-body').text('Please confirm delete seance: "' + target.data('date') + ' - ' + target.data('time') + '"')
        document.getElementById('deleteUrl').href = '/seance/' + target.data('id') + '/delete';
    })
+</script>
+    <script type="text/javascript">
+    $(".form_datetime").datetimepicker({
+        format: "dd MM yyyy - hh:ii",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left"
+    });
 </script>
 </body>
 </html>
