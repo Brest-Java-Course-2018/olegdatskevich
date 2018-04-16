@@ -147,12 +147,14 @@
                                     </a>
                                     <span data-toggle="modal"
                                           data-target="#confirmRemoveModal"
+                                          th:data-target="${seance.seanceDate <= #dates.createNow()} ? '#warningRemove' : '#confirmRemoveModal'"
                                           th:attr="data-id=${seance.seanceId}, data-date=${seance.seanceDate}">
-                                        <button th:if="${seance.seanceActive} ? 'disabled' : ''"
+                                        <button
+                                                th:if="${seance.seanceActive} ? 'disabled' : ''"
                                                 class="btn btn-outline-dark btn-sm"
-                                           data-toggle="tooltip"
-                                           data-placement="top"
-                                           title="Remove seance">
+                                                data-toggle="tooltip"
+                                                data-placement="top"
+                                                title="Remove seance">
                                             <i class="fa fa-trash-o" style="font-size:24px"></i>
                                         </button>
                                     </span>
@@ -219,7 +221,6 @@
                 </div>
                 <div class="modal-body">
                     You can not delete this seance.
-                    _You do not have rights to this._
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>

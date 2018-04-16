@@ -44,7 +44,7 @@ public class MockTestSeanceController {
 
     private static final int Seance_ID = 1;
     private static final Seance Seance = new Seance();
-    private static final String DATE = "2018-05-01";
+    private static final String DATE = "2018-05-01 00:00:00.0";
     private static final String FROM_DATE = "2018-05-01";
     private static final String TO_DATE = "2018-05-02";
 
@@ -53,7 +53,9 @@ public class MockTestSeanceController {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         Date date = formatDate.parse(DATE);
         Seance.setSeanceId(Seance_ID);
-        Seance.setSeanceDate(date);
+        Seance.setSeanceDate(new Date(date.getTime()));
+        System.out.println(new Date(date.getTime()));
+        System.out.println(date);
         Seance.setSeanceCost(5);
         Seance.setSeanceSold(25);
         Seance.setSeanceActive(true);

@@ -1,5 +1,9 @@
 package com.epam.brest.course.model.dao;
 
+//import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Date;
@@ -10,48 +14,53 @@ import java.util.Date;
 public class Seance {
 
     /**
-     *
+     * Seance ID.
      */
     private int seanceId;
 
     /**
-     *
+     * Date of the seance.
      */
-    @NotNull(message = "Seance date can not be null.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Europe/Minsk")
+    //@NotNull(message = "Seance date can not be null.")
     private Date seanceDate;
 
     /**
-     *
+     * Cost of the seance.
      */
     @NotNull(message = "Cost can not be null.")
     @PositiveOrZero(message = "Cost can not be negative.")
     private int seanceCost;
+
     /**
-     *
+     * Count of sold tickets.
      */
     private int seanceSold;
+
     /**
-     *
+     * Active or canceled seance.
      */
     private boolean seanceActive;
+
     /**
-     *
+     * ID of movie for showing on the seance.
      */
     private int movieId;
 
     /**
-     *
+     * Default constructor.
      */
     public Seance() {
     }
 
     /**
-     *
-     * @param seanceDate
-     * @param seanceCost
-     * @param seanceSold
-     * @param seanceActive
-     * @param movieId
+     * Constructor with parameters.
+     * @param seanceDate - date.
+     * @param seanceCost - cost.
+     * @param seanceSold - count of sold tickets
+     * @param seanceActive - activity.
+     * @param movieId - movie ID.
      */
     public Seance(final Date seanceDate, final int seanceCost,
                   final int seanceSold, final boolean seanceActive,

@@ -119,9 +119,11 @@
                                        th:placeholder="#{input_mov_name}">
                                 <div th:if="${#fields.hasErrors('movieName')}"
                                      class="invalid-feedback"
-                                     th:errors="*{movieName}">[ERRORS]
+                                     th:errors="*{movieName}">
+                                    [ERRORS]
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label class="form-control-label"
                                        for="movieDescriptionInput"
@@ -133,7 +135,8 @@
                                        th:field="*{movieDescription}"
                                        class="form-control"
                                        id="movieDescriptionInput"
-                                          th:placeholder="#{input_mov_descr}"></textarea>
+                                       th:placeholder="#{input_mov_descr}">
+                                </textarea>
                                 <div th:if="${#fields.hasErrors('movieDescription')}"
                                      class="invalid-feedback"
                                      th:errors="*{movieDescription}">[ERRORS]

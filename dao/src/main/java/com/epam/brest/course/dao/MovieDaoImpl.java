@@ -79,23 +79,23 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public final Collection<Movie> getMovies() {
-        LOGGER.debug("getMovies()");
         Collection<Movie> movies = namedParameterJdbcTemplate
                 .getJdbcOperations()
                 .query(moviesSelect,
                         BeanPropertyRowMapper.newInstance(Movie.class));
+        LOGGER.debug("getMovies({})", movies);
         return movies;
     }
 
     @Override
     public final Movie getMovieById(final int movieId) {
-        LOGGER.debug("getMovieById({})", movieId);
         SqlParameterSource namedParameters
                 = new MapSqlParameterSource(MOVIE_ID, movieId);
         Movie movie = namedParameterJdbcTemplate.queryForObject(
                 movieSelectById,
                 namedParameters,
                 BeanPropertyRowMapper.newInstance(Movie.class));
+        LOGGER.debug("getMovieById({})", movie);
         return movie;
     }
 
@@ -111,13 +111,14 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public final Movie addMovie(final Movie movie) throws DataAccessException {
-        LOGGER.debug("addMovie({})", movie);
+        LOGGER.debug("addMovieIn({})", movie);
         SqlParameterSource namedParameters
                 = new BeanPropertySqlParameterSource(movie);
         KeyHolder generatedKey = new GeneratedKeyHolder();
         namedParameterJdbcTemplate
                 .update(insert, namedParameters, generatedKey);
         movie.setMovieId(generatedKey.getKey().intValue());
+        LOGGER.debug("addMovieOut({})", movie);
         return movie;
     }
 

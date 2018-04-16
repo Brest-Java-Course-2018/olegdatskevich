@@ -120,7 +120,22 @@
                                    name="field_seanceId"
                                    type="hidden"/>
 
-                            <div class="form-group row">
+                            <!--<div th:if="${not isNew}">
+                                <input th:field="*{seanceDate}"
+                                       id="field_seanceDate"
+                                       name="field_seanceDate"
+                                       type="hidden"/>
+                                <input th:field="*{seanceSold}"
+                                       id="field_seanceSold"
+                                       name="field_seanceSold"
+                                       type="hidden"/>
+                                <input th:field="*{seanceActive}"
+                                       id="field_seanceActive"
+                                       name="field_seanceActive"
+                                       type="hidden"/>
+                            </div>-->
+
+                            <!--<div class="form-group row">
                                 <label for="example-date-input" class="col-2 col-form-label">Date</label>
                                 <div class="col-10">
                                     <input class="form-control"
@@ -129,7 +144,7 @@
                                            value="2011-08-19"
                                            id="example-date-input">
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div th:if="${isNew}"
                                  class="input-append date form_datetime">
@@ -141,7 +156,7 @@
                                         <input th:field="*{seanceDate}"
                                                th:class="${#fields.hasErrors('seanceDate')} ? 'form-control is-invalid' : 'form-control'"
                                                size="16"
-                                               type="text"
+                                               type="datetime-local"
                                                value=""
                                                readonly>
                                     </div>
@@ -198,7 +213,8 @@
                                     </span>
                                 </h4>
                             </div>
-
+                            <div th:text="${#dates.format(seance.seanceDate)}"></div>
+                            <div th:text="${{#dates.format(seance.seanceDate)}}"></div>
                         </form>
 
                     </div>
@@ -229,7 +245,7 @@
 </script>
 <script type="text/javascript">
     $(".form_datetime").datetimepicker({
-        format: "dd MM yyyy - hh:ii",
+        format: "yyyy-mm-dd hh:ii:ss",
         autoclose: true,
         todayBtn: true,
     });

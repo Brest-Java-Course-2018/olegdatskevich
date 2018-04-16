@@ -91,25 +91,34 @@
                                 <td class="text-right">
                                     <a href="movie.html"
                                        th:href="@{|/movie/${movie.movieId}|}"
-                                       class="btn btn-outline-dark btn-md"
+                                       class="btn btn-outline-dark btn-sm"
                                        data-toggle="tooltip"
                                        data-placement="bottom"
                                        th:title="#{edit_movie}">
                                         <i class="fa fa-edit" style="font-size:24px"></i>
                                     </a>
                                     <span data-toggle="modal"
-                                          th:data-target="${movie.earned != 0} ? '#confirmRemoveModal' : '#warningRemove'"
                                           data-target="#confirmRemoveModal"
                                           th:attr="data-id=${movie.movieId}, data-name=${movie.movieName}">
                                         <!--After right query for DTO use this-->
-                                        <button th:if="${movie.movieActive} ? 'disabled' : ''"
+                                        <button
                                            role="button"
-                                           class="btn btn-outline-dark btn-md"
+                                           class="btn btn-outline-dark btn-sm"
                                            data-toggle="tooltip"
                                            data-placement="bottom"
                                            th:title="#{remove_movie}">
                                             <i class="fa fa-trash-o" style="font-size:24px"></i>
                                         </button>
+                                        <!--Question about activate film after deleting-->
+                                        <!--<button th:if="${not movie.movieActive}"
+                                                disabled
+                                                role="button"
+                                                class="btn btn-outline-dark btn-md"
+                                                data-toggle="tooltip"
+                                                data-placement="bottom"
+                                                th:title="#{remove_movie}">
+                                            <i class="fa fa-trash-o" style="font-size:20px"></i>
+                                        </button>-->
                                     </span>
                                 </td>
                             </tr>
@@ -156,31 +165,7 @@
             </div>
         </div>
     </div>
-    <!-- WarningModal -->
-    <div class="modal fade"
-         id="warningRemove"
-         tabindex="-1"
-         role="dialog"
-         aria-labelledby="exampleModalCenterTitle"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header alert alert-danger">
-                    <h5 class="modal-title" id="warningRemoveTitle">WARNING</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    You can not delete this movie.
-                    The film is scheduled for today.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <script src="../../resources/static/js/jquery.min.js"
             th:src="@{/resources/static/js/jquery.min.js}"></script>
     <script src="../../resources/static/js/popper.min.js"

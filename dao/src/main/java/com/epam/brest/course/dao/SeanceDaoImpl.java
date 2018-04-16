@@ -106,28 +106,29 @@ public class SeanceDaoImpl implements SeanceDao {
 
     @Override
     public final Collection<Seance> getSeances() {
-        LOGGER.debug("getSeances()");
         Collection<Seance> seances = namedParameterJdbcTemplate
                 .getJdbcOperations()
                 .query(seancesSelect,
                         BeanPropertyRowMapper.newInstance(Seance.class));
+        LOGGER.debug("getSeances({})", seances);
         return seances;
     }
 
     @Override
     public final Seance getSeanceById(final int seanceId) {
-        LOGGER.debug("getSeanceById()");
         SqlParameterSource namedParameters
                 = new MapSqlParameterSource(SEANCE_ID, seanceId);
         Seance seance = namedParameterJdbcTemplate.queryForObject(
                 seanceSelectById,
                 namedParameters,
                 BeanPropertyRowMapper.newInstance(Seance.class));
+        LOGGER.debug("getSeanceById({})", seance);
         return seance;
     }
 
     @Override
     public final Seance addSeance(final Seance seance) {
+        LOGGER.debug("addSeanceIn({})", seance);
         MapSqlParameterSource namedParameters = new MapSqlParameterSource()
                 .addValue(SEANCE_DATE, seance.getSeanceDate())
                 .addValue(SEANCE_COST, seance.getSeanceCost())
@@ -138,6 +139,7 @@ public class SeanceDaoImpl implements SeanceDao {
         namedParameterJdbcTemplate.update(insert, namedParameters,
                 generatedKeyHolder);
         seance.setSeanceId(generatedKeyHolder.getKey().intValue());
+        LOGGER.debug("addSeanceOut({})", seance);
         return seance;
     }
 
@@ -158,17 +160,17 @@ public class SeanceDaoImpl implements SeanceDao {
 
     @Override
     public final Collection<Seance> filterSeanceByDate(final Date fromDate,
-                                                         final Date toDate) {
+                                                       final Date toDate) {
         LOGGER.debug("filterSeanceByDate({}, {})", fromDate, toDate);
 
         SqlParameterSource namedParameters = new MapSqlParameterSource()
         .addValue(FROM_DATE, fromDate)
         .addValue(TO_DATE, toDate);
-
         Collection<Seance> seances = namedParameterJdbcTemplate.query(
                 seanceFilter,
                 namedParameters,
                 BeanPropertyRowMapper.newInstance(Seance.class));
+        LOGGER.debug("filteredSeances({})", seances);
         return seances;
     }
 }
