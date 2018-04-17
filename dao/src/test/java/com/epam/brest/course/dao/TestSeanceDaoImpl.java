@@ -88,7 +88,7 @@ public class TestSeanceDaoImpl {
         Date date = formatDate.parse(DATE);
         Seance newSeance = seanceDao.addSeance(
                 new Seance(date, COST, SOLD, ACTIVE, MOVIE_ID));
-        newSeance.setSeanceCost(2);
+        newSeance.setSeanceSold(30);
         newSeance.setMovieId(3);
         LOGGER.debug("testUpdateSeance({})", newSeance);
         int updatedSeanceId = newSeance.getSeanceId();

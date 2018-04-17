@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Seances</title>
+    <title th:text="#{seances}">Seances</title>
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
           th:href="@{/resources/static/css/font-awesome.min.css}">
@@ -24,6 +24,7 @@
           href="../../resources/static/css/bootstrap-datetimepicker.min.css"
           th:href="@{/resources/static/css/bootstrap-datetimepicker.min.css}">
 </head>
+
 <body>
     <nav class="p-0 pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light">
         <button class="navbar-toggler"
@@ -41,34 +42,53 @@
             <nav class="navbar-nav">
                 <a class="nav-item nav-link"
                    href="movies.html"
-                   th:href="@{/movies}">Movies</a>
+                   th:href="@{/movies}"
+                   th:text="#{movies}">Movies</a>
                 <a class="nav-item nav-link active"
                    href="seances.html"
-                   th:href="@{/seances}">Seances</a>
+                   th:href="@{/seances}"
+                   th:text="#{seances}">Seances</a>
             </nav>
         </div>
         <div>
-            <a href="seances?lang=en" class="badge badge-light">en</a>
-            <a href="seances?lang=ru" class="badge badge-light">ru</a>
+            <h6>
+                <a href="seances?lang=en" class="badge badge-light">en</a>
+                <a href="seances?lang=ru" class="badge badge-light">ru</a>
+            </h6>
         </div>
     </nav>
 
 <header>
     <nav class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
-        <span class="navbar-brand text-uppercase mr-auto">
+        <span class="navbar-brand text-uppercase mr-auto"
+              th:text="#{seances}">
             Seances
         </span>
 
         <span class="mr-auto navbar-nav">
-            <form class="form">
+            <form id="filterForm">
                 <div class="form-group row">
                     <div class="input-append date form_datetime">
-                        <input size="16" type="text" value="" readonly>
-                        <span class="add-on"><i class="icon-th"></i></span>
+                        <input type="text"
+                               id="fromDate"
+                               name="fromDate"
+                               size="16"
+                               value=""
+                               readonly>
+                        <span class="add-on">
+                              <i class="icon-th"></i>
+                        </span>
                     </div>
                     <div class="input-append date form_datetime">
-                        <input size="16" type="text" value="" readonly>
-                        <span class="add-on"><i class="icon-th"></i></span>
+                        <input type="text"
+                               id="toDate"
+                               name="toDate"
+                               size="16"
+                               value=""
+                               readonly>
+                        <span class="add-on">
+                            <i class="icon-th"></i>
+                        </span>
                     </div>
                     <!--<div class="form-group col input-group-prepend">
                         <span class="input-group-text">From</span>
@@ -79,27 +99,44 @@
                         <span class="input-group-text">To</span>
                         <input type="date">
                     </div>-->
-                    <a href="seances.html"
+                    <!--<a href="seances.html"
                        th:href="@{/seances}"
                        class="btn btn-light">
                         <i class="fa fa-filter" style="font-size:16px"></i>
                         Filter
-                    </a>
+                    </a>-->
                 </div>
             </form>
         </span>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="seances.html"
+                   th:href="@{|/seances|/fromDate|/toDate|}"
+                   th:onclick="@{document.forms['filterForm'].submit(); return false;}"
+                   class="btn btn-light"
+                   data-toggle="tooltip"
+                   data-placement="bottom">
+                    <i class="fa fa-filter"
+                       style="font-size:24px"></i>
+                    <span class="d-none d-md-inline"
+                          th:text="#{filter}">Filter</span>
+                </a>
+            </li>
+        </ul>
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a title="Add seance"
+                <a title="Create seance"
+                   th:title="#{create_seance}"
                    href="seance.html"
                    th:href="@{/seance}"
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom">
-                    <i class="fa fa-plus-circle" style="font-size:24px"></i>
-                    Add
-                    <span class="d-none dm-sm-inline"></span>
+                   <i class="fa fa-plus-circle"
+                      style="font-size:24px"></i>
+                   <span class="d-none d-md-inline"
+                         th:text="#{create}">Create</span>
                 </a>
             </li>
         </ul>
@@ -115,12 +152,12 @@
                         <table class="mb-2 table table-striped">
                             <thead class="thead-inverse">
                             <tr>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Film</th>
-                                <th>Cost</th>
-                                <th>Sold tickets</th>
-                                <th>Activity</th>
+                                <th th:text="#{date}">Date</th>
+                                <th th:text="#{time}">Time</th>
+                                <th th:text="#{film}">Film</th>
+                                <th th:text="#{cost}">Cost</th>
+                                <th th:text="#{sold_tickets}">Sold tickets</th>
+                                <th th:text="#{seance_activity}">Activity</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -130,11 +167,9 @@
                                 <td th:text="${#dates.format(seance.seanceDate, 'HH:mm')}">12:00</td>
                                 <td th:each="movie : ${movies}"
                                     th:if="${seance.movieId == movie.movieId}"
-                                        th:text="${movie.movieName}">
-                                    Terminator
-                                </td>
-                                <td th:text="${seance.seanceCost}">5</td>
-                                <td th:text="${seance.seanceSold}">55</td>
+                                        th:text="${movie.movieName}">Terminator</td>
+                                <td th:text="${'$ ' + seance.seanceCost}">$ 5</td>
+                                <td th:text="${seance.seanceSold + ' tickets'}">55 tickets</td>
                                 <td th:text="${seance.seanceActive} ? '' : 'Canceled'">Active/Canceled</td>
                                 <td class="text-right">
                                     <a href="seance.html"
@@ -142,7 +177,8 @@
                                        class="btn btn-outline-dark btn-sm"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       title="Edit seance">
+                                       title="Edit seance"
+                                       th:title="#{edit_seance}">
                                         <i class="fa fa-edit" style="font-size:24px"></i>
                                     </a>
                                     <span data-toggle="modal"
@@ -154,7 +190,8 @@
                                                 class="btn btn-outline-dark btn-sm"
                                                 data-toggle="tooltip"
                                                 data-placement="top"
-                                                title="Remove seance">
+                                                title="Remove seance"
+                                                th:title="#{remove_seance}">
                                             <i class="fa fa-trash-o" style="font-size:24px"></i>
                                         </button>
                                     </span>
@@ -165,27 +202,28 @@
                     </div>
                     <div class="card alert alert-warning"
                          th:if="${seances.isEmpty()}">
-                        <h2>Nothing found</h2>
+                        <h2 th:text="#{nothing_found}">Nothing found</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
-    <!-- RemoveModal -->
+    <!-- RemoveSeanceModal -->
     <div class="modal fade"
          id="confirmRemoveModal"
          tabindex="-1"
          role="dialog"
          aria-labelledby="exampleModalCenterTitle"
          aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered"
+             role="document">
             <div class="modal-content">
                 <div class="modal-header alert alert-danger">
                     <h5 class="modal-title "
-                        id="exampleModalLongTitle">
-                        Deleting seances
+                        id="exampleModalLongTitle"
+                        th:text="#{delete_seance_header}">
+                        Deleting seance.
                     </h5>
                     <button type="button"
                             class="close"
@@ -198,28 +236,47 @@
                     Are you sure to remove this seance?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a id="deleteUrl" href="#" class="btn btn-danger">Remove</a>
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                            th:text="#{close_button}">
+                        Close
+                    </button>
+                    <a id="deleteUrl"
+                       href="#"
+                       class="btn btn-danger"
+                       th:text="#{remove_button}">
+                        Remove
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- WarningModal -->
+    <!-- WarningSeanceModal -->
     <div class="modal fade"
          id="warningRemove"
          tabindex="-1"
          role="dialog"
          aria-labelledby="exampleModalCenterTitle"
          aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered "
+             role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="warningRemoveTitle">WARNING</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header alert alert-danger">
+                    <h5 class="modal-title"
+                        id="warningRemoveTitle"
+                        th:text="#{warning_title}">
+                        WARNING
+                    </h5>
+                    <button type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body"
+                     th:text="#{warning_text}">
                     You can not delete this seance.
                 </div>
                 <div class="modal-footer">
@@ -250,11 +307,11 @@
        var target = $(event.relatedTarget)
        $(this).find('.modal-body').text('Please confirm delete seance: "' + target.data('date') + '"')
        document.getElementById('deleteUrl').href = '/seance/' + target.data('id') + '/delete';
-   })
+    })
 </script>
-    <script type="text/javascript">
+<script type="text/javascript">
     $(".form_datetime").datetimepicker({
-        format: "dd MM yyyy - hh:ii",
+        format: "yyyy-mm-dd-hh:ii:ss",
         autoclose: true,
         todayBtn: true,
         pickerPosition: "bottom-left"

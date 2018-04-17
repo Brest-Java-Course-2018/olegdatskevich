@@ -1,6 +1,5 @@
 package com.epam.brest.course.client.rest;
 
-import com.epam.brest.course.client.ServerDataAccessException;
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
 import com.epam.brest.course.service.MovieService;

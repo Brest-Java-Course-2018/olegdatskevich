@@ -4,7 +4,6 @@ package com.epam.brest.course.model.dao;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Date;
 
@@ -29,13 +28,13 @@ public class Seance {
     /**
      * Cost of the seance.
      */
-    @NotNull(message = "Cost can not be null.")
     @PositiveOrZero(message = "Cost can not be negative.")
     private int seanceCost;
 
     /**
      * Count of sold tickets.
      */
+    @PositiveOrZero(message = "Cost can not be negative.")
     private int seanceSold;
 
     /**

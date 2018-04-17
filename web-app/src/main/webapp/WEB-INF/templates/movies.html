@@ -42,10 +42,11 @@
 
         </div>
         <div>
-            <a href="movies?lang=en" class="badge badge-light">en</a>
-            <a href="movies?lang=ru" class="badge badge-light">ru</a>
+            <h6>
+                <a href="movies?lang=en" class="badge badge-light">en</a>
+                <a href="movies?lang=ru" class="badge badge-light">ru</a>
+            </h6>
         </div>
-
     </nav>
 <header>
     <nav class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
@@ -62,7 +63,8 @@
                    data-placement="bottom"
                    th:title="#{add_movie}">
                     <i class="fa fa-plus-circle" style="font-size:24px"></i>
-                    <span class="d-none d-md-inline" th:text="#{add}">Add</span>
+                    <span class="d-none d-md-inline"
+                          th:text="#{add}">Add</span>
                 </a>
             </li>
         </ul>

@@ -43,8 +43,10 @@
                 </nav>
         </div>
         <div>
-            <a href="movie?lang=en" class="badge badge-light">en</a>
-            <a href="movie?lang=ru" class="badge badge-light">ru</a>
+            <h6>
+                <a href="movie?lang=en" class="badge badge-light">en</a>
+                <a href="movie?lang=ru" class="badge badge-light">ru</a>
+            </h6>
         </div>
     </nav>
 <header>
@@ -68,7 +70,6 @@
         </span>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <!--ЧЕ за косяк-->
                 <a href="movies.html"
                    th:href="@{/movie}"
                    th:onclick="@{document.forms['movieForm'].submit(); return false;}"
@@ -113,10 +114,10 @@
                                 </label>
                                 <input th:field="*{movieName}"
                                        th:class="${#fields.hasErrors('movieName')} ? 'form-control is-invalid' : 'form-control'"
+                                       th:placeholder="#{input_mov_name}"
                                        id="movieNameInput"
                                        type="text"
-                                       class="form-control"
-                                       th:placeholder="#{input_mov_name}">
+                                       class="form-control">
                                 <div th:if="${#fields.hasErrors('movieName')}"
                                      class="invalid-feedback"
                                      th:errors="*{movieName}">
