@@ -37,3 +37,10 @@ INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, 
 INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (26, '2018-03-28 20:00:00', 3, 101, true, 9);
 INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (27, '2018-03-28 22:00:00', 4, 148, true, 5);
 INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (28, '2018-03-28 23:59:00', 4, 23, true, 1);
+INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (29, '2018-04-28 12:00:00', 2, 53, true, 8);
+INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (30, '2018-04-28 14:00:00', 2, 72, true, 8);
+INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (31, '2018-04-28 16:00:00', 2, 85, true, 10);
+INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (32, '2018-04-28 18:00:00', 3, 80, true, 10);
+INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (33, '2018-04-28 20:00:00', 3, 101, true, 1);
+INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (34, '2018-04-28 22:00:00', 4, 148, true, 2);
+INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (35, '2018-04-28 23:59:00', 4, 23, true, 3);

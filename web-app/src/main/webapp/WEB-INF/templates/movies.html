@@ -16,7 +16,7 @@
           th:href="@{/resources/static/css/style.css}">
 </head>
 <body>
-    <nav class="p-0 pl-2 navbar navbar-expand-sm navbar-dark bg-dark text-light">
+    <nav class="p-0 pl-2 pr-2 navbar navbar-expand-sm navbar-dark bg-dark text-light">
         <button class="navbar-toggler"
                 type="button"
                 data-toggle="collapse"
@@ -102,25 +102,14 @@
                                     <span data-toggle="modal"
                                           data-target="#confirmRemoveModal"
                                           th:attr="data-id=${movie.movieId}, data-name=${movie.movieName}">
-                                        <!--After right query for DTO use this-->
-                                        <button
-                                           role="button"
-                                           class="btn btn-outline-dark btn-sm"
-                                           data-toggle="tooltip"
-                                           data-placement="bottom"
-                                           th:title="#{remove_movie}">
-                                            <i class="fa fa-trash-o" style="font-size:24px"></i>
-                                        </button>
-                                        <!--Question about activate film after deleting-->
-                                        <!--<button th:if="${not movie.movieActive}"
-                                                disabled
+                                        <button th:disabled="${movie.haveSeance or not movie.movieActive}"
                                                 role="button"
                                                 class="btn btn-outline-dark btn-md"
                                                 data-toggle="tooltip"
                                                 data-placement="bottom"
-                                                th:title="#{remove_movie}">
-                                            <i class="fa fa-trash-o" style="font-size:20px"></i>
-                                        </button>-->
+                                                th:title="${not movie.haveSeance or movie.movieActive} ? #{remove_movie} : ''">
+                                            <i class="fa fa-trash-o" style="font-size:24px"></i>
+                                        </button>
                                     </span>
                                 </td>
                             </tr>

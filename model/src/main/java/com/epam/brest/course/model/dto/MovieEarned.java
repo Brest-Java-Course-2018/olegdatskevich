@@ -21,6 +21,8 @@ public class MovieEarned {
      */
     private boolean movieActive;
 
+    private boolean haveSeance;
+
     /**
      *
      */
@@ -35,11 +37,13 @@ public class MovieEarned {
      * @param movieActive
      */
     public MovieEarned(final int movieId, final String movieName,
-                       final int earned, final boolean movieActive) {
+                       final int earned, final boolean movieActive,
+                       final boolean haveSeance) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.earned = earned;
         this.movieActive = movieActive;
+        this.haveSeance = haveSeance;
     }
 
     /**
@@ -106,6 +110,14 @@ public class MovieEarned {
         this.movieActive = movieActive;
     }
 
+    public boolean isHaveSeance() {
+        return haveSeance;
+    }
+
+    public void setHaveSeance(boolean haveSeance) {
+        this.haveSeance = haveSeance;
+    }
+
     @Override
     public final String toString() {
         return "\n\tMovieEarned{"
@@ -113,6 +125,7 @@ public class MovieEarned {
                 + ", Name='" + movieName + '\''
                 + ", Earned=" + earned
                 + ", Active=" + movieActive
+                + ", Have seance=" + haveSeance
                 + '}';
     }
 }

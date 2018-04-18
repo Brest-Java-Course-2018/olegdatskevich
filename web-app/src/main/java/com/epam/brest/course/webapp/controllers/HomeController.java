@@ -22,8 +22,7 @@ public class HomeController {
      * Redirect to movies.html.
      * @return - template name.
      */
-    @GetMapping(value = "/*")
-    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/")
     public final String defaultPageRedirect() throws Exception {
         LOGGER.debug("defaultPageRedirect()");
         return "redirect:movies";

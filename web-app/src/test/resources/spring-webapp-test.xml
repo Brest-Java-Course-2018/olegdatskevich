@@ -9,9 +9,17 @@
 
     <context:component-scan base-package="com.epam.brest.course.webapp.controllers"/>
 
-    <!--<bean id="homeController" class="com.epam.brest.course.webapp.controllers.HomeController"/>
+    <bean id="movieService" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.course.service.MovieService"/>
+    </bean>
 
-    <bean id="movieController" class="com.epam.brest.course.webapp.controllers.MovieController"/>-->
+    <bean id="seanceService" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.course.service.SeanceService"/>
+    </bean>
+
+    <!--<bean id="homeController" class="com.epam.brest.course.webapp.controllers.HomeController"/>-->
+
+    <!--<bean id="movieController" class="com.epam.brest.course.webapp.controllers.MovieController"/>-->
 
 
 

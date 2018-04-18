@@ -67,7 +67,7 @@ public class SeanceController {
      * @return - path.
      * @throws ParseException
      */
-    @GetMapping(value = "/seances/?fromDate={fromDate}&?toDate={toDate}")
+    @GetMapping(value = "/seances/{fromDate}/{toDate}")
     public final String filterSeanceByDate(@PathVariable final String fromDate,
                                            @PathVariable final String toDate,
                                            final Model model) throws ParseException {
