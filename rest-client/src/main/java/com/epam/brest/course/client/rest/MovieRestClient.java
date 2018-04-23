@@ -3,6 +3,7 @@ package com.epam.brest.course.client.rest;
 import com.epam.brest.course.client.ServerDataAccessException;
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
+import com.epam.brest.course.model.dto.MoviesTitles;
 import com.epam.brest.course.service.MovieService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Rest client for MOVIE.
@@ -38,24 +38,15 @@ public class MovieRestClient implements MovieService {
     private RestTemplate restTemplate;
 
     @Override
-    @SuppressWarnings("unchecked")
-    public final Collection<Movie> getMovies()
-            throws ServerDataAccessException  {
-        ResponseEntity<List> responseEntity
-                = restTemplate.getForEntity(url, List.class);
-        List<Movie> movies = (List<Movie>)responseEntity.getBody();
-        LOGGER.debug("REST-client getMovies({})", responseEntity);
+    //@SuppressWarnings("unchecked")
+    public final Collection<MoviesTitles> getMoviesTitles()
+            throws ServerDataAccessException, ClassCastException {
+        ResponseEntity<Collection> responseEntity
+                = restTemplate.getForEntity(url + "titles", Collection.class);
+        Collection<MoviesTitles> movies
+                = (Collection<MoviesTitles>)responseEntity.getBody();
+        LOGGER.debug("REST-client getMoviesTitles({})", responseEntity);
         return movies;
-    }
-
-    @Override
-    public final Movie getMovieById(final int movieId)
-            throws ServerDataAccessException {
-        ResponseEntity<Movie> responseEntity = restTemplate
-                .getForEntity(url + "/" + movieId, Movie.class);
-        Movie movie = responseEntity.getBody();
-        LOGGER.debug("REST-client getMovieById({})", responseEntity);
-        return movie;
     }
 
     @Override
@@ -71,11 +62,21 @@ public class MovieRestClient implements MovieService {
     }
 
     @Override
+    public final Movie getMovieById(final int movieId)
+            throws ServerDataAccessException {
+        ResponseEntity<Movie> responseEntity = restTemplate
+                .getForEntity(url + "/" + movieId, Movie.class);
+        Movie movie = responseEntity.getBody();
+        LOGGER.debug("REST-client getMovieById({})", responseEntity);
+        return movie;
+    }
+
+    @Override
     public final Movie addMovie(final Movie movie)
             throws ServerDataAccessException {
         ResponseEntity<Movie> responseEntity
                 = restTemplate.postForEntity(url, movie, Movie.class);
-        Movie result = (Movie)responseEntity.getBody();
+        Movie result = responseEntity.getBody();
         LOGGER.debug("REST-client addMovie({})", responseEntity);
         return result;
     }

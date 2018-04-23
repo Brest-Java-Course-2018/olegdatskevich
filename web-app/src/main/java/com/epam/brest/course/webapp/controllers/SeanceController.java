@@ -1,8 +1,8 @@
 package com.epam.brest.course.webapp.controllers;
 
-import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dao.Seance;
 import com.epam.brest.course.model.dto.MovieEarned;
+import com.epam.brest.course.model.dto.MoviesTitles;
 import com.epam.brest.course.service.MovieService;
 import com.epam.brest.course.service.SeanceService;
 import org.apache.logging.log4j.LogManager;
@@ -92,7 +92,7 @@ public class SeanceController {
     @GetMapping(value = "/seance")
     public final String addSeance(final Model model) throws Exception {
         LOGGER.debug("getAddSeance({})", model);
-        Collection<Movie> movies = movieService.getMovies();
+        Collection<MoviesTitles> movies = movieService.getMoviesTitles();
         model.addAttribute("movies", movies);
         model.addAttribute("seance", new Seance());
         model.addAttribute("isNew", true);
@@ -112,7 +112,7 @@ public class SeanceController {
                                    final Model model) throws Exception {
         LOGGER.debug("postAddSeance({}, {})", seance, result);
         if (result.hasErrors()) {
-            Collection<Movie> movies = movieService.getMovies();
+            Collection<MoviesTitles> movies = movieService.getMoviesTitles();
             model.addAttribute("movies", movies);
             model.addAttribute("seance", seance);
             model.addAttribute("isNew", true);
@@ -134,7 +134,7 @@ public class SeanceController {
                                       final Model model) throws Exception {
         LOGGER.debug("getUpdateSeance({})", id);
         Seance seance = seanceService.getSeanceById(id);
-        Collection<Movie> movies = movieService.getMovies();
+        Collection<MoviesTitles> movies = movieService.getMoviesTitles();
         model.addAttribute("movies", movies);
         model.addAttribute("seance", seance);
         model.addAttribute("isNew", false);
@@ -154,7 +154,7 @@ public class SeanceController {
                                       final Model model) throws Exception {
         LOGGER.debug("postUpdateSeance({}, {})", seance, result);
         if (result.hasErrors()) {
-            Collection<Movie> movies = movieService.getMovies();
+            Collection<MoviesTitles> movies = movieService.getMoviesTitles();
             model.addAttribute("seance", seance);
             model.addAttribute("movies", movies);
             model.addAttribute("isNew", false);

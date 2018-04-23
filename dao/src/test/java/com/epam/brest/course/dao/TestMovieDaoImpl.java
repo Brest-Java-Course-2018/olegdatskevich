@@ -2,6 +2,7 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
+import com.epam.brest.course.model.dto.MoviesTitles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -33,8 +34,8 @@ public class TestMovieDaoImpl {
     private MovieDao movieDao;
 
     @Test
-    public void testGetMovies() {
-        Collection<Movie> movies = movieDao.getMovies();
+    public void testGetMoviesTitles() {
+        Collection<MoviesTitles> movies = movieDao.getMoviesTitles();
         LOGGER.debug("testGetMovies({})", movies);
         assertFalse(movies.isEmpty());
     }
@@ -59,7 +60,7 @@ public class TestMovieDaoImpl {
 
     @Test
     public void testAddMovie() {
-        Collection<Movie> movies = movieDao.getMovies();
+        Collection<MoviesTitles> movies = movieDao.getMoviesTitles();
         int sizeBeforeAdd = movies.size();
         Movie newMovie = movieDao.addMovie(new Movie(
                 "testAddMovie",
@@ -72,7 +73,7 @@ public class TestMovieDaoImpl {
         assertEquals(newMovie.getMovieDescription(),
                 movieDao.getMovieById(addedMovieId).getMovieDescription());
         assertTrue(movieDao.getMovieById(addedMovieId).isMovieActive());
-        assertTrue((sizeBeforeAdd + 1) == movieDao.getMovies().size());
+        assertTrue((sizeBeforeAdd + 1) == movieDao.getMoviesTitles().size());
     }
 
     @Test(expected = DuplicateKeyException.class)

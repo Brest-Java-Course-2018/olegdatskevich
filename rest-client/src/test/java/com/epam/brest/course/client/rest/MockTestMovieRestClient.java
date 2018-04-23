@@ -2,6 +2,7 @@ package com.epam.brest.course.client.rest;
 
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
+import com.epam.brest.course.model.dto.MoviesTitles;
 import com.epam.brest.course.service.MovieService;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -32,6 +33,8 @@ public class MockTestMovieRestClient {
     private RestTemplate mockRestTemplate;
 
     private static final int MOVIE_ID = 1;
+    private static final MoviesTitles MOVIES_TITLES_1 = new MoviesTitles();
+    private static final MoviesTitles MOVIES_TITLES_2 = new MoviesTitles();
     private static final MovieEarned MOVIE_EARNED_1 = new MovieEarned();
     private static final MovieEarned MOVIE_EARNED_2 = new MovieEarned();
     private static final Movie MOVIE_1 = new Movie();
@@ -45,6 +48,11 @@ public class MockTestMovieRestClient {
         MOVIE_EARNED_2.setMovieId(2);
         MOVIE_EARNED_2.setMovieName("REST_CLIENT_MOVIE_2");
         MOVIE_EARNED_2.setEarned(100502);
+
+        MOVIES_TITLES_1.setMovieId(1);
+        MOVIES_TITLES_1.setMovieName("Title1");
+        MOVIES_TITLES_2.setMovieId(2);
+        MOVIES_TITLES_2.setMovieName("Title2");
 
         MOVIE_1.setMovieId(1);
         MOVIE_1.setMovieName("REST_CLIENT_MOVIE_1");
@@ -76,14 +84,14 @@ public class MockTestMovieRestClient {
     }
 
     @Test
-    public void mockTestMoviesClient() {
-        List movies = Arrays.asList(MOVIE_1, MOVIE_2);
-        ResponseEntity entity = new ResponseEntity<>(movies, HttpStatus.OK);
+    public void mockTestMoviesTitlesClient() {
+        Collection moviesTitles = Arrays.asList(MOVIES_TITLES_1, MOVIES_TITLES_2);
+        ResponseEntity entity = new ResponseEntity<>(moviesTitles, HttpStatus.OK);
         expect(mockRestTemplate.getForEntity(anyString(), anyObject()))
                 .andReturn(entity);
         replay(mockRestTemplate);
 
-        Collection<Movie> results = mockMovieService.getMovies();
+        Collection<MoviesTitles> results = mockMovieService.getMoviesTitles();
         assertNotNull(results);
         assertEquals(2, results.size());
     }
@@ -117,6 +125,7 @@ public class MockTestMovieRestClient {
         mockRestTemplate.put(anyString(), anyObject());
         expectLastCall();
         replay(mockRestTemplate);
+
         mockMovieService.updateMovie(MOVIE_1);
     }
 
@@ -125,6 +134,7 @@ public class MockTestMovieRestClient {
         mockRestTemplate.put(anyString(), anyObject());
         expectLastCall();
         replay(mockRestTemplate);
+
         mockMovieService.deleteMovie(MOVIE_ID);
     }
 }

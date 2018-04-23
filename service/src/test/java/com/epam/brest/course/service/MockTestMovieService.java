@@ -3,6 +3,7 @@ package com.epam.brest.course.service;
 import com.epam.brest.course.dao.MovieDao;
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
+import com.epam.brest.course.model.dto.MoviesTitles;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +22,8 @@ import static org.easymock.EasyMock.*;
 public class MockTestMovieService {
 
     private static final int MOVIE_ID = 1;
+    private static final MoviesTitles MOVIES_TITLES
+            = new MoviesTitles(2, "MoviesTitle");
     private static final Movie MOVIE
             = new Movie("TestMovie", "TestMovieDep", true);
     private static final MovieEarned MOVIE_EARNED
@@ -44,10 +47,10 @@ public class MockTestMovieService {
 
     @Test
     public void mockTestGetMovies() {
-        Collection<Movie> movies = Arrays.asList(MOVIE);
-        expect(mockMovieDao.getMovies()).andReturn(movies);
+        Collection<MoviesTitles> movies = Arrays.asList(MOVIES_TITLES);
+        expect(mockMovieDao.getMoviesTitles()).andReturn(movies);
         replay(mockMovieDao);
-        movieService.getMovies();
+        movieService.getMoviesTitles();
     }
 
     @Test

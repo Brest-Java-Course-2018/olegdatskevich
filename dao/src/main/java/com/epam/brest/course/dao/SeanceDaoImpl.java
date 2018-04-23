@@ -128,7 +128,7 @@ public class SeanceDaoImpl implements SeanceDao {
                 .addValue(SEANCE_DATE, seance.getSeanceDate())
                 .addValue(SEANCE_COST, seance.getSeanceCost())
                 .addValue(SEANCE_SOLD, seance.getSeanceSold())
-                .addValue(SEANCE_ACTIVE, seance.isSeanceActive())
+                .addValue(SEANCE_ACTIVE, true)
                 .addValue(MOVIE_ID, seance.getMovieId());
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(insert, namedParameters,

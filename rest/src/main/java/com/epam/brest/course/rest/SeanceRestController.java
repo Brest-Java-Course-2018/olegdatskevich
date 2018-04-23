@@ -36,7 +36,7 @@ public class SeanceRestController {
      */
     @GetMapping(value = "/seances")
     public final Collection<Seance> seances() {
-        LOGGER.debug("REST seances()");
+        LOGGER.debug("REST-server seances()");
         return seanceService.getSeances();
     }
 
@@ -48,7 +48,7 @@ public class SeanceRestController {
     @GetMapping(value = "/seances/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public final Seance seanceById(@PathVariable(value = "id") final int id) {
-        LOGGER.debug("REST seanceById({})", id);
+        LOGGER.debug("REST-server seanceById({})", id);
         return seanceService.getSeanceById(id);
     }
 
@@ -60,7 +60,7 @@ public class SeanceRestController {
     @PostMapping(value = "/seances")
     @ResponseStatus(HttpStatus.CREATED)
     public final Seance addSeance(@RequestBody final Seance seance) {
-        LOGGER.debug("REST addSeance({})", seance);
+        LOGGER.debug("REST-server addSeance({})", seance);
         return seanceService.addSeance(seance);
     }
 
@@ -70,7 +70,7 @@ public class SeanceRestController {
      */
     @PutMapping(value = "/seances")
     public final void updateSeance(@RequestBody final Seance seance) {
-        LOGGER.debug("REST updateSeance({})", seance);
+        LOGGER.debug("REST-server updateSeance({})", seance);
         seanceService.updateSeance(seance);
     }
 
@@ -80,7 +80,7 @@ public class SeanceRestController {
      */
     @PutMapping(value = "/seances/{id}")
     public final void deleteSeance(@PathVariable(value = "id") final int id) {
-        LOGGER.debug("REST deleteSeance({})", id);
+        LOGGER.debug("REST-server deleteSeance({})", id);
         seanceService.deleteSeance(id);
     }
 
@@ -96,7 +96,7 @@ public class SeanceRestController {
             @PathVariable(value = "fromDate") final String fromDate,
             @PathVariable(value = "toDate") final String toDate)
             throws ParseException {
-        LOGGER.debug("REST filterByDate({} - {})", fromDate, toDate);
+        LOGGER.debug("REST-server filterByDate({} - {})", fromDate, toDate);
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate = formatDate.parse(fromDate);
         Date endDate = formatDate.parse(toDate);

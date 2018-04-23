@@ -2,6 +2,7 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
+import com.epam.brest.course.model.dto.MoviesTitles;
 
 import java.util.Collection;
 
@@ -11,10 +12,10 @@ import java.util.Collection;
 public interface MovieService {
 
     /**
-     * Getting all movies from DB.
+     * Getting all movies titles from DB.
      * @return - collection of movies.
      */
-    Collection<Movie> getMovies();
+    Collection<MoviesTitles> getMoviesTitles();
 
     /**
      * Getting one movie from BD.

@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Rest client for SEANCE.
@@ -38,12 +37,13 @@ public class SeanceRestClient implements SeanceService {
     private RestTemplate restTemplate;
 
     @Override
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     public final Collection<Seance> getSeances()
             throws ServerDataAccessException {
-        ResponseEntity<List> responseEntity
-                = restTemplate.getForEntity(url, List.class);
-        List<Seance> seances = (List<Seance>) responseEntity.getBody();
+        ResponseEntity<Collection> responseEntity
+                = restTemplate.getForEntity(url, Collection.class);
+        Collection<Seance> seances = (Collection<Seance>) responseEntity.getBody();
+        LOGGER.debug("REST-client getSeanceById({})", responseEntity);
         return seances;
     }
 
@@ -53,7 +53,7 @@ public class SeanceRestClient implements SeanceService {
         ResponseEntity<Seance> responseEntity = restTemplate
                 .getForEntity(url + "/" + seanceId, Seance.class);
         Seance seance = responseEntity.getBody();
-        LOGGER.debug("REST-client getSeanceById({})", responseEntity);
+        LOGGER.debug("REST-client getSeances({})", seance);
         return seance;
     }
 
@@ -62,8 +62,8 @@ public class SeanceRestClient implements SeanceService {
             throws ServerDataAccessException {
         ResponseEntity<Seance> responseEntity
                 = restTemplate.postForEntity(url, seance, Seance.class);
-        Seance result = (Seance) responseEntity.getBody();
-        LOGGER.debug("REST-client addSeance({})", responseEntity);
+        Seance result = responseEntity.getBody();
+        LOGGER.debug("REST-client addSeance({})", result);
         return result;
     }
 
@@ -89,10 +89,12 @@ public class SeanceRestClient implements SeanceService {
             throws ServerDataAccessException {
         LOGGER.debug("REST-client filterSeanceByDate({} - {})",
                 fromDate, toDate);
-        ResponseEntity<List> responseEntity
+        ResponseEntity<Collection> responseEntity
                 = restTemplate.getForEntity(
-                        url + "/" + fromDate + "/" + toDate, List.class);
-        List<Seance> seances = (List<Seance>) responseEntity.getBody();
+                        url + "/" + fromDate + "/" + toDate,
+                Collection.class);
+        Collection<Seance> seances
+                = (Collection<Seance>) responseEntity.getBody();
         return seances;
     }
 }

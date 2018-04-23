@@ -2,6 +2,7 @@ package com.epam.brest.course.rest;
 
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
+import com.epam.brest.course.model.dto.MoviesTitles;
 import com.epam.brest.course.service.MovieService;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -42,6 +43,7 @@ public class MockTestMovieController {
 
     private static final int MOVIE_ID = 1;
     private static final MovieEarned MOVIE_EARNED = new MovieEarned();
+    private static final MoviesTitles MOVIES_TITLES = new MoviesTitles();
     private static final Movie MOVIE = new Movie();
 
     @BeforeClass
@@ -50,6 +52,9 @@ public class MockTestMovieController {
         MOVIE_EARNED.setMovieName("REST_MOVIE");
         MOVIE_EARNED.setEarned(100500);
         MOVIE_EARNED.setMovieActive(true);
+
+        MOVIES_TITLES.setMovieId(MOVIE_ID);
+        MOVIES_TITLES.setMovieName("MOVIE_TITLE");
 
         MOVIE.setMovieId(MOVIE_ID);
         MOVIE.setMovieName("REST_MOVIE");
@@ -86,6 +91,21 @@ public class MockTestMovieController {
                 .andExpect(jsonPath("$[0].movieName", Matchers.is("REST_MOVIE")))
                 .andExpect(jsonPath("$[0].earned", Matchers.is(100500)))
                 .andExpect(jsonPath("$[0].movieActive", Matchers.is(true)));
+    }
+
+    @Test
+    public void mockTestMoviesTitles() throws Exception {
+        expect(mockMovieService.getMoviesTitles()).andReturn(Arrays.asList(MOVIES_TITLES));
+        replay(mockMovieService);
+
+        mockMvc.perform(
+                get("/moviestitles")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$[0].movieId", Matchers.is(MOVIE_ID)))
+                .andExpect(jsonPath("$[0].movieName", Matchers.is(MOVIES_TITLES.getMovieName())));
     }
 
 

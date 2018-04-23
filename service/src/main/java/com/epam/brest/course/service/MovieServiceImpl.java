@@ -3,6 +3,7 @@ package com.epam.brest.course.service;
 import com.epam.brest.course.dao.MovieDao;
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
+import com.epam.brest.course.model.dto.MoviesTitles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,10 @@ public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
     @Override
-    public final Collection<Movie> getMovies() throws DataAccessException {
-        Collection<Movie> movies = movieDao.getMovies();
-        LOGGER.debug("getMovies({})", movies);
+    public final Collection<MoviesTitles> getMoviesTitles()
+            throws DataAccessException {
+        Collection<MoviesTitles> movies = movieDao.getMoviesTitles();
+        LOGGER.debug("getMoviesTitles({})", movies);
         return movies;
     }
 

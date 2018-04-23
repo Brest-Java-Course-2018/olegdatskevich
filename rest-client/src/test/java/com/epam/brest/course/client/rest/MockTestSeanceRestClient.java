@@ -17,8 +17,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 import static org.easymock.EasyMock.*;
 import static org.easymock.EasyMock.anyObject;
@@ -31,31 +29,31 @@ import static org.junit.Assert.assertNotNull;
 public class MockTestSeanceRestClient {
 
     @Autowired
-    private SeanceService mockSeanceService;
+    private SeanceService seanceService;
 
     @Autowired
     private RestTemplate mockRestTemplate;
 
-    private static final int Seance_ID = 1;
-    private static final Seance Seance_1 = new Seance();
-    private static final Seance Seance_2 = new Seance();
+    private static final int SEANCE_ID = 1;
+    private static final Seance SEANCE_1 = new Seance();
+    private static final Seance SEANCE_2 = new Seance();
 
     @BeforeClass
     public static void beforeClass() throws ParseException {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
-        Seance_1.setSeanceId(1);
-        Seance_1.setSeanceDate(formatDate.parse("2018-05-01"));
-        Seance_1.setSeanceCost(5);
-        Seance_1.setSeanceSold(25);
-        Seance_1.setSeanceActive(true);
-        Seance_1.setMovieId(1);
+        SEANCE_1.setSeanceId(1);
+        SEANCE_1.setSeanceDate(formatDate.parse("2018-05-01"));
+        SEANCE_1.setSeanceCost(5);
+        SEANCE_1.setSeanceSold(25);
+        SEANCE_1.setSeanceActive(true);
+        SEANCE_1.setMovieId(1);
 
-        Seance_2.setSeanceId(1);
-        Seance_2.setSeanceDate(formatDate.parse("2018-05-02"));
-        Seance_2.setSeanceCost(6);
-        Seance_2.setSeanceSold(26);
-        Seance_2.setSeanceActive(true);
-        Seance_2.setMovieId(2);
+        SEANCE_2.setSeanceId(1);
+        SEANCE_2.setSeanceDate(formatDate.parse("2018-05-02"));
+        SEANCE_2.setSeanceCost(6);
+        SEANCE_2.setSeanceSold(26);
+        SEANCE_2.setSeanceActive(true);
+        SEANCE_2.setMovieId(2);
     }
 
     @After
@@ -66,52 +64,52 @@ public class MockTestSeanceRestClient {
 
     @Test
     public void mockTestSeancesClient() {
-        List<Seance> seances = Arrays.asList(Seance_1, Seance_2);
+        Collection<Seance> seances = Arrays.asList(SEANCE_1, SEANCE_2);
         ResponseEntity entity = new ResponseEntity<>(seances, HttpStatus.OK);
         expect(mockRestTemplate.getForEntity(anyString(), anyObject()))
                 .andReturn(entity);
         replay(mockRestTemplate);
 
-        Collection<Seance> results = mockSeanceService.getSeances();
+        Collection<Seance> results = seanceService.getSeances();
         assertNotNull(results);
         assertEquals(2, results.size());
     }
 
     @Test
     public void mockTestFilterByDateClient() {
-        List<Seance> seancesByDate = Arrays.asList(Seance_1, Seance_2);
+        Collection<Seance> seancesByDate = Arrays.asList(SEANCE_1, SEANCE_2);
         ResponseEntity entity = new ResponseEntity<>(seancesByDate, HttpStatus.OK);
         expect(mockRestTemplate.getForEntity(anyString(), anyObject())).andReturn(entity);
         replay(mockRestTemplate);
 
-        Collection<Seance> results = mockSeanceService.filterSeanceByDate(
-                Seance_1.getSeanceDate(), Seance_2.getSeanceDate());
+        Collection<Seance> results = seanceService.filterSeanceByDate(
+                SEANCE_1.getSeanceDate(), SEANCE_2.getSeanceDate());
         assertNotNull(results);
         assertEquals(2, results.size());
     }
 
     @Test
     public void mockTestSeanceByIdClient() {
-        ResponseEntity entity = new ResponseEntity<>(Seance_1, HttpStatus.FOUND);
+        ResponseEntity entity = new ResponseEntity<>(SEANCE_1, HttpStatus.FOUND);
         expect(mockRestTemplate.getForEntity(anyString(), anyObject()))
                 .andReturn(entity);
         replay(mockRestTemplate);
 
-        Seance result = mockSeanceService.getSeanceById(Seance_1.getSeanceId());
+        Seance result = seanceService.getSeanceById(SEANCE_1.getSeanceId());
         assertNotNull(result);
-        assertEquals(Seance_1, result);
+        assertEquals(SEANCE_1, result);
     }
 
     @Test
     public void mockTestAddSeanceClient() {
-        ResponseEntity entity = new ResponseEntity<>(Seance_1, HttpStatus.OK);
+        ResponseEntity entity = new ResponseEntity<>(SEANCE_1, HttpStatus.OK);
         expect(mockRestTemplate.postForEntity(anyString(), anyObject(), anyObject()))
                 .andReturn(entity);
         replay(mockRestTemplate);
 
-        Seance result = mockSeanceService.addSeance(Seance_1);
+        Seance result = seanceService.addSeance(SEANCE_1);
         assertNotNull(result);
-        assertEquals(Seance_1, result);
+        assertEquals(SEANCE_1, result);
     }
 
     @Test
@@ -119,7 +117,8 @@ public class MockTestSeanceRestClient {
         mockRestTemplate.put(anyString(), anyObject());
         expectLastCall();
         replay(mockRestTemplate);
-        mockSeanceService.updateSeance(Seance_1);
+
+        seanceService.updateSeance(SEANCE_1);
     }
 
     @Test
@@ -127,6 +126,7 @@ public class MockTestSeanceRestClient {
         mockRestTemplate.put(anyString(), anyObject());
         expectLastCall();
         replay(mockRestTemplate);
-        mockSeanceService.deleteSeance(Seance_ID);
+
+        seanceService.deleteSeance(SEANCE_ID);
     }
 }

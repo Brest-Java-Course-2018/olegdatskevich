@@ -2,6 +2,7 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
+import com.epam.brest.course.model.dto.MoviesTitles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,12 +74,12 @@ public class MovieDaoImpl implements MovieDao {
     private String delete;
 
     @Override
-    public final Collection<Movie> getMovies() {
-        Collection<Movie> movies = namedParameterJdbcTemplate
+    public final Collection<MoviesTitles> getMoviesTitles() {
+        Collection<MoviesTitles> movies = namedParameterJdbcTemplate
                 .getJdbcOperations()
                 .query(moviesSelect,
-                        BeanPropertyRowMapper.newInstance(Movie.class));
-        LOGGER.debug("getMovies({})", movies);
+                        BeanPropertyRowMapper.newInstance(MoviesTitles.class));
+        LOGGER.debug("getMoviesTitles({})", movies);
         return movies;
     }
 
@@ -113,6 +114,7 @@ public class MovieDaoImpl implements MovieDao {
         namedParameterJdbcTemplate
                 .update(insert, namedParameters, generatedKey);
         movie.setMovieId(generatedKey.getKey().intValue());
+        movie.setMovieActive(true);
         LOGGER.debug("addMovieOut({})", movie);
         return movie;
     }
