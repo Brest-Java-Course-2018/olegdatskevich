@@ -54,8 +54,6 @@ public class MockTestSeanceController {
         Date date = formatDate.parse(DATE);
         Seance.setSeanceId(Seance_ID);
         Seance.setSeanceDate(new Date(date.getTime()));
-        System.out.println(new Date(date.getTime()));
-        System.out.println(date);
         Seance.setSeanceCost(5);
         Seance.setSeanceSold(25);
         Seance.setSeanceActive(true);

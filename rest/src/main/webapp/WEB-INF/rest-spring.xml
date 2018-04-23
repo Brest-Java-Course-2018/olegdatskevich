@@ -15,7 +15,12 @@
 
     <mvc:annotation-driven/>
     <!-- Component scan for @Controller, @Service... annotations -->
-    <context:component-scan base-package="com.epam.brest.course.rest"/>
+    <context:component-scan base-package="com.epam.brest.course"/>
+
+    <bean id="namedParameterJdbcTemplate"
+          class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
 
     <!--Sample in memory database for application-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -26,8 +31,8 @@
     </bean>
 
     <jdbc:initialize-database>
-        <jdbc:script location="classpath:sample-db/create-table.sql"/>
-        <jdbc:script location="classpath:sample-db/data-script.sql"/>
+        <jdbc:script location="classpath:create-table.sql"/>
+        <jdbc:script location="classpath:data-script.sql"/>
     </jdbc:initialize-database>
 
     <!--<context:property-placeholder location="classpath:application.properties"/>-->
@@ -35,7 +40,7 @@
         <property name="locations">
             <list>
                 <value>classpath:sql.properties</value>
-                <value>classpath:sample-db/db.properties</value>
+                <value>classpath:db.properties</value>
             </list>
         </property>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
@@ -43,27 +48,6 @@
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="namedParameterJdbcTemplate"
-          class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="movieDao" class="com.epam.brest.course.dao.MovieDaoImpl">
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="seanceDao" class="com.epam.brest.course.dao.SeanceDaoImpl">
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="movieService" class="com.epam.brest.course.service.MovieServiceImpl">
-        <property name="movieDao" ref="movieDao"/>
-    </bean>
-
-    <bean id="seanceService" class="com.epam.brest.course.service.SeanceServiceImpl">
-        <property name="seanceDao" ref="seanceDao"/>
     </bean>
 
 </beans>

@@ -3,6 +3,7 @@ package com.epam.brest.course.dao;
 import com.epam.brest.course.model.dao.Seance;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Date;
@@ -18,6 +20,7 @@ import java.util.Date;
 /**
  * Implementation of DAO layer for seance.
  */
+@Component
 public class SeanceDaoImpl implements SeanceDao {
 
     /**
@@ -29,6 +32,7 @@ public class SeanceDaoImpl implements SeanceDao {
     /**
      * NamedParameterJdbcTemplate.
      */
+    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     /**
@@ -94,15 +98,6 @@ public class SeanceDaoImpl implements SeanceDao {
      */
     @Value("${seance.delete}")
     private String delete;
-
-    /**
-     * Setter for NamedParameterJdbcTemplate.
-     * @param namedParameterJdbcTemplate - namedParam.
-     */
-    public final void setNamedParameterJdbcTemplate(
-            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
 
     @Override
     public final Collection<Seance> getSeances() {

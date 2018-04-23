@@ -4,6 +4,7 @@ import com.epam.brest.course.model.dao.Seance;
 import com.epam.brest.course.service.SeanceService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,15 +27,8 @@ public class SeanceRestController {
     /**
      * seanceService.
      */
+    @Autowired
     private SeanceService seanceService;
-
-    /**
-     * Setter for var seanceService.
-     * @param seanceService
-     */
-    public final void setSeanceService(final SeanceService seanceService) {
-        this.seanceService = seanceService;
-    }
 
     /**
      * Getting list of seances for today.

@@ -64,7 +64,7 @@ public class MockTestMovieRestClient {
 
     @Test
     public void mockTestMoviesEarnedClient() {
-        List moviesEarned = Arrays.asList(MOVIE_EARNED_1, MOVIE_EARNED_2);
+        Collection moviesEarned = Arrays.asList(MOVIE_EARNED_1, MOVIE_EARNED_2);
         ResponseEntity entity = new ResponseEntity<>(moviesEarned, HttpStatus.OK);
         expect(mockRestTemplate.getForEntity(anyString(), anyObject()))
                 .andReturn(entity);

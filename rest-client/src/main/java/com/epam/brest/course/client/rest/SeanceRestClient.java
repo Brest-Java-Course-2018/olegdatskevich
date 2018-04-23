@@ -5,7 +5,10 @@ import com.epam.brest.course.model.dao.Seance;
 import com.epam.brest.course.service.SeanceService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
@@ -15,6 +18,7 @@ import java.util.List;
 /**
  * Rest client for SEANCE.
  */
+@Service
 public class SeanceRestClient implements SeanceService {
 
     /**
@@ -25,22 +29,13 @@ public class SeanceRestClient implements SeanceService {
     /**
      * URL for SEANCES.
      */
+    @Value("${seanceRestClientUrl}")
     private String url;
     /**
      * For interaction with REST module.
      */
+    @Autowired
     private RestTemplate restTemplate;
-
-    /**
-     * Constructor of SeanceRestClient
-     * @param url - url request.
-     * @param restTemplate - REST Template
-     */
-    public SeanceRestClient(final String url,
-                            final  RestTemplate restTemplate) {
-        this.url = url;
-        this.restTemplate = restTemplate;
-    }
 
     @Override
     @SuppressWarnings("unchecked")
@@ -90,9 +85,9 @@ public class SeanceRestClient implements SeanceService {
     @Override
     @SuppressWarnings("unchecked")
     public final Collection<Seance> filterSeanceByDate(final Date fromDate,
-                                                 final Date toDate)
+                                                       final Date toDate)
             throws ServerDataAccessException {
-        LOGGER.debug("REST-client filterSeanceByDate(from:{}, to:{})",
+        LOGGER.debug("REST-client filterSeanceByDate({} - {})",
                 fromDate, toDate);
         ResponseEntity<List> responseEntity
                 = restTemplate.getForEntity(

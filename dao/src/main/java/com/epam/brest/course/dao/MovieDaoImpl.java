@@ -4,6 +4,7 @@ import com.epam.brest.course.model.dao.Movie;
 import com.epam.brest.course.model.dto.MovieEarned;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -13,12 +14,14 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
 /**
  * Implementation of DAO layer for movies.
  */
+@Component
 public class MovieDaoImpl implements MovieDao {
 
     /**
@@ -30,6 +33,7 @@ public class MovieDaoImpl implements MovieDao {
     /**
      * NamedParameterJdbcTemplate.
      */
+    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     /**
@@ -67,15 +71,6 @@ public class MovieDaoImpl implements MovieDao {
      */
     @Value("${movie.delete}")
     private String delete;
-
-    /**
-     * Setter for NamedParameterJdbcTemplate.
-     * @param namedParameterJdbcTemplate - namedParam.
-     */
-    public final void setNamedParameterJdbcTemplate(
-            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
 
     @Override
     public final Collection<Movie> getMovies() {

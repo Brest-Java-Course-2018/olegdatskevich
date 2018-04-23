@@ -5,6 +5,7 @@ import com.epam.brest.course.model.dto.MovieEarned;
 import com.epam.brest.course.service.MovieService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,15 +25,8 @@ public class MovieRestController {
     /**
      *
      */
+    @Autowired
     private MovieService movieService;
-
-    /**
-     *
-     * @param movieService
-     */
-    public final void setMovieService(final MovieService movieService) {
-        this.movieService = movieService;
-    }
 
     /**
      * Get list of movies.

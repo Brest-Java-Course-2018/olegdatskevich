@@ -10,63 +10,19 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:sql.properties</value>
-                <value>classpath:application.properties</value>
-                <value>classpath:rest.properties</value>
-                <value>classpath:db.properties</value>
-            </list>
-        </property>
-    </bean>
-
-    <import resource="sample-db-spring.xml"/>
-
     <!-- Use spring servlet for all requests, including static resources -->
     <mvc:default-servlet-handler/>
+
     <!-- Use @MVC annotations -->
     <mvc:annotation-driven/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <!-- Component scan for @Controller, @Service... annotations -->
-    <context:component-scan base-package="com.epam.brest.course.*"/>
+    <context:component-scan base-package="com.epam.brest.course.webapp"/>
+    <context:component-scan base-package="com.epam.brest.course.client"/>
 
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/*" />
-            <ref bean="localeChangeInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
-
-    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-        <property name="paramName" value="lang"/>
-    </bean>
-
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="en" />
-    </bean>
-
-    <bean id="messageSource"
-          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="/WEB-INF/locales/messages" />
-        <property name="defaultEncoding" value="UTF-8" />
-    </bean>
-
-    <bean id="namedParameterJdbcTemplate"
-          class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-
+    <!--Bean validator (JSR 303)-->
     <bean id="validator"
           class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
@@ -77,7 +33,6 @@
         <property name="suffix" value=".html"/>
         <property name="templateMode" value="HTML"/>
     </bean>
-
     <!-- Thymeleaf Template Engine (Spring4-specific version) -->
     <bean id="templateEngine"
           class="org.thymeleaf.spring4.SpringTemplateEngine">
@@ -87,7 +42,6 @@
             </set>
         </property>
     </bean>
-
     <!-- Thymeleaf View Resolver - implementation of Spring's ViewResolver interface -->
     <bean id="viewResolver"
           class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
@@ -95,24 +49,37 @@
         <property name="characterEncoding" value="UTF-8"/>
     </bean>
 
-    <bean id="movieDao" class="com.epam.brest.course.dao.MovieDaoImpl">
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:rest.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
-    <bean id="seanceDao" class="com.epam.brest.course.dao.SeanceDaoImpl">
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    <!--REST-client-->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
     </bean>
 
-    <bean id="movieService" class="com.epam.brest.course.service.MovieServiceImpl">
-        <property name="movieDao" ref="movieDao"/>
+    <!--l10n & i18n-->
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="lang"/>
+    </bean>
+    <!--l10n & i18n-->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+    <!--l10n & i18n-->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="/WEB-INF/locales/messages" />
+        <property name="defaultEncoding" value="UTF-8" />
     </bean>
 
-    <bean id="seanceService" class="com.epam.brest.course.service.SeanceServiceImpl">
-        <property name="seanceDao" ref="seanceDao"/>
-    </bean>
-
-    <!--<bean id="movieService" class="com.epam.brest.course.client.rest.MovieRestClient">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.departments}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>-->
 </beans>

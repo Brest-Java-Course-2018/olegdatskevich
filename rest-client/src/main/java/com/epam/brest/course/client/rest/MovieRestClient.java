@@ -6,7 +6,10 @@ import com.epam.brest.course.model.dto.MovieEarned;
 import com.epam.brest.course.service.MovieService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
@@ -15,6 +18,7 @@ import java.util.List;
 /**
  * Rest client for MOVIE.
  */
+@Service
 public class MovieRestClient implements MovieService {
 
     /**
@@ -25,21 +29,13 @@ public class MovieRestClient implements MovieService {
     /**
      * URL for MOVIES.
      */
+    @Value("${movieRestClientUrl}")
     private String url;
     /**
      * For interaction with REST module.
      */
+    @Autowired
     private RestTemplate restTemplate;
-
-    /**
-     * Constructor of MovieRestClient
-     * @param url - url request.
-     * @param restTemplate - REST Template
-     */
-    public MovieRestClient(final String url, final RestTemplate restTemplate) {
-        this.url = url;
-        this.restTemplate = restTemplate;
-    }
 
     @Override
     @SuppressWarnings("unchecked")
@@ -66,10 +62,10 @@ public class MovieRestClient implements MovieService {
     @SuppressWarnings("unchecked")
     public final Collection<MovieEarned> moviesEarned()
             throws ServerDataAccessException {
-        ResponseEntity<List> responseEntity
-                = restTemplate.getForEntity(url, List.class);
-        List<MovieEarned> moviesEarned
-                = (List<MovieEarned>)responseEntity.getBody();
+        ResponseEntity<Collection> responseEntity
+                = restTemplate.getForEntity(url, Collection.class);
+        Collection<MovieEarned> moviesEarned
+                = (Collection<MovieEarned>)responseEntity.getBody();
         LOGGER.debug("REST-client moviesEarned({})", responseEntity);
         return moviesEarned;
     }

@@ -7,22 +7,14 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-    <context:component-scan base-package="com.epam.brest.course.rest"/>
-
     <bean id="movieService" class="org.easymock.EasyMock" factory-method="createMock">
         <constructor-arg value="com.epam.brest.course.service.MovieService"/>
-    </bean>
-
-    <bean id="movieRestController" class="com.epam.brest.course.rest.MovieRestController">
-        <property name="movieService" ref="movieService"/>
     </bean>
 
     <bean id="seanceService" class="org.easymock.EasyMock" factory-method="createMock">
         <constructor-arg value="com.epam.brest.course.service.SeanceService"/>
     </bean>
 
-    <bean id="seanceRestController" class="com.epam.brest.course.rest.SeanceRestController">
-        <property name="seanceService" ref="seanceService"/>
-    </bean>
+    <context:component-scan base-package="com.epam.brest.course.rest"/>
 
 </beans>

@@ -14,12 +14,17 @@ Web application for cinema. The application is designed to work with movies and 
 
        $mvn clean install  
 
-## Run  
+## Run REST-service  
 
-       $mvn jetty:run  
+       $mvn -pl rest/ jetty:run  
        
-       http://localhost:8080/  
+       http://localhost:8088/movies  
+       
+## Run WEB-application  
 
+       $mvn -pl web-app/ jetty:run  
+       
+       http://localhost:8080/movies  
 ## 
 EPAM Java Course, Brest 2018  
 by **Oleg Datskevich**  

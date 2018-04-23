@@ -122,9 +122,10 @@
                                        th:title="#{edit_seance}">
                                         <i class="fa fa-edit" style="font-size:24px"></i>
                                     </a>
+                                    <!--th:data-target="${seance.seanceDate <= #dates.createNow()} ? '#warningRemove' : '#confirmRemoveModal'"-->
+
                                     <span data-toggle="modal"
                                           data-target="#confirmRemoveModal"
-                                          th:data-target="${seance.seanceDate <= #dates.createNow()} ? '#warningRemove' : '#confirmRemoveModal'"
                                           th:attr="data-id=${seance.seanceId}, data-date=${seance.seanceDate}">
                                         <button
                                                 th:if="${seance.seanceActive} ? 'disabled' : ''"
