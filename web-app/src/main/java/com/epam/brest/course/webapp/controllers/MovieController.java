@@ -49,7 +49,7 @@ public class MovieController {
      * @return
      */
     @GetMapping(value = "/movie")
-    public final String addMovie(final Model model) {
+    public final String getAddMovie(final Model model) {
         LOGGER.debug("GetAddMovie({})", model);
         model.addAttribute("movie", new Movie());
         model.addAttribute("isNew", true);
@@ -85,7 +85,7 @@ public class MovieController {
      * @return
      */
     @GetMapping(value = "/movie/{id}")
-    public final String updateMovie(
+    public final String getUpdateMovie(
             @PathVariable final int id, final Model model) {
         LOGGER.debug("GetUpdateMovie({}, {})", id, model);
         Movie movie = movieService.getMovieById(id);
