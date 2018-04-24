@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Seance REST controller.
@@ -38,6 +39,27 @@ public class SeanceRestController {
     public final Collection<Seance> seances() {
         LOGGER.debug("REST-server seances()");
         return seanceService.getSeances();
+    }
+
+    /**
+     * Filtration seances by dates.
+     * @param fromDate - start date.
+     * @param toDate - end date.
+     * @return - collection of seances.
+     * @throws ParseException - exception for parsing date.
+     */
+    @GetMapping(value = "/seances/{fromDate}/{toDate}")
+    public final Collection<Seance> filterByDate(
+            @PathVariable(value = "fromDate") final String fromDate,
+            @PathVariable(value = "toDate") final String toDate)
+            throws ParseException {
+        LOGGER.debug("REST-server filterByDate({} - {})", fromDate, toDate);
+        SimpleDateFormat formatDate
+                = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy",
+                Locale.US);
+        Date startDate = formatDate.parse(fromDate);
+        Date endDate = formatDate.parse(toDate);
+        return seanceService.filterSeanceByDate(startDate, endDate);
     }
 
     /**
@@ -82,24 +104,5 @@ public class SeanceRestController {
     public final void deleteSeance(@PathVariable(value = "id") final int id) {
         LOGGER.debug("REST-server deleteSeance({})", id);
         seanceService.deleteSeance(id);
-    }
-
-    /**
-     * Filtration seances by dates.
-     * @param fromDate - start date.
-     * @param toDate - end date.
-     * @return - collection of seances.
-     * @throws ParseException - exception for parsing date.
-     */
-    @GetMapping(value = "/seances/{fromDate}/{toDate}")
-    public final Collection<Seance> filterByDate(
-            @PathVariable(value = "fromDate") final String fromDate,
-            @PathVariable(value = "toDate") final String toDate)
-            throws ParseException {
-        LOGGER.debug("REST-server filterByDate({} - {})", fromDate, toDate);
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
-        Date startDate = formatDate.parse(fromDate);
-        Date endDate = formatDate.parse(toDate);
-        return seanceService.filterSeanceByDate(startDate, endDate);
     }
 }

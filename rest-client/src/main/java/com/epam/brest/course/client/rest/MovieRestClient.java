@@ -38,7 +38,7 @@ public class MovieRestClient implements MovieService {
     private RestTemplate restTemplate;
 
     @Override
-    //@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public final Collection<MoviesTitles> getMoviesTitles()
             throws ServerDataAccessException, ClassCastException {
         ResponseEntity<Collection> responseEntity
@@ -93,6 +93,5 @@ public class MovieRestClient implements MovieService {
             throws ServerDataAccessException {
         LOGGER.debug("REST-client deleteMovie({})", movieId);
         restTemplate.put(url + "/" + movieId, movieId);
-        //restTemplate.put(url + "/{}", movieId);
     }
 }

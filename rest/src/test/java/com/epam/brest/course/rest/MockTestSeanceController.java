@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
 
 import static org.easymock.EasyMock.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,22 +43,22 @@ public class MockTestSeanceController {
 
     private MockMvc mockMvc;
 
-    private static final int Seance_ID = 1;
-    private static final Seance Seance = new Seance();
-    private static final String DATE = "2018-05-01 00:00:00.0";
-    private static final String FROM_DATE = "2018-05-01";
-    private static final String TO_DATE = "2018-05-02";
+    private static final int SEANCE_ID = 1;
+    private static final Seance SEANCE = new Seance();
+    private static final String DATE = "2018-05-01-12:30:00";
+    private static final String FROM_DATE = "Mon Apr 02 00:00:00 MSK 2018";
+    private static final String TO_DATE = "Mon Apr 03 23:00:00 MSK 2018";
 
     @BeforeClass
     public static void beforeClass() throws ParseException {
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
         Date date = formatDate.parse(DATE);
-        Seance.setSeanceId(Seance_ID);
-        Seance.setSeanceDate(new Date(date.getTime()));
-        Seance.setSeanceCost(5);
-        Seance.setSeanceSold(25);
-        Seance.setSeanceActive(true);
-        Seance.setMovieId(2);
+        SEANCE.setSeanceId(SEANCE_ID);
+        SEANCE.setSeanceDate(new Date(date.getTime()));
+        SEANCE.setSeanceCost(5);
+        SEANCE.setSeanceSold(25);
+        SEANCE.setSeanceActive(true);
+        SEANCE.setMovieId(2);
     }
 
     @Before
@@ -76,10 +77,10 @@ public class MockTestSeanceController {
 
     @Test
     public void mockTestSeances() throws Exception {
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
         Date date = formatDate.parse(DATE);
 
-        expect(mockSeanceService.getSeances()).andReturn(Arrays.asList(Seance));
+        expect(mockSeanceService.getSeances()).andReturn(Arrays.asList(SEANCE));
         replay(mockSeanceService);
 
         mockMvc.perform(
@@ -88,7 +89,7 @@ public class MockTestSeanceController {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$[0]seanceId", Matchers.is(Seance_ID)))
+                .andExpect(jsonPath("$[0]seanceId", Matchers.is(SEANCE_ID)))
                 .andExpect(jsonPath("$[0]seanceDate", Matchers.is(date.getTime())))
                 .andExpect(jsonPath("$[0]seanceCost", Matchers.is(5)))
                 .andExpect(jsonPath("$[0]seanceSold", Matchers.is(25)))
@@ -98,19 +99,19 @@ public class MockTestSeanceController {
 
     @Test
     public void mockTestSeanceById() throws Exception {
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
         Date date = formatDate.parse(DATE);
 
-        expect(mockSeanceService.getSeanceById(Seance_ID)).andReturn(Seance);
+        expect(mockSeanceService.getSeanceById(SEANCE_ID)).andReturn(SEANCE);
         replay(mockSeanceService);
 
         mockMvc.perform(
-                get("/seances/" + Seance_ID)
+                get("/seances/" + SEANCE_ID)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("seanceId", Matchers.is(Seance_ID)))
+                .andExpect(jsonPath("seanceId", Matchers.is(SEANCE_ID)))
                 .andExpect(jsonPath("seanceDate", Matchers.is(date.getTime())))
                 .andExpect(jsonPath("seanceCost", Matchers.is(5)))
                 .andExpect(jsonPath("seanceSold", Matchers.is(25)))
@@ -120,10 +121,10 @@ public class MockTestSeanceController {
 
     @Test
     public void mockTestAddSeance() throws Exception {
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
         Date date = formatDate.parse(DATE);
 
-        expect(mockSeanceService.addSeance(anyObject())).andReturn(Seance);
+        expect(mockSeanceService.addSeance(anyObject())).andReturn(SEANCE);
         replay(mockSeanceService);
 
         mockMvc.perform(
@@ -134,7 +135,7 @@ public class MockTestSeanceController {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("seanceId", Matchers.is(Seance_ID)))
+                .andExpect(jsonPath("seanceId", Matchers.is(SEANCE_ID)))
                 .andExpect(jsonPath("seanceDate", Matchers.is(date.getTime())))
                 .andExpect(jsonPath("seanceCost", Matchers.is(5)))
                 .andExpect(jsonPath("seanceSold", Matchers.is(25)))
@@ -159,12 +160,12 @@ public class MockTestSeanceController {
 
     @Test
     public void mockTestDeleteMovie() throws Exception {
-        mockSeanceService.deleteSeance(Seance_ID);
+        mockSeanceService.deleteSeance(SEANCE_ID);
         expectLastCall();
         replay(mockSeanceService);
 
         mockMvc.perform(
-                put("/seances/" + Seance_ID)
+                put("/seances/" + SEANCE_ID)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -172,13 +173,16 @@ public class MockTestSeanceController {
 
     @Test
     public void mockTestFilterByDate() throws Exception {
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = formatDate.parse(DATE);
+        SimpleDateFormat formatDate
+                = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy",
+                Locale.US);
         Date fromDate = formatDate.parse(FROM_DATE);
         Date toDate = formatDate.parse(TO_DATE);
+        SimpleDateFormat formatResultDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+        Date date = formatResultDate.parse(DATE);
 
         expect(mockSeanceService.filterSeanceByDate(fromDate, toDate))
-                .andReturn(Arrays.asList(Seance));
+                .andReturn(Arrays.asList(SEANCE));
         replay(mockSeanceService);
 
         mockMvc.perform(
@@ -187,7 +191,7 @@ public class MockTestSeanceController {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$[0]seanceId", Matchers.is(Seance_ID)))
+                .andExpect(jsonPath("$[0]seanceId", Matchers.is(SEANCE_ID)))
                 .andExpect(jsonPath("$[0]seanceDate", Matchers.is(date.getTime())))
                 .andExpect(jsonPath("$[0]seanceCost", Matchers.is(5)))
                 .andExpect(jsonPath("$[0]seanceSold", Matchers.is(25)))

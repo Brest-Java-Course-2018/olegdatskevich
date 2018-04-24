@@ -125,33 +125,6 @@
                                    id="field_seanceId"
                                    name="field_seanceId"
                                    type="hidden"/>
-
-                            <!--<div th:if="${not isNew}">
-                                <input th:field="*{seanceDate}"
-                                       id="field_seanceDate"
-                                       name="field_seanceDate"
-                                       type="hidden"/>
-                                <input th:field="*{seanceSold}"
-                                       id="field_seanceSold"
-                                       name="field_seanceSold"
-                                       type="hidden"/>
-                                <input th:field="*{seanceActive}"
-                                       id="field_seanceActive"
-                                       name="field_seanceActive"
-                                       type="hidden"/>
-                            </div>-->
-
-                            <!--<div class="form-group row">
-                                <label for="example-date-input" class="col-2 col-form-label">Date</label>
-                                <div class="col-10">
-                                    <input class="form-control"
-                                           th:field="*{seanceDate}"
-                                           type="date"
-                                           value="2011-08-19"
-                                           id="example-date-input">
-                                </div>
-                            </div>-->
-
                             <div th:if="${isNew}"
                                  class="input-append date form_datetime">
                                 <label th:text="#{date_time}">Date&Time</label>

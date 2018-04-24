@@ -37,13 +37,32 @@ public class SeanceRestClient implements SeanceService {
     private RestTemplate restTemplate;
 
     @Override
-    //@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public final Collection<Seance> getSeances()
             throws ServerDataAccessException {
         ResponseEntity<Collection> responseEntity
                 = restTemplate.getForEntity(url, Collection.class);
-        Collection<Seance> seances = (Collection<Seance>) responseEntity.getBody();
+        Collection<Seance> seances
+                = (Collection<Seance>) responseEntity.getBody();
         LOGGER.debug("REST-client getSeanceById({})", responseEntity);
+        return seances;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public final Collection<Seance> filterSeanceByDate(final Date fromDate,
+                                                       final Date toDate)
+            throws ServerDataAccessException {
+        LOGGER.debug("REST-client filterSeanceByDate({} - {})",
+                fromDate, toDate);
+        ResponseEntity<Collection> responseEntity
+                = restTemplate.getForEntity(
+                url + "/" + fromDate + "/" + toDate,
+                Collection.class);
+        LOGGER.debug("REST-client filterSeanceByDate responseEntity({})",
+                responseEntity);
+        Collection<Seance> seances
+                = (Collection<Seance>) responseEntity.getBody();
         return seances;
     }
 
@@ -79,22 +98,5 @@ public class SeanceRestClient implements SeanceService {
             throws ServerDataAccessException {
         LOGGER.debug("REST-client deleteSeance({})", seanceId);
         restTemplate.put(url + "/" + seanceId, seanceId);
-        //restTemplate.put(url + "/{}", seanceId);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public final Collection<Seance> filterSeanceByDate(final Date fromDate,
-                                                       final Date toDate)
-            throws ServerDataAccessException {
-        LOGGER.debug("REST-client filterSeanceByDate({} - {})",
-                fromDate, toDate);
-        ResponseEntity<Collection> responseEntity
-                = restTemplate.getForEntity(
-                        url + "/" + fromDate + "/" + toDate,
-                Collection.class);
-        Collection<Seance> seances
-                = (Collection<Seance>) responseEntity.getBody();
-        return seances;
     }
 }

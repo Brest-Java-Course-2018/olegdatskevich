@@ -70,7 +70,8 @@ public class SeanceController {
     @GetMapping(value = "/seances/{fromDate}/{toDate}")
     public final String filterSeanceByDate(@PathVariable final String fromDate,
                                            @PathVariable final String toDate,
-                                           final Model model) throws ParseException {
+                                           final Model model)
+            throws ParseException {
         LOGGER.debug("filterSeanceByDateWebApp({} - {})", fromDate, toDate);
         SimpleDateFormat formatDate
                 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
