@@ -51,7 +51,7 @@ public class SeanceController {
      */
     @GetMapping(value = "/seances")
     public final String getSeances(final Model model) throws Exception {
-        LOGGER.debug("getSeancesWebApp({})", model);
+        LOGGER.debug("getSeances()");
         Collection<MovieEarned> movies = movieService.moviesEarned();
         Collection<Seance> seances = seanceService.getSeances();
         model.addAttribute("movies", movies);
@@ -91,8 +91,8 @@ public class SeanceController {
      * @return - path.
      */
     @GetMapping(value = "/seance")
-    public final String addSeance(final Model model) throws Exception {
-        LOGGER.debug("getAddSeance({})", model);
+    public final String getAddSeance(final Model model) throws Exception {
+        LOGGER.debug("getAddSeance()");
         Collection<MoviesTitles> movies = movieService.getMoviesTitles();
         model.addAttribute("movies", movies);
         model.addAttribute("seance", new Seance());
@@ -131,7 +131,7 @@ public class SeanceController {
      * @return - path.
      */
     @GetMapping(value = "/seance/{id}")
-    public final String updateSeance(@PathVariable final int id,
+    public final String getUpdateSeance(@PathVariable final int id,
                                       final Model model) throws Exception {
         LOGGER.debug("getUpdateSeance({})", id);
         Seance seance = seanceService.getSeanceById(id);

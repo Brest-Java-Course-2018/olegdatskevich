@@ -70,6 +70,7 @@ public class MovieController {
                                     final Model model) {
         LOGGER.debug("PostAddMovie({}, {})", movie, result);
         if (result.hasErrors()) {
+            model.addAttribute("movie", movie);
             model.addAttribute("isNew", true);
             return "movie";
         } else {
@@ -108,6 +109,7 @@ public class MovieController {
                                     final Model model) {
         LOGGER.debug("PostUpdateMovie({}, {})", movie, result);
         if (result.hasErrors()) {
+            model.addAttribute("movie", movie);
             model.addAttribute("isNew", false);
             return "movie";
         } else {

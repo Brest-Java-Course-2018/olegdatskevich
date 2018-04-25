@@ -51,9 +51,6 @@
                 <a href="seances?lang=ru" class="badge badge-light">ru</a>
             </h6>
         </div>
-        <div th:text="${seance.seanceDate <= #dates.createNow()}">
-
-        </div>
     </nav>
 
 <header>
@@ -127,7 +124,6 @@
                                     </a>
                                     <!--th:data-target="${seance.seanceDate <= #dates.createNow()} ? '#warningRemove' : '#confirmRemoveModal'"-->
                                     <span data-toggle="modal"
-                                          th:data-target="${seance.seanceDate <= #dates.createNow()} ? '#warningRemove' : '#confirmRemoveModal'"
                                           data-target="#confirmRemoveModal"
                                           th:attr="data-id=${seance.seanceId}, data-date=${seance.seanceDate}">
                                         <button

@@ -1,7 +1,5 @@
 package com.epam.brest.course.model.dao;
 
-//import com.fasterxml.jackson.annotation.JsonFormat;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.PositiveOrZero;
@@ -21,8 +19,6 @@ public class Seance {
      * Date of the seance.
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Europe/Minsk")
-    //@NotNull(message = "Seance date can not be null.")
     private Date seanceDate;
 
     /**
@@ -177,5 +173,31 @@ public class Seance {
                 + ", Active=" + seanceActive
                 + ", movieId=" + movieId
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Seance seance = (Seance) o;
+
+        if (seanceId != seance.seanceId) return false;
+        if (seanceCost != seance.seanceCost) return false;
+        if (seanceSold != seance.seanceSold) return false;
+        if (seanceActive != seance.seanceActive) return false;
+        if (movieId != seance.movieId) return false;
+        return seanceDate != null ? seanceDate.equals(seance.seanceDate) : seance.seanceDate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = seanceId;
+        result = 31 * result + (seanceDate != null ? seanceDate.hashCode() : 0);
+        result = 31 * result + seanceCost;
+        result = 31 * result + seanceSold;
+        result = 31 * result + (seanceActive ? 1 : 0);
+        result = 31 * result + movieId;
+        return result;
     }
 }
