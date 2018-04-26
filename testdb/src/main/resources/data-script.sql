@@ -5,9 +5,9 @@ INSERT INTO movie (movieId, movieName, movieDescription, movieActive) VALUES (4,
 INSERT INTO movie (movieId, movieName, movieDescription, movieActive) VALUES (5, 'Inception', 'Inception', true);
 INSERT INTO movie (movieId, movieName, movieDescription, movieActive) VALUES (6, 'Fight Club', 'Fight', true);
 INSERT INTO movie (movieId, movieName, movieDescription, movieActive) VALUES (7, 'The Godfather', 'godfather', true);
-INSERT INTO movie (movieId, movieName, movieDescription, movieActive) VALUES (8, 'Pulp Fiction', 'Pulp', false);
+INSERT INTO movie (movieId, movieName, movieDescription, movieActive) VALUES (8, 'Pulp Fiction', 'Pulp', true);
 INSERT INTO movie (movieId, movieName, movieDescription, movieActive) VALUES (9, 'Interstellar', 'Inter', true);
-INSERT INTO movie (movieId, movieName, movieDescription, movieActive) VALUES (10, 'Alien', 'Alien 1', false);
+INSERT INTO movie (movieId, movieName, movieDescription, movieActive) VALUES (10, 'Alien', 'Alien 1', true);
 
 INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (1, '2018-04-02 12:00:00', 2, 65, true, 4);
 INSERT INTO seance (seanceId, seanceDate, seanceCost, seanceSold, seanceActive, movieId) VALUES (2, '2018-04-02 14:00:00', 2, 80, true, 4);

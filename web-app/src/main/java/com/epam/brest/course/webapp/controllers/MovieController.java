@@ -93,7 +93,6 @@ public class MovieController {
         model.addAttribute("movie", movie);
         model.addAttribute("isNew", false);
         return "movie";
-
     }
 
     /**
@@ -124,7 +123,8 @@ public class MovieController {
      * @return
      */
     @GetMapping(value = "/movie/{id}/delete")
-    public final String deleteMovie(@PathVariable final int id) {
+    public final String deleteMovie(@PathVariable final int id)
+            throws Exception {
         LOGGER.debug("deleteMovie({})", id);
         movieService.deleteMovie(id);
         return "redirect:/movies";

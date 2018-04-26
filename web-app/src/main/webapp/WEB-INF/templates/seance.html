@@ -125,6 +125,12 @@
                                    id="field_seanceId"
                                    name="field_seanceId"
                                    type="hidden"/>
+
+                            <input id="field_seanceActive"
+                                   name="field_seanceActive"
+                                   type="hidden"
+                                   th:field="*{seanceActive}"/>
+
                             <div th:if="${isNew}"
                                  class="input-append date form_datetime">
                                 <label th:text="#{date_time}">Date&Time</label>

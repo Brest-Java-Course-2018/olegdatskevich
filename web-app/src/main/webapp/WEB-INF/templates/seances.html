@@ -61,7 +61,9 @@
         </span>
         <span class="mr-auto navbar-nav">
             <ul class="pl-2 pr-2 mt-2 mb-2">
-                <label for="datefilter" class="form-control-label">Filter by date:</label>
+                <label for="datefilter"
+                       class="form-control-label"
+                       th:text="#{filter}">Filter by date:</label>
                 <input type="text" id="datefilter" name="datefilter" value="" />
             </ul>
         </span>
@@ -111,7 +113,7 @@
                                         th:text="${movie.movieName}">Terminator</td>
                                 <td th:text="${'$ ' + seance.seanceCost}">$ 5</td>
                                 <td th:text="${seance.seanceSold + ' tickets'}">55 tickets</td>
-                                <td th:text="${seance.seanceActive} ? '' : 'Canceled'">Active/Canceled</td>
+                                <td th:text="${seance.seanceActive} ? '' : #{canceled}">Active/Canceled</td>
                                 <td class="text-right">
                                     <a href="seance.html"
                                        th:href="@{|/seance/${seance.seanceId}|}"
@@ -122,16 +124,15 @@
                                        th:title="#{edit_seance}">
                                         <i class="fa fa-edit" style="font-size:24px"></i>
                                     </a>
-                                    <!--th:data-target="${seance.seanceDate <= #dates.createNow()} ? '#warningRemove' : '#confirmRemoveModal'"-->
                                     <span data-toggle="modal"
                                           data-target="#confirmRemoveModal"
-                                          th:attr="data-id=${seance.seanceId}, data-date=${seance.seanceDate}">
-                                        <button
-                                                th:if="${seance.seanceActive} ? 'disabled' : ''"
+                                          th:data-target="${seance.seanceDate <= #dates.createNow().getTime()} ? '#warningRemove' : '#confirmRemoveModal'"
+                                          th:attr="data-id=${seance.seanceId}, data-date=${#dates.format(seance.seanceDate, 'dd MMMM yyyy HH:mm')}">
+                                        <button role="button"
+                                                th:disabled="${not seance.seanceActive}"
                                                 class="btn btn-outline-dark btn-sm"
                                                 data-toggle="tooltip"
                                                 data-placement="top"
-                                                title="Remove seance"
                                                 th:title="#{remove_seance}">
                                             <i class="fa fa-trash-o" style="font-size:24px"></i>
                                         </button>
@@ -233,11 +234,11 @@
     <script src="../../resources/static/js/bootstrap.min.js"
             th:src="@{/resources/static/js/bootstrap.min.js}"></script>
 
-    <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>-->
     <script type="text/javascript" src="http://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="http://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 
-    <script type="text/javascript">
+    <script>
         $(function() {
 
             $('input[name="datefilter"]').daterangepicker({
@@ -258,7 +259,7 @@
                 $(this).val('');
             });
         });
-    </script>
+</script>
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()

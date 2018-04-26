@@ -150,8 +150,14 @@
                     Are you sure to deactivate this movie?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <a id="deleteUrl" href="#" class="btn btn-danger">Remove</a>
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                            th:text="#{close_button}">Cancel</button>
+                    <a id="deleteUrl"
+                       href="#"
+                       class="btn btn-danger"
+                       th:text="#{remove_button}">Remove</a>
                 </div>
             </div>
         </div>
@@ -167,11 +173,12 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
     $('#confirmRemoveModal').on('show.bs.modal', function (event) {
        var target = $(event.relatedTarget)
        $(this).find('.modal-body').text('Please confirm delete movie: "' + target.data('name') + '"')
        document.getElementById('deleteUrl').href = '/movie/' + target.data('id') + '/delete';
-   })
+    })
 </script>
 </body>
 </html>

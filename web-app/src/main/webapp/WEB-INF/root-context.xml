@@ -67,6 +67,13 @@
         </property>
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*" />
+            <ref bean="localeChangeInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!--l10n & i18n-->
     <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
         <property name="paramName" value="lang"/>
