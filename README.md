@@ -16,7 +16,16 @@ Web application for cinema. The application is designed to work with movies and 
 
 ## Run REST-service  
 
-       $mvn -pl rest/ jetty:run  
+       $mvn -pl rest/ jetty:run 
+#### Read movie       
+       $ curl -v localhost:8088/movies
+       $ curl -v localhost:8088/movies/1
+#### Create movie  
+       $ curl -H "Content-Type: application/json" -X POST -d '{"movieName":"Movie 42","movieDescription":"Ha-Ha"}' -v localhost:8088/movies
+#### Update movie  
+       $ curl -X PUT -H "Content-Type: application/json" -d '{"movieId":"1","movieName":"New Movie","movieDescription":"Ho-Ho"}' -v localhost:8088/movies
+#### Delete movie  
+       $ curl -X PUT -H "Content-Type: application/json" -d '{}' -v localhost:8088/movies/1
        
        http://localhost:8088/movies  
        

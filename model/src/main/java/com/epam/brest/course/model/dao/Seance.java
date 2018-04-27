@@ -1,5 +1,6 @@
 package com.epam.brest.course.model.dao;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.PositiveOrZero;
@@ -19,6 +20,9 @@ public class Seance {
      * Date of the seance.
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "Europe/Minsk",
+            shape = JsonFormat.Shape.NUMBER)
     private Date seanceDate;
 
     /**
@@ -30,7 +34,7 @@ public class Seance {
     /**
      * Count of sold tickets.
      */
-    @PositiveOrZero(message = "Cost can not be negative.")
+    @PositiveOrZero(message = "Sold can not be negative.")
     private int seanceSold;
 
     /**
@@ -68,96 +72,96 @@ public class Seance {
     }
 
     /**
-     *
-     * @return
+     * Getter for Seance ID.
+     * @return seance ID.
      */
     public final int getSeanceId() {
         return seanceId;
     }
 
     /**
-     *
-     * @param seanceId
+     * Setter for Seance ID
+     * @param seanceId - ID.
      */
     public final void setSeanceId(final int seanceId) {
         this.seanceId = seanceId;
     }
 
     /**
-     *
-     * @return
+     * Getter for Seance date.
+     * @return seance date.
      */
     public final Date getSeanceDate() {
         return seanceDate;
     }
 
     /**
-     *
-     * @param seanceDate
+     * Setter for seanceDate.
+     * @param seanceDate - seance date.
      */
     public final void setSeanceDate(final Date seanceDate) {
         this.seanceDate = seanceDate;
     }
 
     /**
-     *
-     * @return
+     * Getter for Seance cost.
+     * @return seance cost.
      */
     public final int getSeanceCost() {
         return seanceCost;
     }
 
     /**
-     *
-     * @param seanceCost
+     * Setter for seanceCost.
+     * @param seanceCost - cost of seance.
      */
     public final void setSeanceCost(final int seanceCost) {
         this.seanceCost = seanceCost;
     }
 
     /**
-     *
-     * @return
+     * Getter for Seance sold.
+     * @return seance sold.
      */
     public final int getSeanceSold() {
         return seanceSold;
     }
 
     /**
-     *
-     * @param seanceSold
+     * Setter  for seanceSold.
+     * @param seanceSold - sold tickets.
      */
     public final void setSeanceSold(final int seanceSold) {
         this.seanceSold = seanceSold;
     }
 
     /**
-     *
-     * @return
+     * Getter for Seance activity.
+     * @return activity.
      */
     public final boolean isSeanceActive() {
         return seanceActive;
     }
 
     /**
-     *
-     * @param seanceActive
+     * Setter for seanceActive.
+     * @param seanceActive - activity of seance.
      */
     public final void setSeanceActive(final boolean seanceActive) {
         this.seanceActive = seanceActive;
     }
 
     /**
-     *
-     * @return
+     * Getter for movie ID.
+     * @return movie ID.
      */
     public final int getMovieId() {
         return movieId;
     }
 
     /**
-     *
-     * @param movieId
+     * Setter of movie ID.
+     * @param movieId - movie ID.
      */
     public final void setMovieId(final int movieId) {
         this.movieId = movieId;
@@ -176,28 +180,28 @@ public class Seance {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public final boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Seance seance = (Seance) o;
 
-        if (seanceId != seance.seanceId) return false;
-        if (seanceCost != seance.seanceCost) return false;
-        if (seanceSold != seance.seanceSold) return false;
-        if (seanceActive != seance.seanceActive) return false;
-        if (movieId != seance.movieId) return false;
-        return seanceDate != null ? seanceDate.equals(seance.seanceDate) : seance.seanceDate == null;
+        if (seanceId != seance.seanceId) {
+            return false;
+        }
+        return seanceDate != null
+                ? seanceDate.equals(seance.seanceDate)
+                : seance.seanceDate == null;
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = seanceId;
         result = 31 * result + (seanceDate != null ? seanceDate.hashCode() : 0);
-        result = 31 * result + seanceCost;
-        result = 31 * result + seanceSold;
-        result = 31 * result + (seanceActive ? 1 : 0);
-        result = 31 * result + movieId;
         return result;
     }
 }

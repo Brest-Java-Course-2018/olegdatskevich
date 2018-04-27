@@ -5,9 +5,11 @@ import com.epam.brest.course.model.dto.MovieEarned;
 import com.epam.brest.course.model.dto.MoviesTitles;
 import com.epam.brest.course.service.MovieService;
 import com.epam.brest.course.service.SeanceService;
+//import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,21 +35,22 @@ public class SeanceController {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Service of movie
+     * Service of movie.
      */
     @Autowired
     private MovieService movieService;
 
     /**
-     * Service of seance
+     * Service of seance.
      */
     @Autowired
     private SeanceService seanceService;
 
     /**
-     * Get mapping of
-     * @param model
-     * @return
+     * Get seances.
+     * @param model - model of data
+     * @return - path.
+     * @throws Exception exception handling.
      */
     @GetMapping(value = "/seances")
     public final String getSeances(final Model model) throws Exception {
@@ -60,19 +63,19 @@ public class SeanceController {
     }
 
     /**
-     *
-     * @param fromDate
-     * @param toDate
-     * @param model
+     * Get seance by dates.
+     * @param fromDate - start date.
+     * @param toDate - end date.
+     * @param model - model of data.
      * @return - path.
-     * @throws ParseException
+     * @throws ParseException - exception of parsing date.
      */
     @GetMapping(value = "/seances/{fromDate}/{toDate}")
     public final String filterSeanceByDate(@PathVariable final String fromDate,
                                            @PathVariable final String toDate,
                                            final Model model)
             throws ParseException {
-        LOGGER.debug("filterSeanceByDateWebApp({} - {})", fromDate, toDate);
+        LOGGER.debug("filterSeanceByDate({} - {})", fromDate, toDate);
         SimpleDateFormat formatDate
                 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
         Date startDate = formatDate.parse(fromDate);
@@ -86,9 +89,10 @@ public class SeanceController {
     }
 
     /**
-     *
-     * @param model
+     * New seance for posting.
+     * @param model - model of data.
      * @return - path.
+     * @throws Exception exception handling.
      */
     @GetMapping(value = "/seance")
     public final String getAddSeance(final Model model) throws Exception {
@@ -101,11 +105,12 @@ public class SeanceController {
     }
 
     /**
-     *
+     * Post seance.
      * @param seance
-     * @param result
-     * @param model
+     * @param result - validation result.
+     * @param model - model of data.
      * @return - path
+     * @throws Exception exception handling.
      */
     @PostMapping(value = "/seance")
     public final String addSeance(@Valid final Seance seance,
@@ -129,6 +134,7 @@ public class SeanceController {
      * @param id - seance's ID for output.
      * @param model - data for HTML-page.
      * @return - path.
+     * @throws Exception exception handling.
      */
     @GetMapping(value = "/seance/{id}")
     public final String getUpdateSeance(@PathVariable final int id,
@@ -148,6 +154,7 @@ public class SeanceController {
      * @param result - validation result.
      * @param model - data for HTML-page.
      * @return - path.
+     * @throws Exception exception handling.
      */
     @PostMapping(value = "/seance/{id}")
     public final String updateSeance(@Valid final Seance seance,
@@ -170,6 +177,7 @@ public class SeanceController {
      * Delete controller for seance.
      * @param id - seance's ID for delete.
      * @return path.
+     * @throws Exception exception handling.
      */
     @GetMapping(value = "/seance/{id}/delete")
     public final String deleteSeance(@PathVariable final int id)

@@ -19,6 +19,7 @@ public class HomeController {
     /**
      * Redirect to movies.html.
      * @return - template name.
+     * @throws Exception exception handling.
      */
     @GetMapping(value = "/")
     public final String defaultPageRedirect() throws Exception {

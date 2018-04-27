@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.Collection;
 
+/**
+ * Movies Controller for web-app.
+ */
 @Controller
 public class MovieController {
 
@@ -25,15 +28,15 @@ public class MovieController {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     *
+     * Service of movies.
      */
     @Autowired
     private MovieService movieService;
 
     /**
-     *
-     * @param model
-     * @return
+     * Get movies list.
+     * @param model model of data.
+     * @return url path.
      */
     @GetMapping(value = "/movies")
     public final String getMovies(final Model model) {
@@ -44,9 +47,9 @@ public class MovieController {
     }
 
     /**
-     *
-     * @param model
-     * @return
+     * New movie for post.
+     * @param model model of data.
+     * @return url path.
      */
     @GetMapping(value = "/movie")
     public final String getAddMovie(final Model model) {
@@ -58,11 +61,11 @@ public class MovieController {
     }
 
     /**
-     *
-     * @param movie
-     * @param result
-     * @param model
-     * @return
+     * Post movie.
+     * @param movie - new movie.
+     * @param result - validation result
+     * @param model - model of data.
+     * @return url path.
      */
     @PostMapping(value = "/movie")
     public final String addMovie(@Valid final Movie movie,
@@ -80,10 +83,10 @@ public class MovieController {
     }
 
     /**
-     *
-     * @param id
-     * @param model
-     * @return
+     * Get-update controller for movie.
+     * @param id - movie ID for update.
+     * @param model - model of data.
+     * @return url path.
      */
     @GetMapping(value = "/movie/{id}")
     public final String getUpdateMovie(
@@ -96,11 +99,11 @@ public class MovieController {
     }
 
     /**
-     *
-     * @param movie
-     * @param result
-     * @param model
-     * @return
+     * Post update movie.
+     * @param movie - movie for update.
+     * @param result - validation result.
+     * @param model model of data.
+     * @return url path.
      */
     @PostMapping(value = "/movie/{id}")
     public final String updateMovie(@Valid final Movie movie,
@@ -118,9 +121,10 @@ public class MovieController {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Remove movie.
+     * @param id - id of movie for delete.
+     * @return url path.
+     * @throws Exception exception handling.
      */
     @GetMapping(value = "/movie/{id}/delete")
     public final String deleteMovie(@PathVariable final int id)

@@ -8,10 +8,13 @@ import org.springframework.web.client.ResponseErrorHandler;
 import java.io.IOException;
 
 /**
- *
+ * Custom error handler.
  */
 public class CustomResponseErrorHandler implements ResponseErrorHandler {
 
+    /**
+     * Response of handled error.
+     */
     private ResponseErrorHandler errorHandler
             = new DefaultResponseErrorHandler();
 

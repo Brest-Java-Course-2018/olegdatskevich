@@ -44,7 +44,7 @@ public class MovieRestClient implements MovieService {
         ResponseEntity<Collection> responseEntity
                 = restTemplate.getForEntity(url + "titles", Collection.class);
         Collection<MoviesTitles> movies
-                = (Collection<MoviesTitles>)responseEntity.getBody();
+                = (Collection<MoviesTitles>) responseEntity.getBody();
         LOGGER.debug("REST-client getMoviesTitles({})", responseEntity);
         return movies;
     }
@@ -56,7 +56,7 @@ public class MovieRestClient implements MovieService {
         ResponseEntity<Collection> responseEntity
                 = restTemplate.getForEntity(url, Collection.class);
         Collection<MovieEarned> moviesEarned
-                = (Collection<MovieEarned>)responseEntity.getBody();
+                = (Collection<MovieEarned>) responseEntity.getBody();
         LOGGER.debug("REST-client moviesEarned({})", responseEntity);
         return moviesEarned;
     }

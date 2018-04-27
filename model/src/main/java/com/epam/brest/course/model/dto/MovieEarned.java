@@ -110,11 +110,19 @@ public class MovieEarned {
         this.movieActive = movieActive;
     }
 
-    public boolean isHaveSeance() {
+    /**
+     * Getter for haveSeance.
+     * @return will be a seance.
+     */
+    public final boolean isHaveSeance() {
         return haveSeance;
     }
 
-    public void setHaveSeance(boolean haveSeance) {
+    /**
+     * Setter for haveSeance.
+     * @param haveSeance movie has seance?
+     */
+    public final void setHaveSeance(final boolean haveSeance) {
         this.haveSeance = haveSeance;
     }
 

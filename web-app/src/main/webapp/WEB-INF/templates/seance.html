@@ -133,73 +133,58 @@
 
                             <div th:if="${isNew}"
                                  class="input-append date form_datetime">
-                                <label th:text="#{date_time}">Date&Time</label>
+                                <label th:text="#{date_time}">
+                                    Date&Time
+                                </label>
                                 <span class="add-on">
                                     <i class="fa fa-calendar"></i>
                                 </span>
-                                <div>
-                                    <input th:field="*{seanceDate}"
-                                           th:class="${#fields.hasErrors('seanceDate')}
+                                <input th:field="*{seanceDate}"
+                                       th:class="${#fields.hasErrors('seanceDate')}
                                            ? 'form-control is-invalid' : 'form-control'"
-                                           size="16"
-                                           type="datetime-local"
-                                           value=""
-                                           readonly>
-                                </div>
-                                <div th:if="${#fields.hasErrors('seanceDate')}"
-                                     class="invalid-feedback"
-                                     th:errors="*{seanceDate}">
-                                    [ERRORS]
-                                </div>
+                                       size="16"
+                                       type="datetime-local"
+                                       value=""
+                                       readonly>
                             </div>
 
                             <div th:if="${isNew}"
                                  class="form-group">
                                 <label for="seanceCost"
-                                       th:text="#{cost}">Cost</label>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                    <input type="text"
-                                           th:field="*{seanceCost}"
-                                           th:placeholder="#{input_seance_cost}"
-                                           th:class="${#fields.hasErrors('seanceCost')} ? 'form-control is-invalid' : 'form-control'"
-                                           class="form-control"
-                                           id="seanceCost">
-                                    <!--<div th:if="${#fields.hasErrors('seanceCost')}"
-                                         class="invalid-feedback"
-                                         th:text="#{seance_cost_error}">
-                                        [ERROR]
-                                    </div>-->
-                                    <div>
-                                        <label th:if="${#fields.hasErrors('seanceCost')}"
-                                               class="invalid-feedback"
-                                               th:text="#{seance_cost_error}"
-                                               for="seanceCost">
-                                            [ERROR]
-                                        </label>
-                                    </div>
-
+                                       th:text="#{cost}">
+                                    Cost
+                                </label>
+                                <input type="number"
+                                       th:field="*{seanceCost}"
+                                       th:placeholder="#{input_seance_cost}"
+                                       th:class="${#fields.hasErrors('seanceCost')} ? 'form-control is-invalid' : 'form-control'"
+                                       class="form-control"
+                                       id="seanceCost">
+                                <div th:if="${#fields.hasErrors('seanceCost')}"
+                                     class="invalid-feedback"
+                                     th:text="#{seance_cost_error}">
+                                    [ERROR]
                                 </div>
                             </div>
 
                             <div th:if="${not isNew}"
                                  class="form-group">
-                                <label for="seanceSold"
-                                       th:text="#{sold_tickets}">Sold tickets</label>
-                                <div class="input-group-prepend">
+                                    <label for="seanceSold"
+                                           th:text="#{sold_tickets}">
+                                        Sold tickets
+                                    </label>
                                     <input type="number"
                                            th:field="*{seanceSold}"
+                                           th:placeholder="#{input_seance_sold}"
                                            th:class="${#fields.hasErrors('seanceSold')} ? 'form-control is-invalid' : 'form-control'"
                                            class="form-control"
                                            id="seanceSold">
-                                </div>
-                                <div th:if="${#fields.hasErrors('seanceSold')}"
-                                     class="invalid-feedback"
-                                     th:errors="*{seanceSold}">
-                                    [ERRORS]
-                                </div>
+                                    <div th:if="${#fields.hasErrors('seanceSold')}"
+                                         class="invalid-feedback"
+                                         th:text="#{seance_sold_error}">
+                                        [ERRORS]
+                                    </div>
                             </div>
-
 
                             <div class="form-group">
                                 <label for="movieChose"
@@ -214,11 +199,6 @@
                                         Movie title
                                     </option>
                                 </select>
-                                <div th:if="${#fields.hasErrors('movieId')}"
-                                     class="invalid-feedback"
-                                     th:errors="*{movieId}">
-                                    [ERRORS]
-                                </div>
                             </div>
 
                             <div th:if="${not isNew}">
@@ -265,6 +245,5 @@
         todayBtn: true,
     });
 </script>
-
 </body>
 </html>

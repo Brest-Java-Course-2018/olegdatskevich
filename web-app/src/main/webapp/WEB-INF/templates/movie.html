@@ -106,11 +106,6 @@
                                    type="hidden"
                                    th:field="*{movieId}"/>
 
-                            <input id="field_movieActive"
-                                   name="field_movieActive"
-                                   type="hidden"
-                                   th:field="*{movieActive}"/>
-
                             <div class="form-group">
                                 <label class="form-control-label"
                                        for="movieNameInput"
@@ -148,6 +143,7 @@
                                      th:errors="*{movieDescription}">[ERRORS]
                                 </div>
                             </div>
+
                             <div th:if="${not isNew}">
                                 <h4>
                                     <span th:class="${movie.movieActive} ? 'badge badge-success' : 'badge badge-danger'"
@@ -157,14 +153,23 @@
                                     </span>
                                 </h4>
                             </div>
-                            <!--<div class="form-group form-check">
+
+                            <div>
+                                <input id="field_movieActive"
+                                       name="field_movieActive"
+                                       type="hidden"
+                                       th:field="*{movieActive}"/>
+                            </div>
+
+                            <!--<div class="form-group form-check"
+                                 th:if="${not isNew and not movie.movieActive}">
                                 <input th:field="*{movieActive}"
                                        th:if="${movieActive} ? 'checked' : ''"
                                        type="checkbox"
                                        class="form-check-input"
                                        id="movieActivity">
                                 <label class="form-check-label" for="movieActivity">
-                                    Active movie
+                                    Activate movie
                                 </label>
                             </div>-->
                         </form>

@@ -55,64 +55,64 @@ public class Movie {
     }
 
     /**
-     *
-     * @return
+     * Getter for movieId.
+     * @return movieId.
      */
     public final Integer getMovieId() {
         return movieId;
     }
 
     /**
-     *
-     * @param movieId
+     * Setter for movieId.
+     * @param movieId - movie ID.
      */
     public final void setMovieId(final Integer movieId) {
         this.movieId = movieId;
     }
 
     /**
-     *
-     * @return
+     * Getter for movieName.
+     * @return movie title.
      */
     public final String getMovieName() {
         return movieName;
     }
 
     /**
-     *
-     * @param movieName
+     * Setter for title.
+     * @param movieName movie title.
      */
     public final void setMovieName(final String movieName) {
         this.movieName = movieName;
     }
 
     /**
-     *
-     * @return
+     * Getter for movieDescription.
+     * @return movieDescription.
      */
     public final String getMovieDescription() {
         return movieDescription;
     }
 
     /**
-     *
-     * @param movieDescription
+     * Setter for movieDescription.
+     * @param movieDescription - description of movie.
      */
     public final void setMovieDescription(final String movieDescription) {
         this.movieDescription = movieDescription;
     }
 
     /**
-     *
-     * @return
+     * Getter for movieActive.
+     * @return - activity of movie.
      */
     public final boolean isMovieActive() {
         return movieActive;
     }
 
     /**
-     *
-     * @param movieActive
+     * Setter for movieActive.
+     * @param movieActive - activity of movie.
      */
     public final void setMovieActive(final boolean movieActive) {
         this.movieActive = movieActive;
@@ -129,25 +129,28 @@ public class Movie {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public final boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Movie movie = (Movie) o;
 
-        if (movieId != movie.movieId) return false;
-        if (movieActive != movie.movieActive) return false;
-        if (movieName != null ? !movieName.equals(movie.movieName) : movie.movieName != null)
+        if (movieId != movie.movieId) {
             return false;
-        return movieDescription != null ? movieDescription.equals(movie.movieDescription) : movie.movieDescription == null;
+        }
+        return movieName != null
+                ? movieName.equals(movie.movieName)
+                : movie.movieName == null;
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int result = movieId;
         result = 31 * result + (movieName != null ? movieName.hashCode() : 0);
-        result = 31 * result + (movieDescription != null ? movieDescription.hashCode() : 0);
-        result = 31 * result + (movieActive ? 1 : 0);
         return result;
     }
 }
