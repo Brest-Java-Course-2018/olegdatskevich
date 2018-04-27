@@ -1,6 +1,5 @@
 package com.epam.brest.course.model.dao;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.PositiveOrZero;
@@ -20,9 +19,9 @@ public class Seance {
      * Date of the seance.
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",
-            timezone = "Europe/Minsk",
-            shape = JsonFormat.Shape.NUMBER)
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",
+//            timezone = "Europe/Minsk",
+//            shape = JsonFormat.Shape.NUMBER)
     private Date seanceDate;
 
     /**

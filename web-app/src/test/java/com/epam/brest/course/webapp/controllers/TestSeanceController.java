@@ -6,17 +6,15 @@ import com.epam.brest.course.model.dto.MovieEarned;
 import com.epam.brest.course.model.dto.MoviesTitles;
 import com.epam.brest.course.service.MovieService;
 import com.epam.brest.course.service.SeanceService;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import io.florianlopes.spring.test.web.servlet.request.MockMvcRequestBuilderUtils;
+//import io.florianlopes.spring.test.web.servlet.request.MockMvcRequestBuilderUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+//import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,7 +30,6 @@ import java.util.Locale;
 import static org.easymock.EasyMock.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -54,7 +51,6 @@ public class TestSeanceController {
     private SeanceService mockSeanceService;
 
     private MockMvc mockMvc;
-    private MockMvc mockMvc2;
 
     private static final int SEANCE_ID = 1;
     private static final Seance SEANCE = new Seance();
@@ -76,11 +72,6 @@ public class TestSeanceController {
                 .standaloneSetup(seanceController)
                 .setViewResolvers(viewResolver)
                 .build();
-
-//        mockMvc2 = MockMvcBuilders
-//                .standaloneSetup(seanceController)
-//                .setMessageConverters(new MappingJackson2HttpMessageConverter())
-//                .build();
 
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss", Locale.US);
         Date date = formatDate.parse("2018-05-01-12:30:00");
@@ -186,7 +177,7 @@ public class TestSeanceController {
         LOGGER.debug("testAddSeance({})", SEANCE.getSeanceDate());
 //        expect(mockSeanceService.addSeance(SEANCE)).andReturn(SEANCE);
 //        replay(mockSeanceService);
-//
+
 //        mockMvc.perform(post("/seance")
 //                .param("seanceId", Integer.toString(SEANCE.getSeanceId()))
 //                .param("seanceDate", SEANCE.getSeanceDate().toString())
@@ -201,8 +192,8 @@ public class TestSeanceController {
 //                .andDo(print())
 //                .andExpect(status().isOk())
 //                .andExpect(view().name("seance"));
-
-        verify(mockSeanceService);
+//
+//        verify(mockSeanceService);
     }
 
     @Test
