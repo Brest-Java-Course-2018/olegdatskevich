@@ -2,8 +2,6 @@ package com.epam.brest.course.model.dao;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-//import javax.persistence.Temporal;
-//import javax.persistence.TemporalType;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Date;
 
@@ -21,7 +19,6 @@ public class Seance {
      * Date of the seance.
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-//    @Temporal(TemporalType.TIMESTAMP)
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",
 //            timezone = "Europe/Minsk",
 //            shape = JsonFormat.Shape.NUMBER)
