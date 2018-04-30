@@ -4,6 +4,7 @@
 ## Description    
 Web application for cinema. The application is designed to work with movies and seances.  
 The project consists of two cooperating applications, designed to work with information about movies and seances.
+  
 **cinemarest.war** — REST service providing access to a database of movies and seances.
 
 **cinemaweb.war** — Web application providing an interface for working with the REST service.
@@ -31,7 +32,7 @@ The project consists of two cooperating applications, designed to work with info
        
 ## Run WEB-application  
        $mvn -pl web-app/ jetty:run  
-#####The application should be available at:       
+##### The application should be available at:       
        http://localhost:8080/movies  
 ## 
 EPAM Java Course, Brest 2018  

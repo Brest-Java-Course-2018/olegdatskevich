@@ -27,6 +27,7 @@ import static org.junit.Assert.*;
 @Rollback
 @Transactional
 public class TestSeanceDaoImpl {
+
     private static final Logger LOGGER = LogManager.getLogger();
 
     private static final String DATE = "2018-05-01";
