@@ -37,8 +37,8 @@ public class TestSeanceDaoImpl {
     private static final int MOVIE_ID = 1;
 
     private SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
-    private static final String FROM_DATE = "2018-04-02";
-    private static final String TO_DATE = "2018-04-03";
+    private static final String FROM_DATE = "2018-05-02";
+    private static final String TO_DATE = "2018-05-03";
 
     @Autowired
     private SeanceDao seanceDao;
