@@ -6,7 +6,6 @@ import com.epam.brest.course.model.dto.MovieEarned;
 import com.epam.brest.course.model.dto.MoviesTitles;
 import com.epam.brest.course.service.MovieService;
 import com.epam.brest.course.service.SeanceService;
-//import io.florianlopes.spring.test.web.servlet.request.MockMvcRequestBuilderUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
@@ -14,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-//import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,8 +26,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import static org.easymock.EasyMock.*;
+//import static io.florianlopes.spring.test.web.servlet.request.MockMvcRequestBuilderUtils.postForm;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -59,11 +57,8 @@ public class TestSeanceController {
     private static final MoviesTitles MOVIES_TITLES = new MoviesTitles();
     private static final String FROM_DATE = "2018-04-02-12:00:00";
     private static final String TO_DATE = "2018-04-02-20:00:00";
-    private static final String FROM_DATE1 = "Mon Apr 02 00:00:00 MSK 2018";
-    private static final String TO_DATE1 = "Mon Apr 03 23:00:00 MSK 2018";
 
     @Before
-
     public void setUp() throws ParseException {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/templates/");
@@ -73,7 +68,8 @@ public class TestSeanceController {
                 .setViewResolvers(viewResolver)
                 .build();
 
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss", Locale.US);
+        SimpleDateFormat formatDate
+                = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss", Locale.US);
         Date date = formatDate.parse("2018-05-01-12:30:00");
 
         SEANCE.setSeanceId(1);
@@ -174,24 +170,16 @@ public class TestSeanceController {
 
     @Test
     public void testAddSeance() throws Exception {
-        LOGGER.debug("testAddSeance({})", SEANCE.getSeanceDate());
+        LOGGER.debug("testAddSeance({})", SEANCE);
 //        expect(mockSeanceService.addSeance(SEANCE)).andReturn(SEANCE);
 //        replay(mockSeanceService);
-
-//        mockMvc.perform(post("/seance")
-//                .param("seanceId", Integer.toString(SEANCE.getSeanceId()))
-//                .param("seanceDate", SEANCE.getSeanceDate().toString())
-//                .param("seanceCost", Integer.toString(SEANCE.getSeanceCost()))
-//                .param("seanceSold", Integer.toString(SEANCE.getSeanceSold()))
-//                .param("seanceActive", Boolean.toString(SEANCE.isSeanceActive()))
-//                .param("movieId", Integer.toString(SEANCE.getMovieId())))
+//
+//        mockMvc.perform(postForm("/seance", SEANCE)
+//                .accept(MediaType.APPLICATION_JSON)
+//                .contentType(MediaType.APPLICATION_JSON))
 //                .andDo(print())
-//                .andExpect(view().name("seance"));
-
-//        mockMvc.perform(MockMvcRequestBuilderUtils.postForm("/seance", SEANCE))
-//                .andDo(print())
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("seance"));
+//                .andExpect(status().isFound())
+//                .andExpect(view().name("redirect:/seances"));
 //
 //        verify(mockSeanceService);
     }
@@ -229,8 +217,9 @@ public class TestSeanceController {
 //        expectLastCall();
 //        replay(mockSeanceService);
 //
-//        mockMvc.perform(MockMvcRequestBuilderUtils.postForm(
-//                "/seance/" + SEANCE.getMovieId(), SEANCE))
+//        mockMvc.perform(postForm("/seance/" + SEANCE.getMovieId(), SEANCE)
+//                .accept(MediaType.APPLICATION_JSON)
+//                .contentType(MediaType.APPLICATION_JSON))
 //                .andDo(print())
 //                .andExpect(status().isFound())
 //                .andExpect(view().name("redirect:/seances"));

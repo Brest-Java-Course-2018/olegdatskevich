@@ -109,6 +109,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>cinemaweb</finalName>
     </build>
 
 </project>

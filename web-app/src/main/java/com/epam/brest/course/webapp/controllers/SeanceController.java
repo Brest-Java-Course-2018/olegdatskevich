@@ -5,15 +5,16 @@ import com.epam.brest.course.model.dto.MovieEarned;
 import com.epam.brest.course.model.dto.MoviesTitles;
 import com.epam.brest.course.service.MovieService;
 import com.epam.brest.course.service.SeanceService;
-//import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.format.annotation.DateTimeFormat;
+//import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+//import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -45,6 +46,14 @@ public class SeanceController {
      */
     @Autowired
     private SeanceService seanceService;
+
+/*    @InitBinder
+    public void initBinderAdd(WebDataBinder binder) {
+        SimpleDateFormat dateFormat
+                = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        binder.registerCustomEditor(Date.class, "seanceDate",
+                new CustomDateEditor(dateFormat, true));
+    }*/
 
     /**
      * Get seances.
@@ -106,25 +115,25 @@ public class SeanceController {
 
     /**
      * Post seance.
-     * @param seance
+     * @param seanceAdd
      * @param result - validation result.
      * @param model - model of data.
      * @return - path
      * @throws Exception exception handling.
      */
     @PostMapping(value = "/seance")
-    public final String addSeance(@Valid final Seance seance,
+    public final String addSeance(@Valid final Seance seanceAdd,
                                    final BindingResult result,
                                    final Model model) throws Exception {
-        LOGGER.debug("postAddSeance({}, {})", seance, result);
+        LOGGER.debug("postAddSeance({}, {})", seanceAdd, result);
         if (result.hasErrors()) {
             Collection<MoviesTitles> movies = movieService.getMoviesTitles();
             model.addAttribute("movies", movies);
-            model.addAttribute("seance", seance);
+            model.addAttribute("seance", seanceAdd);
             model.addAttribute("isNew", true);
             return "seance";
         } else {
-            seanceService.addSeance(seance);
+            seanceService.addSeance(seanceAdd);
             return "redirect:/seances";
         }
     }

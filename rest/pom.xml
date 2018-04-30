@@ -98,6 +98,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>cinemarest</finalName>
     </build>
 
 </project>
