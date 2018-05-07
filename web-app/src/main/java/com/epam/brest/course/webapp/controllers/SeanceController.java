@@ -1,8 +1,6 @@
 package com.epam.brest.course.webapp.controllers;
 
 import com.epam.brest.course.model.dao.Seance;
-import com.epam.brest.course.model.dto.MovieEarned;
-import com.epam.brest.course.model.dto.MoviesTitles;
 import com.epam.brest.course.service.MovieService;
 import com.epam.brest.course.service.SeanceService;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -64,10 +61,8 @@ public class SeanceController {
     @GetMapping(value = "/seances")
     public final String getSeances(final Model model) throws Exception {
         LOGGER.debug("getSeances()");
-        Collection<MovieEarned> movies = movieService.moviesEarned();
-        Collection<Seance> seances = seanceService.getSeances();
-        model.addAttribute("movies", movies);
-        model.addAttribute("seances", seances);
+        model.addAttribute("movies", movieService.moviesEarned());
+        model.addAttribute("seances", seanceService.getSeances());
         return "seances";
     }
 
@@ -89,11 +84,9 @@ public class SeanceController {
                 = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
         Date startDate = formatDate.parse(fromDate);
         Date endDate = formatDate.parse(toDate);
-        Collection<MovieEarned> movies = movieService.moviesEarned();
-        Collection<Seance> seances
-                = seanceService.filterSeanceByDate(startDate, endDate);
-        model.addAttribute("movies", movies);
-        model.addAttribute("seances", seances);
+        model.addAttribute("movies", movieService.moviesEarned());
+        model.addAttribute("seances", seanceService
+                .filterSeanceByDate(startDate, endDate));
         return "seances";
     }
 
@@ -106,8 +99,7 @@ public class SeanceController {
     @GetMapping(value = "/seance")
     public final String getAddSeance(final Model model) throws Exception {
         LOGGER.debug("getAddSeance()");
-        Collection<MoviesTitles> movies = movieService.getMoviesTitles();
-        model.addAttribute("movies", movies);
+        model.addAttribute("movies", movieService.getMoviesTitles());
         model.addAttribute("seance", new Seance());
         model.addAttribute("isNew", true);
         return "seance";
@@ -127,8 +119,7 @@ public class SeanceController {
                                    final Model model) throws Exception {
         LOGGER.debug("postAddSeance({}, {})", seanceAdd, result);
         if (result.hasErrors()) {
-            Collection<MoviesTitles> movies = movieService.getMoviesTitles();
-            model.addAttribute("movies", movies);
+            model.addAttribute("movies", movieService.getMoviesTitles());
             model.addAttribute("seance", seanceAdd);
             model.addAttribute("isNew", true);
             return "seance";
@@ -149,10 +140,8 @@ public class SeanceController {
     public final String getUpdateSeance(@PathVariable final int id,
                                       final Model model) throws Exception {
         LOGGER.debug("getUpdateSeance({})", id);
-        Seance seance = seanceService.getSeanceById(id);
-        Collection<MoviesTitles> movies = movieService.getMoviesTitles();
-        model.addAttribute("movies", movies);
-        model.addAttribute("seance", seance);
+        model.addAttribute("movies", movieService.getMoviesTitles());
+        model.addAttribute("seance", seanceService.getSeanceById(id));
         model.addAttribute("isNew", false);
         return "seance";
     }
@@ -171,9 +160,8 @@ public class SeanceController {
                                       final Model model) throws Exception {
         LOGGER.debug("postUpdateSeance({}, {})", seance, result);
         if (result.hasErrors()) {
-            Collection<MoviesTitles> movies = movieService.getMoviesTitles();
             model.addAttribute("seance", seance);
-            model.addAttribute("movies", movies);
+            model.addAttribute("movies", movieService.getMoviesTitles());
             model.addAttribute("isNew", false);
             return "seance";
         } else {

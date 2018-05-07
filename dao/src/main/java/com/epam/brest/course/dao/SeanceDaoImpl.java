@@ -102,7 +102,6 @@ public class SeanceDaoImpl implements SeanceDao {
     @Override
     public final Collection<Seance> getSeances() {
         Collection<Seance> seances = namedParameterJdbcTemplate
-                .getJdbcOperations()
                 .query(seancesSelect,
                         BeanPropertyRowMapper.newInstance(Seance.class));
         LOGGER.debug("getSeances({})", seances);

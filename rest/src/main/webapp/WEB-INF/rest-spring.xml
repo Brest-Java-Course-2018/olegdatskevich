@@ -13,7 +13,9 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+    <!--For annotation Sprinf MVC RequestMapping, Controller, Valid..-->
     <mvc:annotation-driven/>
+
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.brest.course"/>
 
@@ -22,7 +24,7 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--Sample in memory database for application-->
+    <!--Sample in-memory database for application-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${driverClassName}"/>
         <property name="url" value="${url}"/>
@@ -35,7 +37,6 @@
         <jdbc:script location="classpath:data-script.sql"/>
     </jdbc:initialize-database>
 
-    <!--<context:property-placeholder location="classpath:application.properties"/>-->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>

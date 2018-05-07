@@ -76,7 +76,6 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public final Collection<MoviesTitles> getMoviesTitles() {
         Collection<MoviesTitles> movies = namedParameterJdbcTemplate
-                .getJdbcOperations()
                 .query(moviesSelect,
                         BeanPropertyRowMapper.newInstance(MoviesTitles.class));
         LOGGER.debug("getMoviesTitles({})", movies);
@@ -98,7 +97,6 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public final Collection<MovieEarned> moviesEarned() {
         Collection<MovieEarned> movies = namedParameterJdbcTemplate
-                .getJdbcOperations()
                 .query(movieCalcalulateEarn,
                         BeanPropertyRowMapper.newInstance(MovieEarned.class));
         LOGGER.debug("moviesEarned({})", movies);

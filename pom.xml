@@ -28,14 +28,14 @@
 
     <modules>
         <module>model</module>
+        <module>dao-api</module>
         <module>dao</module>
-        <module>testdb</module>
         <module>service-api</module>
         <module>service</module>
-        <module>dao-api</module>
         <module>rest</module>
         <module>rest-client</module>
         <module>web-app</module>
+        <module>testdb</module>
     </modules>
 
     <distributionManagement>
@@ -104,6 +104,12 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>testdb</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
@@ -149,11 +155,13 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.thymeleaf</groupId>
                 <artifactId>thymeleaf-spring4</artifactId>
                 <version>${thymeleaf-spring4.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
@@ -193,11 +201,6 @@
                 <artifactId>spring-mvc-test-utils</artifactId>
                 <version>${spring-mvc-test-utils.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.databind.version}</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -496,6 +499,7 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </reporting>
 </project>

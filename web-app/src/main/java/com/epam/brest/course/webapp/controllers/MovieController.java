@@ -1,7 +1,6 @@
 package com.epam.brest.course.webapp.controllers;
 
 import com.epam.brest.course.model.dao.Movie;
-import com.epam.brest.course.model.dto.MovieEarned;
 import com.epam.brest.course.service.MovieService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.Collection;
 
 /**
  * Movies Controller for web-app.
@@ -41,8 +39,7 @@ public class MovieController {
     @GetMapping(value = "/movies")
     public final String getMovies(final Model model) {
         LOGGER.debug("getMovies({})", model);
-        Collection<MovieEarned> movies = movieService.moviesEarned();
-        model.addAttribute("movies", movies);
+        model.addAttribute("movies", movieService.moviesEarned());
         return "movies";
     }
 
@@ -92,8 +89,7 @@ public class MovieController {
     public final String getUpdateMovie(
             @PathVariable final int id, final Model model) {
         LOGGER.debug("GetUpdateMovie({}, {})", id, model);
-        Movie movie = movieService.getMovieById(id);
-        model.addAttribute("movie", movie);
+        model.addAttribute("movie", movieService.getMovieById(id));
         model.addAttribute("isNew", false);
         return "movie";
     }

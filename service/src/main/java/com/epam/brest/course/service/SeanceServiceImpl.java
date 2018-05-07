@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.Date;
  * Implementation of SeanceService from service-api.
  */
 @Service
+@Transactional
 public class SeanceServiceImpl implements SeanceService {
 
     /**
