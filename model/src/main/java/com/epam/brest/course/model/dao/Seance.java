@@ -1,6 +1,5 @@
 package com.epam.brest.course.model.dao;
 
-//import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.PositiveOrZero;
@@ -19,10 +18,8 @@ public class Seance {
     /**
      * Date of the seance.
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",
-//            timezone = "Europe/Minsk",
-//            shape = JsonFormat.Shape.NUMBER)
+    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "EEE MMM dd HH:mm:ss z yyyy")
     private Date seanceDate;
 
     /**
@@ -91,9 +88,6 @@ public class Seance {
      * Getter for Seance date.
      * @return seance date.
      */
-//    @JsonFormat(pattern = "EEE MMM dd HH:mm:ss z yyyy",
-//            timezone = "Europe/Minsk",
-//            shape = JsonFormat.Shape.STRING)
     public final Date getSeanceDate() {
         return seanceDate;
     }
@@ -102,9 +96,6 @@ public class Seance {
      * Setter for seanceDate.
      * @param seanceDate - seance date.
      */
-//    @JsonFormat(pattern = "EEE MMM dd HH:mm:ss z yyyy",
-//            timezone = "Europe/Minsk",
-//            shape = JsonFormat.Shape.STRING)
     public final void setSeanceDate(final Date seanceDate) {
         this.seanceDate = seanceDate;
     }

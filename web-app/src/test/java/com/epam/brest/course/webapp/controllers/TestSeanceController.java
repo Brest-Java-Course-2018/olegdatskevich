@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import static org.easymock.EasyMock.*;
-//import static io.florianlopes.spring.test.web.servlet.request.MockMvcRequestBuilderUtils.postForm;
+import static io.florianlopes.spring.test.web.servlet.request.MockMvcRequestBuilderUtils.postForm;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -171,17 +171,17 @@ public class TestSeanceController {
     @Test
     public void testAddSeance() throws Exception {
         LOGGER.debug("testAddSeance({})", SEANCE);
-//        expect(mockSeanceService.addSeance(SEANCE)).andReturn(SEANCE);
-//        replay(mockSeanceService);
-//
-//        mockMvc.perform(postForm("/seance", SEANCE)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .contentType(MediaType.APPLICATION_JSON))
-//                .andDo(print())
-//                .andExpect(status().isFound())
-//                .andExpect(view().name("redirect:/seances"));
-//
-//        verify(mockSeanceService);
+        expect(mockSeanceService.addSeance(SEANCE)).andReturn(SEANCE);
+        replay(mockSeanceService);
+
+        mockMvc.perform(postForm("/seance", SEANCE)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isFound())
+                .andExpect(view().name("redirect:/seances"));
+
+        verify(mockSeanceService);
     }
 
     @Test
@@ -213,18 +213,18 @@ public class TestSeanceController {
     @Test
     public void testUpdateSeance() throws Exception {
         LOGGER.debug("testUpdateSeance()");
-//        mockSeanceService.updateSeance(SEANCE);
-//        expectLastCall();
-//        replay(mockSeanceService);
-//
-//        mockMvc.perform(postForm("/seance/" + SEANCE.getMovieId(), SEANCE)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .contentType(MediaType.APPLICATION_JSON))
-//                .andDo(print())
-//                .andExpect(status().isFound())
-//                .andExpect(view().name("redirect:/seances"));
-//
-//        verify(mockSeanceService);
+        mockSeanceService.updateSeance(SEANCE);
+        expectLastCall();
+        replay(mockSeanceService);
+
+        mockMvc.perform(postForm("/seance/" + SEANCE.getMovieId(), SEANCE)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isFound())
+                .andExpect(view().name("redirect:/seances"));
+
+        verify(mockSeanceService);
     }
 
     @Test
