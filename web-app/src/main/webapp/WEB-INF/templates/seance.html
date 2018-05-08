@@ -142,7 +142,7 @@
                                 <input th:field="*{seanceDate}"
                                        class="form-control"
                                        size="16"
-                                       type="datetime-local"
+                                       type="text"
                                        value=""
                                        readonly>
                             </div>
@@ -239,7 +239,7 @@
 </script>
 <script type="text/javascript">
     $(".form_datetime").datetimepicker({
-        format: "D MM dd hh:ii:ss Z yyyy",
+        format: "D M dd hh:ii:ss z yyyy",
         autoclose: true,
         todayBtn: true,
         minuteStep: 10,
